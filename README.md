@@ -1,2 +1,2 @@
 # ChatLab-2023
-A excellent chat plugin.
+A project about my old chat plugin.
