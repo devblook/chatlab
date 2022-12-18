@@ -10,3 +10,5 @@ error:
   # Player isn't online.
   player-offline: "&a[Server] &8| &fThe player &a%player% &fisn't online."
 
+  # No reply.
+  no-reply: "&a[Server] &8| &FYou doesn't reply with anyone."
