@@ -1,0 +1,9 @@
+
+config:
+
+
+# Private message format.
+msg:
+
+  from-sender: "&aYou &8> &a%target% &8: &f%message%"
+  from-receptor: "&a%sender &8> &aYou &8: &fmessage%"
