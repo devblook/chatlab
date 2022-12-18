@@ -4,7 +4,6 @@ import me.bryang.chatlab.ChatLab;
 import me.bryang.chatlab.PluginCore;
 import me.bryang.chatlab.loaders.CommandLoader;
 import me.bryang.chatlab.loaders.ListenersLoader;
-import org.bukkit.event.player.PlayerGameModeChangeEvent;
 import team.unnamed.inject.Binder;
 import team.unnamed.inject.Module;
 

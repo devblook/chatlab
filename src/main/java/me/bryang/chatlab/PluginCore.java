@@ -4,8 +4,6 @@ import me.bryang.chatlab.loaders.CommandLoader;
 import me.bryang.chatlab.loaders.ListenersLoader;
 import team.unnamed.inject.InjectAll;
 
-import javax.inject.Inject;
-
 @InjectAll
 
 public class PluginCore {

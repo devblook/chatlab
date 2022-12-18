@@ -5,8 +5,6 @@ import me.bryang.chatlab.managers.FileManager;
 import team.unnamed.inject.Binder;
 import team.unnamed.inject.Module;
 
-import javax.inject.Inject;
-
 public class FileModule implements Module {
 
     private final ChatLab plugin;

@@ -1,6 +1,5 @@
 package me.bryang.chatlab.commands;
 
-import jdk.jfr.Name;
 import me.bryang.chatlab.managers.FileManager;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
@@ -10,7 +9,6 @@ import me.fixeddev.commandflow.bukkit.annotation.Sender;
 import org.bukkit.entity.Player;
 import team.unnamed.inject.InjectAll;
 
-import javax.inject.Inject;
 import javax.inject.Named;
 
 @Command(
