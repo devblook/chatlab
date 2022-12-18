@@ -5,7 +5,6 @@ import me.bryang.chatlab.loaders.ListenersLoader;
 import team.unnamed.inject.InjectAll;
 
 @InjectAll
-
 public class PluginCore {
 
     private CommandLoader commandLoader;
