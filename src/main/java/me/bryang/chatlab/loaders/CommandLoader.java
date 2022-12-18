@@ -2,6 +2,7 @@ package me.bryang.chatlab.loaders;
 
 import me.bryang.chatlab.Loader;
 import me.bryang.chatlab.commands.MsgCommand;
+import me.bryang.chatlab.commands.ReplyCommand;
 import me.bryang.chatlab.loaders.translator.CommandTranslatorLoader;
 import me.bryang.chatlab.managers.FileManager;
 import me.fixeddev.commandflow.CommandManager;
@@ -35,7 +36,7 @@ public class CommandLoader implements Loader{
         partInjector.install(new BukkitModule());
 
         builder = new AnnotatedCommandTreeBuilderImpl(partInjector);
-        registerCommands(new MsgCommand());
+        registerCommands(new MsgCommand(), new ReplyCommand());
     }
 
     public void registerCommands(CommandClass... commandClasses){
