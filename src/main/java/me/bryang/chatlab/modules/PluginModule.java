@@ -14,12 +14,14 @@ public class PluginModule implements Module {
     public PluginModule(ChatLab plugin){
         this.plugin = plugin;
     }
+
     @Override
     public void configure(Binder binder) {
 
-        binder.bind(PluginCore.class).toInstance(new PluginCore());
         binder.bind(CommandLoader.class).toInstance(new CommandLoader());
         binder.bind(ListenersLoader.class).toInstance(new ListenersLoader());
+
+        binder.bind(PluginCore.class).toInstance(new PluginCore());
 
         binder.install(new FileModule(plugin));
 
