@@ -1,0 +1,12 @@
+
+error:
+
+  # Put a command in console.
+  console: "You can't do this in console."
+
+  # Argument doesn't exist
+  no-argument: "&a[Server] &8| &fUnknown argument. Usage: &a%usage%&f."
+
+  # Player isn't online.
+  player-offline: "&a[Server] &8| &fThe player &a%player% &fisn't online."
+
