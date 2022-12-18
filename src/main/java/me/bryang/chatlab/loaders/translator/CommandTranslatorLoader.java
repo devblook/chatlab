@@ -4,11 +4,11 @@ import me.bryang.chatlab.managers.FileManager;
 import me.fixeddev.commandflow.Namespace;
 import me.fixeddev.commandflow.translator.TranslationProvider;
 
-public class CommandTranslator implements TranslationProvider {
+public class CommandTranslatorLoader implements TranslationProvider {
 
     private final FileManager messagesFile;
 
-    public CommandTranslator(FileManager messagesFile){
+    public CommandTranslatorLoader(FileManager messagesFile){
         this.messagesFile = messagesFile;
     }
 

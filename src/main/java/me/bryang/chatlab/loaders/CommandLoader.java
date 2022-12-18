@@ -2,7 +2,7 @@ package me.bryang.chatlab.loaders;
 
 import me.bryang.chatlab.Loader;
 import me.bryang.chatlab.commands.MsgCommand;
-import me.bryang.chatlab.loaders.translator.CommandTranslator;
+import me.bryang.chatlab.loaders.translator.CommandTranslatorLoader;
 import me.bryang.chatlab.managers.FileManager;
 import me.fixeddev.commandflow.CommandManager;
 import me.fixeddev.commandflow.annotated.AnnotatedCommandTreeBuilder;
@@ -28,7 +28,7 @@ public class CommandLoader implements Loader{
     public void load(){
 
         commandManager = new BukkitCommandManager("ChatLab");
-        commandManager.getTranslator().setProvider(new CommandTranslator(messagesFile));
+        commandManager.getTranslator().setProvider(new CommandTranslatorLoader(messagesFile));
         PartInjector partInjector = PartInjector.create();
 
         partInjector.install(new DefaultsModule());
