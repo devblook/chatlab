@@ -1,0 +1,4 @@
+name: ChatLab
+version: '${project.version}'
+main: me.bryang.chatlab.ChatLab
+author: BryanG
