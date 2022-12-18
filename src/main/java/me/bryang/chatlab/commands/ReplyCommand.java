@@ -12,7 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.metadata.FixedMetadataValue;
 import team.unnamed.inject.InjectAll;
 
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.UUID;
 
