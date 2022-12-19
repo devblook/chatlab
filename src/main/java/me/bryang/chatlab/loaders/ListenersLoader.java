@@ -15,8 +15,8 @@ public class ListenersLoader implements Loader {
 
     @Override
     public void load() {
-        PluginManager pluginManager = Bukkit.getPluginManager();
 
+        PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new PlayerQuitListener(), chatLab);
     }
 }
