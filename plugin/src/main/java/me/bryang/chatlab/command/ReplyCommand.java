@@ -1,7 +1,7 @@
-package me.bryang.chatlab.commands;
+package me.bryang.chatlab.command;
 
 import me.bryang.chatlab.ChatLab;
-import me.bryang.chatlab.managers.FileManager;
+import me.bryang.chatlab.manager.FileManager;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
 import me.fixeddev.commandflow.annotated.annotation.OptArg;
