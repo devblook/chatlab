@@ -7,7 +7,10 @@ import team.unnamed.inject.InjectAll;
 @InjectAll
 public class PluginCore {
 
+    @Named("command-listener")
     private CommandLoader commandLoader;
+
+    @Named("listeners-loader")
     private ListenersLoader listenersLoader;
 
     public void init(){

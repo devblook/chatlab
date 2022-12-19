@@ -22,8 +22,8 @@ public class PluginModule implements Module {
         binder.bind(CommandLoader.class).toInstance(new CommandLoader());
         binder.bind(ListenersLoader.class).toInstance(new ListenersLoader());
 
-        binder.bind(Loader.class).to(ListenersLoader.class);
-        binder.bind(Loader.class).to(CommandLoader.class);
+        binder.bind(Loader.class).named("listeners-loader").to(ListenersLoader.class);
+        binder.bind(Loader.class).named("command-loader").to(CommandLoader.class);
 
         binder.bind(PluginCore.class).toInstance(new PluginCore());
 
