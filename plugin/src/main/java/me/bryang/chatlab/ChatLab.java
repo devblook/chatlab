@@ -1,27 +1,30 @@
 package me.bryang.chatlab;
 
-import me.bryang.chatlab.modules.PluginModule;
+import me.bryang.chatlab.api.Service;
 import org.bukkit.plugin.java.JavaPlugin;
 import team.unnamed.inject.Injector;
 
 import javax.inject.Inject;
+import java.util.Set;
 
 public class ChatLab extends JavaPlugin {
 
     @Inject
-    private PluginCore pluginCore;
+    private Set<Service> services;
+
+    @Override
+    public void onLoad() {
+        Injector injector = Injector.create(new PluginModule(this));
+        injector.injectMembers(this);
+    }
 
     @Override
     public void onEnable() {
-
-        Injector injector = Injector.create(new PluginModule(this));
-        injector.injectMembers(this);
-
-        pluginCore.init();
+        services.forEach(Service::start);
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        services.forEach(Service::stop);
     }
 }
