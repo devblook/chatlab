@@ -1,10 +1,10 @@
-package me.bryang.chatlab.loaders;
+package me.bryang.chatlab.service;
 
-import me.bryang.chatlab.Loader;
-import me.bryang.chatlab.commands.MsgCommand;
-import me.bryang.chatlab.commands.ReplyCommand;
-import me.bryang.chatlab.loaders.translator.CommandTranslatorLoader;
-import me.bryang.chatlab.managers.FileManager;
+import me.bryang.chatlab.api.Service;
+import me.bryang.chatlab.command.MsgCommand;
+import me.bryang.chatlab.command.ReplyCommand;
+import me.bryang.chatlab.service.translator.CommandTranslatorLoader;
+import me.bryang.chatlab.manager.FileManager;
 import me.fixeddev.commandflow.CommandManager;
 import me.fixeddev.commandflow.annotated.AnnotatedCommandTreeBuilder;
 import me.fixeddev.commandflow.annotated.AnnotatedCommandTreeBuilderImpl;
@@ -17,7 +17,7 @@ import me.fixeddev.commandflow.bukkit.factory.BukkitModule;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-public class CommandLoader implements Loader{
+public class CommandService implements Service {
 
     @Inject @Named("messages")
     private FileManager messagesFile;
@@ -26,7 +26,7 @@ public class CommandLoader implements Loader{
     private CommandManager commandManager;
 
     @Override
-    public void load(){
+    public void start(){
 
         commandManager = new BukkitCommandManager("ChatLab");
         commandManager.getTranslator().setProvider(new CommandTranslatorLoader(messagesFile));
@@ -49,5 +49,8 @@ public class CommandLoader implements Loader{
 
     }
 
-
+    @Override
+    public void stop() {
+        commandManager.unregisterAll();
+    }
 }
