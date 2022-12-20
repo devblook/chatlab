@@ -2,6 +2,7 @@ package me.bryang.chatlab.command;
 
 import me.bryang.chatlab.ChatLab;
 import me.bryang.chatlab.manager.FileManager;
+import me.bryang.chatlab.user.UserManager;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
 import me.fixeddev.commandflow.annotated.annotation.OptArg;
@@ -25,7 +26,7 @@ public class MsgCommand implements CommandClass {
     @Named("messages")
     private FileManager messagesFile;
 
-    private ChatLab plugin;
+    private UserManager userManager;
 
     public void messageCommand(
 
@@ -53,8 +54,9 @@ public class MsgCommand implements CommandClass {
                 .replace("%sender%", sender.getName())
                 .replace("%message%", senderMessage));
 
-        sender.setMetadata("ChatLab::privateMessage", new FixedMetadataValue(plugin, target.getUniqueId()));
-        target.setMetadata("ChatLab::privateMessage", new FixedMetadataValue(plugin, sender.getUniqueId()));
+        userManager.getUser(sender.getUniqueId()).setRepliedTarget(target.getUniqueId());
+        userManager.getUser(target.getUniqueId()).setRepliedTarget(sender.getUniqueId());
+
 
     }
 }

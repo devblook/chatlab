@@ -2,6 +2,8 @@ package me.bryang.chatlab.command;
 
 import me.bryang.chatlab.ChatLab;
 import me.bryang.chatlab.manager.FileManager;
+import me.bryang.chatlab.user.User;
+import me.bryang.chatlab.user.UserManager;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
 import me.fixeddev.commandflow.annotated.annotation.OptArg;
@@ -25,7 +27,7 @@ public class ReplyCommand implements CommandClass {
     @Named("messages")
     private FileManager messagesFile;
 
-    private ChatLab chatLab;
+    private UserManager userManager;
 
     public void messageCommand(
 
@@ -46,7 +48,7 @@ public class ReplyCommand implements CommandClass {
 
 
         Player target = Bukkit.getPlayer(
-                UUID.fromString(sender.getMetadata("ChatLab::privateMessage").get(0).asString()));
+                userManager.getUser(sender.getUniqueId()).getRepliedTarget());
 
         sender.sendMessage(configFile.getString("msg.from-sender")
                 .replace("%target%", target.getName())
@@ -56,10 +58,11 @@ public class ReplyCommand implements CommandClass {
                 .replace("%sender%", sender.getName())
                 .replace("%message%", senderMessage));
 
-        if (!target.getMetadata("ChatLab::privateMessage").get(0).asString()
-                .equalsIgnoreCase(sender.getUniqueId().toString())){
+        User targetUser = userManager.getUser(target.getUniqueId());
 
-            target.setMetadata("ChatLab::privateMessage", new FixedMetadataValue(chatLab, sender.getName()));
+        if (targetUser.getRepliedTarget() != sender.getUniqueId()){
+
+            targetUser.setRepliedTarget(sender.getUniqueId());
         }
     }
 

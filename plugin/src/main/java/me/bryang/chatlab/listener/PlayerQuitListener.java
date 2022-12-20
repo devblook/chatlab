@@ -1,6 +1,8 @@
 package me.bryang.chatlab.listener;
 
 import me.bryang.chatlab.ChatLab;
+import me.bryang.chatlab.user.User;
+import me.bryang.chatlab.user.UserManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
@@ -12,22 +14,21 @@ import java.util.UUID;
 public class PlayerQuitListener implements Listener {
 
     @Inject
-    private ChatLab chatLab;
+    private UserManager userManager;
 
     public void leaveEvent(PlayerQuitEvent event){
 
-        if (event.getPlayer().hasMetadata("ChatLab::sendMessage")){
+        if (userManager.getUser(event.getPlayer().getUniqueId()).getRepliedTarget() != null){
 
-            Player sender = event.getPlayer();
-            Player target =  Bukkit.getPlayer(
-                    UUID.fromString(sender.getMetadata("ChatLab::privateMessage").get(0).asString()));
+            User senderUser = userManager.getUser(event.getPlayer().getUniqueId());
 
-            sender.removeMetadata("ChatLab::sendMessage", chatLab);
+            User targetUser = userManager.getUser(
+                    userManager.getUser(event.getPlayer().getUniqueId()).getRepliedTarget());
 
-            if (target.getMetadata("ChatLab::sendMessage").get(0).asString()
-                    .equalsIgnoreCase(sender.getUniqueId().toString())){
+            senderUser.setRepliedTarget(null);
 
-                target.removeMetadata("ChatLab::sendMessage", chatLab);
+            if (targetUser.getRepliedTarget() == event.getPlayer().getUniqueId()){
+                targetUser.setRepliedTarget(null);
             }
 
         }
