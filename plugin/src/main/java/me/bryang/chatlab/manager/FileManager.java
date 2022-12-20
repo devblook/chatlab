@@ -1,4 +1,4 @@
-package me.bryang.chatlab.managers;
+package me.bryang.chatlab.manager;
 
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.InvalidConfigurationException;

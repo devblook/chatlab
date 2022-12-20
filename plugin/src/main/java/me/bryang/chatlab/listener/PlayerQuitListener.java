@@ -1,4 +1,4 @@
-package me.bryang.chatlab.listeners;
+package me.bryang.chatlab.listener;
 
 import me.bryang.chatlab.ChatLab;
 import org.bukkit.Bukkit;
