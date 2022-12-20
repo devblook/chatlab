@@ -1,6 +1,7 @@
 package me.bryang.chatlab.service;
 
 import me.bryang.chatlab.api.Service;
+import me.bryang.chatlab.command.MainCommand;
 import me.bryang.chatlab.command.MsgCommand;
 import me.bryang.chatlab.command.ReplyCommand;
 import me.bryang.chatlab.service.translator.CommandTranslatorLoader;
@@ -36,7 +37,7 @@ public class CommandService implements Service {
         partInjector.install(new BukkitModule());
 
         builder = new AnnotatedCommandTreeBuilderImpl(partInjector);
-        registerCommands(new MsgCommand(), new ReplyCommand());
+        registerCommands(new MsgCommand(), new ReplyCommand(), new MainCommand());
     }
 
     public void registerCommands(CommandClass... commandClasses){
