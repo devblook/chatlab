@@ -4,6 +4,7 @@ import me.bryang.chatlab.api.Service;
 import me.bryang.chatlab.manager.FileManager;
 import me.bryang.chatlab.service.CommandService;
 import me.bryang.chatlab.service.ListenerService;
+import me.bryang.chatlab.user.UserManager;
 import team.unnamed.inject.AbstractModule;
 
 public class PluginModule extends AbstractModule {
@@ -27,6 +28,8 @@ public class PluginModule extends AbstractModule {
         bind(FileManager.class)
                 .named("messages")
                 .toInstance(new FileManager(plugin, "messages"));
+
+        bind(UserManager.class).toInstance(new UserManager());
 
     }
 }
