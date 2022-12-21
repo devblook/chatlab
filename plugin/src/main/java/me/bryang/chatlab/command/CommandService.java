@@ -16,13 +16,16 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.Set;
 
+
 public class CommandService implements Service {
 
     @Inject
     @Named("messages")
     private BukkitFileManager messagesFile;
+
     @Inject
     private Set<CommandClass> commands;
+
     private CommandManager commandManager;
 
     @Override
