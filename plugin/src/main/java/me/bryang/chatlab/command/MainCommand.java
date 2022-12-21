@@ -1,26 +1,20 @@
 package me.bryang.chatlab.command;
 
-import me.bryang.chatlab.manager.FileManager;
+import me.bryang.chatlab.manager.BukkitFileManager;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
 import me.fixeddev.commandflow.bukkit.annotation.Sender;
 import org.bukkit.entity.Player;
 import team.unnamed.inject.InjectAll;
-
-import javax.inject.Inject;
 import javax.inject.Named;
-
 
 @Command(names = {"clab", "chatlab"})
 @InjectAll
 public class MainCommand implements CommandClass{
 
-
-    @Named("config")
-    private FileManager configFile;
-
+    private BukkitFileManager configFile;
     @Named("messages")
-    private FileManager messagesFile;
+    private BukkitFileManager messagesFile;
 
     @Command(names = "")
     public void mainSubCommand(@Sender Player sender){
