@@ -1,9 +1,6 @@
-
 config:
-
-
 # Private message format.
-msg:
-
-  from-sender: "&aYou &8> &a%target% &8: &f%message%"
-  from-receptor: "&a%sender &8> &aYou &8: &fmessage%"
+private-messages:
+  # Format for private messages.
+  from-sender: "&fYou &8» &a%target% &8» &f%message%"
+  to-receptor: "&a%sender% &8» &fYou &8» &f%message%"

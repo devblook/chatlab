@@ -1,14 +1,14 @@
-package me.bryang.chatlab.service.translator;
+package me.bryang.chatlab.command.translator;
 
-import me.bryang.chatlab.manager.FileManager;
 import me.fixeddev.commandflow.Namespace;
 import me.fixeddev.commandflow.translator.TranslationProvider;
+import org.bukkit.configuration.file.FileConfiguration;
 
-public class CommandTranslatorLoader implements TranslationProvider {
+public class CommandCustomTranslator implements TranslationProvider {
 
-    private final FileManager messagesFile;
+    private final FileConfiguration messagesFile;
 
-    public CommandTranslatorLoader(FileManager messagesFile){
+    public CommandCustomTranslator(FileConfiguration messagesFile){
         this.messagesFile = messagesFile;
     }
 

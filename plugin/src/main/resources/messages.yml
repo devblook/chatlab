@@ -1,14 +1,11 @@
-
 error:
-
-  # Put a command in console.
+  # You can't use this command in console
   console: "You can't do this in console."
-
-  # Argument doesn't exist
+  # Specific argument is missing
   no-argument: "&a[Server] &8| &fUnknown argument. Usage: &a%usage%&f."
-
   # Player isn't online.
   player-offline: "&a[Server] &8| &fThe player &a%player% &fisn't online."
-
-  # No reply.
+  # No have a recent messenger for use reply command
   no-reply: "&a[Server] &8| &FYou doesn't reply with anyone."
+  # General message for player without permissions
+  no-permission: "&a[Server] &8| &fYou don't have permission to do this."
