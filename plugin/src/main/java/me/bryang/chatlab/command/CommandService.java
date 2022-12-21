@@ -1,10 +1,8 @@
-package me.bryang.chatlab.service;
+package me.bryang.chatlab.command;
 
 import me.bryang.chatlab.api.Service;
-import me.bryang.chatlab.command.MsgCommand;
-import me.bryang.chatlab.command.ReplyCommand;
-import me.bryang.chatlab.service.translator.CommandTranslatorLoader;
-import me.bryang.chatlab.manager.FileManager;
+import me.bryang.chatlab.command.translator.CommandCustomTranslator;
+import me.bryang.chatlab.manager.BukkitFileManager;
 import me.fixeddev.commandflow.CommandManager;
 import me.fixeddev.commandflow.annotated.AnnotatedCommandTreeBuilder;
 import me.fixeddev.commandflow.annotated.AnnotatedCommandTreeBuilderImpl;
@@ -16,37 +14,30 @@ import me.fixeddev.commandflow.bukkit.factory.BukkitModule;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Set;
 
 public class CommandService implements Service {
 
-    @Inject @Named("messages")
-    private FileManager messagesFile;
-
-    private AnnotatedCommandTreeBuilder builder;
+    @Inject
+    @Named("messages")
+    private BukkitFileManager messagesFile;
+    @Inject
+    private Set<CommandClass> commands;
     private CommandManager commandManager;
 
     @Override
-    public void start(){
-
+    public void start() {
         commandManager = new BukkitCommandManager("ChatLab");
-        commandManager.getTranslator().setProvider(new CommandTranslatorLoader(messagesFile));
+        commandManager.getTranslator().setProvider(new CommandCustomTranslator(messagesFile.get()));
         PartInjector partInjector = PartInjector.create();
 
         partInjector.install(new DefaultsModule());
         partInjector.install(new BukkitModule());
 
-        builder = new AnnotatedCommandTreeBuilderImpl(partInjector);
-        registerCommands(new MsgCommand(), new ReplyCommand());
-    }
-
-    public void registerCommands(CommandClass... commandClasses){
-
-        for (CommandClass commandClass : commandClasses){
-
-            commandManager.registerCommands(builder.fromClass(commandClass));
-
+        AnnotatedCommandTreeBuilder builder = new AnnotatedCommandTreeBuilderImpl(partInjector);
+        for (CommandClass command : commands) {
+            commandManager.registerCommands(builder.fromClass(command));
         }
-
     }
 
     @Override
