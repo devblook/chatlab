@@ -9,8 +9,8 @@ import java.util.UUID;
 
 public class User implements Identifiable {
 
-    private String id;
-    private String recentMessenger;
+    private final String id;
+    private UUID recentMessenger;
 
     public User(String id) {
         this.id = id;
@@ -19,12 +19,12 @@ public class User implements Identifiable {
     // Start customizable data user
 
     @Nullable
-    public String recentMessenger() {
+    public UUID recentMessenger() {
         return recentMessenger;
     }
 
-    public void recentMessenger(String messenger) {
-        this.recentMessenger = recentMessenger;
+    public void recentMessenger(UUID messenger) {
+        this.recentMessenger = messenger;
     }
 
     public boolean hasRecentMessenger() {
@@ -38,7 +38,4 @@ public class User implements Identifiable {
         return id;
     }
 
-    public Player bukkitPlayer() {
-        return Bukkit.getPlayer(UUID.fromString(id));
-    }
 }
