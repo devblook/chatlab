@@ -8,7 +8,9 @@ import me.bryang.chatlab.listener.ListenerModule;
 import me.bryang.chatlab.manager.BukkitFileManager;
 import me.bryang.chatlab.command.CommandService;
 import me.bryang.chatlab.listener.ListenerService;
+import me.bryang.chatlab.manager.SenderManager;
 import me.bryang.chatlab.user.User;
+import me.fixeddev.commandflow.bukkit.annotation.Sender;
 import team.unnamed.inject.AbstractModule;
 import team.unnamed.inject.key.TypeReference;
 
@@ -38,7 +40,7 @@ public class PluginModule extends AbstractModule {
         bind(new TypeReference<TypeRegistry<User>>(){})
                 .toInstance(new TypeRegistryImpl<>());
 
-
+        bind(SenderManager.class).toInstance(new SenderManager(plugin));
         install(new ListenerModule());
         install(new CommandModule());
     }
