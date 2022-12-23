@@ -2,6 +2,7 @@ package me.bryang.chatlab.command;
 
 import me.bryang.chatlab.api.utils.TypeRegistry;
 import me.bryang.chatlab.manager.BukkitFileManager;
+import me.bryang.chatlab.manager.SenderManager;
 import me.bryang.chatlab.user.User;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
@@ -22,11 +23,14 @@ public class ReplyCommand implements CommandClass {
     private BukkitFileManager configFile;
     @Named("messages")
     private BukkitFileManager messagesFile;
+
     private TypeRegistry<User> users;
+    private SenderManager senderManager;
 
     @Command(names = {"r", "reply"},
             desc = "A reply command.")
     public void messageCommand(@Sender Player sender, @Text @OptArg() String senderMessage) {
+
         FileConfiguration config = configFile.get();
         FileConfiguration messages = messagesFile.get();
 
@@ -39,22 +43,22 @@ public class ReplyCommand implements CommandClass {
         User user = users.get(sender.getUniqueId().toString());
 
         if (!user.hasRecentMessenger()) {
-            sender.sendMessage(messages.getString("error.no-reply"));
+            senderManager.sendMessage(sender, messages.getString("error.no-reply"));
             return;
         }
 
-        Player target = Bukkit.getPlayer(Objects.requireNonNull(user.recentMessenger()));
+        Player target = Bukkit.getPlayer(user.recentMessenger());
 
         if (target == null) {
-            sender.sendMessage(messages.getString("error.no-reply"));
+            senderManager.sendMessage(sender, messages.getString("error.no-reply"));
             return;
         }
 
-        sender.sendMessage(config.getString("private-messages.from-sender")
+        senderManager.sendMessage(sender, config.getString("private-messages.from-sender")
                 .replace("%target%", target.getName())
                 .replace("%message%", senderMessage));
 
-        target.sendMessage(config.getString("private-messages.to-receptor")
+        senderManager.sendMessage(target, config.getString("private-messages.to-receptor")
                 .replace("%sender%", sender.getName())
                 .replace("%message%", senderMessage));
     }
