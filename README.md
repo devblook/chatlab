@@ -12,4 +12,4 @@ ChatLab is chat plugin whose purpose is to be an optimized plugin and have the n
 - Compatible since 1.8+.
 - Customizables messages.
 
-Possible launch in 3 March 2023
+Possible launch in 32 March 2023
