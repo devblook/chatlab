@@ -5,12 +5,12 @@
 ChatLab is chat plugin whose purpose is to be an optimized plugin and have the necessary options for users.
 This plugin is a recode from my old plugin.
 
-# Requeriments
+## Requeriments
 
 - Paper or fork of this.
 - 1.8.8 Software version+.
 
-# Features
+## Features
 
 With the plugin you can:
 
