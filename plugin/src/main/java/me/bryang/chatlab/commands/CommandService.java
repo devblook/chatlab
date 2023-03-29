@@ -1,8 +1,8 @@
-package me.bryang.chatlab.command;
+package me.bryang.chatlab.commands;
 
 import me.bryang.chatlab.api.Service;
-import me.bryang.chatlab.command.translator.CommandCustomTranslator;
-import me.bryang.chatlab.manager.BukkitFileManager;
+import me.bryang.chatlab.commands.translator.CommandCustomTranslator;
+import me.bryang.chatlab.manager.YamlFileManager;
 import me.fixeddev.commandflow.CommandManager;
 import me.fixeddev.commandflow.annotated.AnnotatedCommandTreeBuilder;
 import me.fixeddev.commandflow.annotated.AnnotatedCommandTreeBuilderImpl;
@@ -21,7 +21,7 @@ public class CommandService implements Service {
 
     @Inject
     @Named("messages")
-    private BukkitFileManager messagesFile;
+    private YamlFileManager messagesFile;
 
     @Inject
     private Set<CommandClass> commands;
