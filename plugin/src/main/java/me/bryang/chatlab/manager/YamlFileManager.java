@@ -10,12 +10,12 @@ import java.io.InputStream;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
 
-public class BukkitFileManager {
+public class YamlFileManager {
 
     private final File file;
     private FileConfiguration config;
 
-    public BukkitFileManager(File folder, String fileName) {
+    public YamlFileManager(File folder, String fileName) {
         if (!folder.exists() && !folder.mkdirs()) {
             throw new IllegalStateException("Plugin folder" + folder.getName() + "cannot be created");
         }
@@ -33,7 +33,7 @@ public class BukkitFileManager {
         reload();
     }
 
-    public BukkitFileManager(ChatLab plugin, String fileName) {
+    public YamlFileManager(ChatLab plugin, String fileName) {
         this(plugin.getDataFolder(), fileName);
     }
 
