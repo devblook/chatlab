@@ -1,15 +1,23 @@
-# ChatLab 2023
+# ChatLab
 
-Note: A project about recode my old plugin.
-
-<img src="https://i.ibb.co/CK64Y0k/pluginbackground.png" width="300" height="200" />
+<img src="https://i.ibb.co/LpBJk0F/plugin-background.png" width="500" height="300" />
 
 ChatLab is chat plugin whose purpose is to be an optimized plugin and have the necessary options for users.
+This plugin is a recode from my old plugin.
 
-# Features
+### Requeriments:
 
-- Optimized plugin.
-- Compatible since 1.8+.
-- Customizables messages.
+- Paper or fork of this.
+- 1.19.3 Software version+.
 
-Possible launch in 3 March 2023
+### Features:
+
+With the plugin you can:
+
+- Use [MiniMessage](https://docs.advntr.dev/minimessage/index.html) in message paths.
+- Send private messages and reply.
+- Ignore or unignore a player.
+
+[Click here](https://discord.devblook.team/) to go to the discord support.
+
+Launch: 32 March 2023
