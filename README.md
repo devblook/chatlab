@@ -8,7 +8,7 @@ This plugin is a recode from my old plugin.
 ### Requeriments:
 
 - Paper or fork of this.
-- 1.8.8 Software version+.
+- 1.19.3 Software version+.
 
 ### Features:
 
