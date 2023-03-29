@@ -3,14 +3,13 @@ package me.bryang.chatlab;
 import me.bryang.chatlab.api.Service;
 import me.bryang.chatlab.api.utils.TypeRegistry;
 import me.bryang.chatlab.api.utils.TypeRegistryImpl;
-import me.bryang.chatlab.command.CommandModule;
-import me.bryang.chatlab.listener.ListenerModule;
-import me.bryang.chatlab.manager.BukkitFileManager;
-import me.bryang.chatlab.command.CommandService;
-import me.bryang.chatlab.listener.ListenerService;
+import me.bryang.chatlab.commands.CommandService;
+import me.bryang.chatlab.listeners.ListenerService;
 import me.bryang.chatlab.manager.SenderManager;
+import me.bryang.chatlab.manager.YamlFileManager;
+import me.bryang.chatlab.modules.CommandModule;
+import me.bryang.chatlab.modules.ListenerModule;
 import me.bryang.chatlab.user.User;
-import me.fixeddev.commandflow.bukkit.annotation.Sender;
 import team.unnamed.inject.AbstractModule;
 import team.unnamed.inject.key.TypeReference;
 
@@ -31,11 +30,11 @@ public class PluginModule extends AbstractModule {
                 .to(CommandService.class)
                 .to(ListenerService.class);
 
-        bind(BukkitFileManager.class)
-                .toInstance(new BukkitFileManager(plugin, "config"));
-        bind(BukkitFileManager.class)
+        bind(YamlFileManager.class)
+                .toInstance(new YamlFileManager(plugin, "config"));
+        bind(YamlFileManager.class)
                 .named("messages")
-                .toInstance(new BukkitFileManager(plugin, "messages"));
+                .toInstance(new YamlFileManager(plugin, "messages"));
 
         bind(new TypeReference<TypeRegistry<User>>(){})
                 .toInstance(new TypeRegistryImpl<>());
