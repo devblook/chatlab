@@ -1,4 +1,4 @@
-package me.bryang.chatlab.listener;
+package me.bryang.chatlab.listeners;
 
 import me.bryang.chatlab.api.utils.TypeRegistry;
 import me.bryang.chatlab.user.User;
