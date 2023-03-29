@@ -1,8 +1,6 @@
 package me.bryang.chatlab.user;
 
 import me.bryang.chatlab.api.Identifiable;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 
 import javax.annotation.Nullable;
 import java.util.UUID;

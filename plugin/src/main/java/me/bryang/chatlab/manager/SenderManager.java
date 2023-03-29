@@ -1,12 +1,9 @@
 package me.bryang.chatlab.manager;
 
 import me.bryang.chatlab.ChatLab;
-import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.checkerframework.checker.units.qual.C;
 
 public class SenderManager {
 

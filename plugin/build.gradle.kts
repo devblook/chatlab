@@ -7,6 +7,7 @@ dependencies{
     implementation("me.fixeddev:commandflow-bukkit:0.5.2")
     implementation("team.unnamed:inject:1.0.1")
     implementation ("net.kyori:adventure-platform-bukkit:4.2.0")
+
     implementation(project(":api"))
 
     testRuntimeOnly(project(":plugin"))
