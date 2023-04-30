@@ -50,7 +50,7 @@ public class MainModule extends AbstractModule {
                 .toInstance(new HashMap<>());
 
         bind(SenderManager.class)
-                .toInstance(new SenderManager(plugin));
+                .toInstance(new SenderManager());
 
         install(new ListenerModule());
         install(new CommandModule());
