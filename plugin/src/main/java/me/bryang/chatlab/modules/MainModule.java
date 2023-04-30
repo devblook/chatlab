@@ -1,5 +1,7 @@
-package me.bryang.chatlab;
+package me.bryang.chatlab.modules;
 
+import me.bryang.chatlab.ChatLab;
+import me.bryang.chatlab.FileCreator;
 import me.bryang.chatlab.manager.SenderManager;
 import me.bryang.chatlab.modules.CommandModule;
 import me.bryang.chatlab.modules.ListenerModule;
@@ -14,11 +16,11 @@ import team.unnamed.inject.key.TypeReference;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PluginModule extends AbstractModule {
+public class MainModule extends AbstractModule {
 
     private final ChatLab plugin;
 
-    public PluginModule(ChatLab plugin){
+    public MainModule(ChatLab plugin){
         this.plugin = plugin;
     }
 
