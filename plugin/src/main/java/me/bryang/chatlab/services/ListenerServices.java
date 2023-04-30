@@ -1,4 +1,4 @@
-package me.bryang.chatlab.listeners;
+package me.bryang.chatlab.services;
 
 import me.bryang.chatlab.ChatLab;
 import me.bryang.chatlab.api.Service;
@@ -9,7 +9,7 @@ import team.unnamed.inject.InjectAll;
 import java.util.Set;
 
 @InjectAll
-public class ListenerService implements Service {
+public class ListenerServices implements Service {
 
     private ChatLab plugin;
     private Set<Listener> listeners;

@@ -1,6 +1,6 @@
 package me.bryang.chatlab;
 
-import me.bryang.chatlab.api.Service;
+import me.bryang.chatlab.services.Service;
 import org.bukkit.plugin.java.JavaPlugin;
 import team.unnamed.inject.Injector;
 

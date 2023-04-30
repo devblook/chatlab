@@ -1,4 +1,4 @@
-package me.bryang.chatlab.commands;
+package me.bryang.chatlab.services;
 
 import me.bryang.chatlab.api.Service;
 import me.bryang.chatlab.commands.translator.CommandCustomTranslator;
@@ -17,7 +17,7 @@ import javax.inject.Named;
 import java.util.Set;
 
 
-public class CommandService implements Service {
+public class CommandServices implements Service {
 
     @Inject
     @Named("messages")
@@ -43,8 +43,4 @@ public class CommandService implements Service {
         }
     }
 
-    @Override
-    public void stop() {
-        commandManager.unregisterAll();
-    }
 }
