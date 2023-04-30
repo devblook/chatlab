@@ -4,14 +4,13 @@ plugins{
 }
 
 dependencies{
+
     implementation("me.fixeddev:commandflow-bukkit:0.5.2")
     implementation("team.unnamed:inject:1.0.1")
     implementation ("net.kyori:adventure-platform-bukkit:4.2.0")
 
-    implementation(project(":api"))
-
-    testRuntimeOnly(project(":plugin"))
-    testRuntimeOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT")
+    compileOnly ("io.papermc.paper:paper-api:1.19.3-R0.1-SNAPSHOT")
+    compileOnly("org.spongepowered:configurate-yaml:4.0.0")
 }
 
 tasks {

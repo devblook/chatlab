@@ -1,6 +1,6 @@
 package me.bryang.chatlab.commands;
 
-import me.bryang.chatlab.manager.YamlFileManager;
+import me.bryang.chatlab.FileCreator;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
 import me.fixeddev.commandflow.bukkit.annotation.Sender;
@@ -13,9 +13,9 @@ import javax.inject.Named;
 @InjectAll
 public class MainCommand implements CommandClass{
 
-    private YamlFileManager configFile;
+    private FileCreator configFile;
     @Named("messages")
-    private YamlFileManager messagesFile;
+    private FileCreator messagesFile;
 
     @Command(names = "")
     public void mainSubCommand(@Sender Player sender){

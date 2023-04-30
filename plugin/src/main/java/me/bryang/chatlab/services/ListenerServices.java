@@ -1,7 +1,6 @@
 package me.bryang.chatlab.services;
 
 import me.bryang.chatlab.ChatLab;
-import me.bryang.chatlab.api.Service;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import team.unnamed.inject.InjectAll;
@@ -12,6 +11,7 @@ import java.util.Set;
 public class ListenerServices implements Service {
 
     private ChatLab plugin;
+
     private Set<Listener> listeners;
 
     @Override
