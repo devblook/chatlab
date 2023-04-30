@@ -25,12 +25,15 @@ public class CommandServices implements Service {
     @Inject
     private Set<CommandClass> commands;
 
+    @Inject
+    private CommandCustomTranslator commandCustomTranslator;
+
     @Override
     public void start() {
 
         CommandManager commandManager = new BukkitCommandManager("ChatLab");
 
-        commandManager.getTranslator().setProvider(new CommandCustomTranslator(messagesFile.get()));
+        commandManager.getTranslator().setProvider(commandCustomTranslator);
         PartInjector partInjector = PartInjector.create();
 
         partInjector.install(new DefaultsModule());

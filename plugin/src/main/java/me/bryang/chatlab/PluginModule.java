@@ -1,5 +1,6 @@
 package me.bryang.chatlab;
 
+import me.bryang.chatlab.services.translator.CommandCustomTranslator;
 import me.bryang.chatlab.services.translator.CommandServices;
 import me.bryang.chatlab.services.ListenerServices;
 import me.bryang.chatlab.manager.SenderManager;
@@ -32,6 +33,8 @@ public class PluginModule extends AbstractModule {
                 .to(CommandServices.class)
                 .to(ListenerServices.class);
 
+        bind(CommandCustomTranslator.class)
+                .toInstance(new CommandCustomTranslator());
         bind(FileCreator.class)
                 .toInstance(new FileCreator(plugin.getDataFolder().toPath(), "config"));
         bind(FileCreator.class)

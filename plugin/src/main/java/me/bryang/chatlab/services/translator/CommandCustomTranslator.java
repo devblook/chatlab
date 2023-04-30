@@ -4,13 +4,12 @@ import me.fixeddev.commandflow.Namespace;
 import me.fixeddev.commandflow.translator.TranslationProvider;
 import org.bukkit.configuration.file.FileConfiguration;
 
+import javax.inject.Inject;
+
 public class CommandCustomTranslator implements TranslationProvider {
 
-    private final FileConfiguration messagesFile;
-
-    public CommandCustomTranslator(FileConfiguration messagesFile){
-        this.messagesFile = messagesFile;
-    }
+    @Inject
+    private FileConfiguration messagesFile;
 
     @Override
     public String getTranslation(Namespace namespace, String key) {
