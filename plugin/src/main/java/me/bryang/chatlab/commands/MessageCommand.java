@@ -1,14 +1,13 @@
 package me.bryang.chatlab.commands;
 
-import me.bryang.chatlab.manager.SenderManager;
 import me.bryang.chatlab.FileCreator;
+import me.bryang.chatlab.manager.SenderManager;
 import me.bryang.chatlab.user.User;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
 import me.fixeddev.commandflow.annotated.annotation.OptArg;
 import me.fixeddev.commandflow.annotated.annotation.Text;
 import me.fixeddev.commandflow.bukkit.annotation.Sender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import team.unnamed.inject.InjectAll;
 

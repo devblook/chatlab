@@ -1,7 +1,7 @@
 package me.bryang.chatlab.services.translator;
 
-import me.bryang.chatlab.services.Service;
 import me.bryang.chatlab.FileCreator;
+import me.bryang.chatlab.services.Service;
 import me.fixeddev.commandflow.CommandManager;
 import me.fixeddev.commandflow.annotated.AnnotatedCommandTreeBuilder;
 import me.fixeddev.commandflow.annotated.AnnotatedCommandTreeBuilderImpl;
