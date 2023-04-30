@@ -30,11 +30,8 @@ public class ReplyCommand implements CommandClass {
             desc = "A reply command.")
     public void messageCommand(@Sender Player sender, @Text @OptArg() String senderMessage) {
 
-        FileConfiguration config = configFile.get();
-        FileConfiguration messages = messagesFile.get();
-
         if (senderMessage.isEmpty()){
-            sender.sendMessage(messages.getString("error.no-argument")
+            sender.sendMessage(messagesFile.getString("error.no-argument")
                     .replace("%usage%", "/msg <player> <message>"));
             return;
         }
@@ -42,22 +39,22 @@ public class ReplyCommand implements CommandClass {
         User user = users.get(sender.getUniqueId().toString());
 
         if (!user.hasRecentMessenger()) {
-            senderManager.sendMessage(sender, messages.getString("error.no-reply"));
+            senderManager.sendMessage(sender, messagesFile.getString("error.no-reply"));
             return;
         }
 
         Player target = Bukkit.getPlayer(user.recentMessenger());
 
         if (target == null) {
-            senderManager.sendMessage(sender, messages.getString("error.no-reply"));
+            senderManager.sendMessage(sender, messagesFile.getString("error.no-reply"));
             return;
         }
 
-        senderManager.sendMessage(sender, config.getString("private-messages.from-sender")
+        senderManager.sendMessage(sender, configFile.getString("private-messages.from-sender")
                 .replace("%target%", target.getName())
                 .replace("%message%", senderMessage));
 
-        senderManager.sendMessage(target, config.getString("private-messages.to-receptor")
+        senderManager.sendMessage(target, configFile.getString("private-messages.to-receptor")
                 .replace("%sender%", sender.getName())
                 .replace("%message%", senderMessage));
     }
