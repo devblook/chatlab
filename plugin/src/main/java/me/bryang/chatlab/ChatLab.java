@@ -25,6 +25,5 @@ public class ChatLab extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        services.forEach(Service::stop);
     }
 }
