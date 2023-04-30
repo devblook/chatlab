@@ -1,17 +1,19 @@
 package me.bryang.chatlab;
 
-import me.bryang.chatlab.api.Service;
-import me.bryang.chatlab.api.utils.TypeRegistry;
-import me.bryang.chatlab.api.utils.TypeRegistryImpl;
-import me.bryang.chatlab.commands.CommandService;
-import me.bryang.chatlab.listeners.ListenerService;
+import me.bryang.chatlab.services.translator.CommandServices;
+import me.bryang.chatlab.services.ListenerServices;
 import me.bryang.chatlab.manager.SenderManager;
-import me.bryang.chatlab.manager.YamlFileManager;
 import me.bryang.chatlab.modules.CommandModule;
 import me.bryang.chatlab.modules.ListenerModule;
+import me.bryang.chatlab.services.Service;
 import me.bryang.chatlab.user.User;
+import org.apache.maven.model.path.PathTranslator;
 import team.unnamed.inject.AbstractModule;
 import team.unnamed.inject.key.TypeReference;
+
+import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PluginModule extends AbstractModule {
 
@@ -27,17 +29,17 @@ public class PluginModule extends AbstractModule {
                 .toInstance(plugin);
 
         multibind(Service.class).asSet()
-                .to(CommandService.class)
-                .to(ListenerService.class);
+                .to(CommandServices.class)
+                .to(ListenerServices.class);
 
-        bind(YamlFileManager.class)
-                .toInstance(new YamlFileManager(plugin, "config"));
-        bind(YamlFileManager.class)
+        bind(FileCreator.class)
+                .toInstance(new FileCreator(plugin.getDataFolder().toPath(), "config"));
+        bind(FileCreator.class)
                 .named("messages")
-                .toInstance(new YamlFileManager(plugin, "messages"));
+                .toInstance(new FileCreator(plugin.getDataFolder().toPath(), "messages"));
 
-        bind(new TypeReference<TypeRegistry<User>>(){})
-                .toInstance(new TypeRegistryImpl<>());
+        bind(new TypeReference<Map<String, User>>(){})
+                .toInstance(new HashMap<>());
 
         bind(SenderManager.class).toInstance(new SenderManager(plugin));
         install(new ListenerModule());
