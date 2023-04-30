@@ -1,6 +1,5 @@
 package me.bryang.chatlab.listeners;
 
-import me.bryang.chatlab.api.utils.TypeRegistry;
 import me.bryang.chatlab.user.User;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -8,19 +7,20 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import javax.inject.Inject;
+import java.util.Map;
 
 public class PlayerRegistryListener implements Listener {
 
     @Inject
-    private TypeRegistry<User> users;
+    private Map<String, User> users;
 
     @EventHandler
     public void onRegistry(PlayerJoinEvent event) {
-        users.register(new User(event.getPlayer().getUniqueId().toString()));
+        users.put(event.getPlayer().getUniqueId().toString(), new User());
     }
 
     @EventHandler
     public void onUnRegistry(PlayerQuitEvent event) {
-        users.unregister(event.getPlayer().getUniqueId().toString());
+
     }
 }

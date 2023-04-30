@@ -1,18 +1,11 @@
 package me.bryang.chatlab.user;
 
-import me.bryang.chatlab.api.Identifiable;
-
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class User implements Identifiable {
+public class User  {
 
-    private final String id;
     private UUID recentMessenger;
-
-    public User(String id) {
-        this.id = id;
-    }
 
     // Start customizable data user
 
@@ -29,11 +22,6 @@ public class User implements Identifiable {
         return recentMessenger != null;
     }
 
-    // End customizable data user
 
-    @Override
-    public String id() {
-        return id;
-    }
 
 }
