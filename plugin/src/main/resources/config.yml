@@ -1,5 +1,7 @@
 config:
+
 # Private message format.
+
 private-messages:
   # Format for private messages.
   from-sender: "&fYou &8» &a%target% &8» &f%message%"
