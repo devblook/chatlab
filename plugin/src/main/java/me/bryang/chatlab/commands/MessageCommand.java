@@ -28,25 +28,25 @@ public class MessageCommand implements CommandClass {
     @Command(names = {"msg", "pm", "m", "message", "tell", "w"},
             desc = "Private message command")
     public void messageCommand(@Sender Player sender, @OptArg() Player target,
-                               @Text @OptArg() String senderMessage){
+                               @Text @OptArg() String senderMessage) {
 
-        if (target == null){
+        if (target == null) {
             senderManager.sendMessage(sender, messagesFile.getString("error.no-argument")
                     .replace("%usage%", "/msg <player> <message>"));
             return;
         }
 
-        if (senderMessage.isEmpty()){
-            senderManager.sendMessage(sender,messagesFile.getString("error.no-argument")
+        if (senderMessage.isEmpty()) {
+            senderManager.sendMessage(sender, messagesFile.getString("error.no-argument")
                     .replace("%usage%", "/msg <player> <message>"));
             return;
         }
 
-        senderManager.sendMessage(sender, messagesFile.getString("private-messages.from-sender")
+        senderManager.sendMessage(sender, messagesFile.getString("private-message.from-sender")
                 .replace("%target%", target.getName())
                 .replace("%message%", senderMessage));
 
-        senderManager.sendMessage(target, configFile.getString("private-messages.to-receptor")
+        senderManager.sendMessage(target, configFile.getString("private-message.to-receptor")
                 .replace("%sender%", sender.getName())
                 .replace("%message%", senderMessage));
 

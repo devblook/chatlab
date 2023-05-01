@@ -3,7 +3,7 @@ package me.bryang.chatlab.user;
 import javax.annotation.Nullable;
 import java.util.UUID;
 
-public class User  {
+public class User {
 
     private UUID recentMessenger;
 
@@ -21,7 +21,6 @@ public class User  {
     public boolean hasRecentMessenger() {
         return recentMessenger != null;
     }
-
 
 
 }

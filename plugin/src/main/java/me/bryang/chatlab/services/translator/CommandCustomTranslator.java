@@ -22,7 +22,7 @@ public class CommandCustomTranslator implements TranslationProvider {
                 return messagesFile.getString("error.no-online");
 
             case "command.no-permission":
-                 return messagesFile.getString("error.no-permission");
+                return messagesFile.getString("error.no-permission");
 
         }
         return "Si ves este mensaje, contacta con el programador.";

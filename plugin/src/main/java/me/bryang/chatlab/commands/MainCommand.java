@@ -11,20 +11,20 @@ import javax.inject.Named;
 
 @Command(names = {"clab", "chatlab"})
 @InjectAll
-public class MainCommand implements CommandClass{
+public class MainCommand implements CommandClass {
 
     private FileCreator configFile;
     @Named("messages")
     private FileCreator messagesFile;
 
     @Command(names = "")
-    public void mainSubCommand(@Sender Player sender){
+    public void mainSubCommand(@Sender Player sender) {
         sender.sendMessage("<blue>ChatLab: <white>Main plugin command.");
         sender.sendMessage("<grey>- <light_blue>/clab reload");
     }
 
     @Command(names = "reload", permission = "chatlab.reload")
-    public void reloadSubCommand(@Sender Player sender){
+    public void reloadSubCommand(@Sender Player sender) {
 
         configFile.reload();
         messagesFile.reload();

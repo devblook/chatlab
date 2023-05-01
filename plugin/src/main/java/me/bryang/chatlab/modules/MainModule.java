@@ -17,7 +17,7 @@ public class MainModule extends AbstractModule {
     private final ChatLab plugin;
     private final Path pluginPath;
 
-    public MainModule(ChatLab plugin){
+    public MainModule(ChatLab plugin) {
         this.plugin = plugin;
         this.pluginPath = plugin.getDataFolder().toPath();
     }
@@ -37,7 +37,8 @@ public class MainModule extends AbstractModule {
                 .named("messages")
                 .toInstance(new FileCreator(pluginPath, "messages"));
 
-        bind(new TypeReference<Map<String, User>>(){})
+        bind(new TypeReference<Map<String, User>>() {
+        })
                 .toInstance(new HashMap<>());
 
         bind(SenderManager.class)

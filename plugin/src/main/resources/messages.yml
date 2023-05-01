@@ -1,6 +1,7 @@
 #
 # Messages.yml
 
+
 error:
   # You can't use this command in console
   console: "You can't do this in console."

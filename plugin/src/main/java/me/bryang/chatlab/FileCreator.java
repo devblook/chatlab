@@ -24,7 +24,7 @@ public class FileCreator {
 
         try {
             start();
-        }catch (ConfigurateException exception){
+        } catch (ConfigurateException exception) {
             exception.printStackTrace();
         }
 
@@ -43,7 +43,7 @@ public class FileCreator {
 
     }
 
-    public void reload(){
+    public void reload() {
 
         try {
             configurationNode = configLoader.load();
@@ -76,7 +76,7 @@ public class FileCreator {
                     .node((Object) path.split("\\."))
                     .getList(String.class, new ArrayList<>());
 
-        } catch (Exception exception){
+        } catch (Exception exception) {
             exception.printStackTrace();
             return null;
         }

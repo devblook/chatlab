@@ -29,7 +29,7 @@ public class ReplyCommand implements CommandClass {
             desc = "A reply command.")
     public void messageCommand(@Sender Player sender, @Text @OptArg() String senderMessage) {
 
-        if (senderMessage.isEmpty()){
+        if (senderMessage.isEmpty()) {
             sender.sendMessage(messagesFile.getString("error.no-argument")
                     .replace("%usage%", "/msg <player> <message>"));
             return;

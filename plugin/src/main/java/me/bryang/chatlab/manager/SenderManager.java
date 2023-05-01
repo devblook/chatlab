@@ -7,11 +7,11 @@ public class SenderManager {
 
     private final MiniMessage miniMessage;
 
-    public SenderManager(){
+    public SenderManager() {
         miniMessage = MiniMessage.miniMessage();
     }
 
-    public void sendMessage(Player sender, String message){
+    public void sendMessage(Player sender, String message) {
         sender.sendMessage(miniMessage.deserialize(message));
     }
 }
