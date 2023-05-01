@@ -19,8 +19,8 @@ public class MainCommand implements CommandClass{
 
     @Command(names = "")
     public void mainSubCommand(@Sender Player sender){
-        sender.sendMessage("§aChatLab: §fMain plugin command.");
-        sender.sendMessage("§8- §f/clab reload");
+        sender.sendMessage("<red>ChatLab: <white>Main plugin command.");
+        sender.sendMessage("<grey>- <light_blue>/clab reload");
     }
 
     @Command(names = "reload", permission = "chatlab.admin")
