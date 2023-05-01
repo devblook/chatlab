@@ -1,5 +1,4 @@
 <img src= "https://img.shields.io/github/license/devblook/chatlab?style=for-the-badge"> <img src= "https://img.shields.io/github/stars/devblook/chatlab?style=for-the-badge"> <img src= "https://img.shields.io/github/forks/devblook/chatlab?style=for-the-badge"> <img src = "https://img.shields.io/github/actions/workflow/status/devblook/chatlab/gradle.yml?style=for-the-badge"> [<img src = "https://img.shields.io/badge/Support-grey?logo=discord&style=for-the-badge">](https://discord.devblook.team)
-# ChatLab
 
 <p align="center">
  <img src="https://i.ibb.co/LpBJk0F/plugin-background.png" width="550" height="320" />
