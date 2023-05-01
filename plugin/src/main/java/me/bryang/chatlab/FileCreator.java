@@ -35,7 +35,7 @@ public class FileCreator {
         configLoader = YamlConfigurationLoader
                 .builder()
                 .path(path
-                        .resolve(fileName + ".yml"))
+                        .resolve(fileName))
                 .build();
 
         configurationNode = configLoader.load();
