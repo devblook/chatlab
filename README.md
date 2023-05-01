@@ -10,12 +10,21 @@
 ChatLab is chat plugin whose purpose is to be an optimized plugin and have the necessary options for users.
 This plugin is a recode from my old plugin.
 
+## Introduction
+
 ### Requeriments:
 
+You need:
 - Paper or fork of this.
 - 1.19.3 Software version+.
 
-### Features:
+### How to install:
+
+Coming soon..
+
+
+
+## Features:
 
 With the plugin you can:
 
@@ -23,5 +32,14 @@ With the plugin you can:
 - Send private messages and reply.
 - Ignore or unignore a player.
 
-### Support:
+## To do:
+
+- [X] Release
+- [ ] Multilanguage support 
+- [ ] Chat format
+
+Note: Coming soon more features.
+
+## Support:
 [Click here](https://discord.devblook.team/) to go to the discord support.
+
