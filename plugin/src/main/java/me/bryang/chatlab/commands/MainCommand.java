@@ -1,6 +1,7 @@
 package me.bryang.chatlab.commands;
 
 import me.bryang.chatlab.FileCreator;
+import me.bryang.chatlab.manager.SenderManager;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
 import me.fixeddev.commandflow.bukkit.annotation.Sender;
@@ -17,10 +18,12 @@ public class MainCommand implements CommandClass {
     @Named("messages")
     private FileCreator messagesFile;
 
+    private SenderManager senderManager;
+
     @Command(names = "")
     public void mainSubCommand(@Sender Player sender) {
-        sender.sendMessage("<blue>ChatLab: <white>Main plugin command.");
-        sender.sendMessage("<grey>- <light_blue>/clab reload");
+        senderManager.sendMessage(sender, "<blue>ChatLab: <white>Main plugin command.");
+        senderManager.sendMessage(sender, "<grey>- <light_blue>/clab reload");
     }
 
     @Command(names = "reload", permission = "chatlab.reload")
@@ -28,7 +31,7 @@ public class MainCommand implements CommandClass {
 
         configFile.reload();
         messagesFile.reload();
-        sender.sendMessage("<blue>[ChatLab] <black>| <f>Plugin relaoded.");
+        senderManager.sendMessage(sender,"<blue>[ChatLab] <black>| <f>Plugin reloaded.");
 
     }
 
