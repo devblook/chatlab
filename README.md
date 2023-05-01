@@ -23,5 +23,3 @@ With the plugin you can:
 
 ### Support:
 [Click here](https://discord.devblook.team/) to go to the discord support.
-
-Launch: 32 March 2023
