@@ -28,7 +28,4 @@ public class ChatLab extends JavaPlugin {
         getLogger().info("Thanks for using my plugin!");
     }
 
-    @Override
-    public void onDisable() {
-    }
 }
