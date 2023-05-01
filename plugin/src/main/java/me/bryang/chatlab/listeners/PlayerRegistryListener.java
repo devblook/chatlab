@@ -11,7 +11,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import team.unnamed.inject.InjectAll;
 
-import javax.inject.Inject;
 import java.util.Map;
 
 @InjectAll

@@ -1,6 +1,5 @@
 package me.bryang.chatlab.manager;
 
-import me.bryang.chatlab.ChatLab;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.entity.Player;
 
