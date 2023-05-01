@@ -1,6 +1,7 @@
+<img src= "https://img.shields.io/github/license/devblook/chatlab?style=for-the-badge"> <img src= "https://img.shields.io/github/stars/devblook/chatlab?style=for-the-badge"> <img src= "https://img.shields.io/github/forks/devblook/chatlab?style=for-the-badge"> <img src = "https://img.shields.io/badge/Support-grey?link=https://discord.devblook.team/&logo=discord&style=for-the-badge">
 # ChatLab
 
-<img src="https://i.ibb.co/LpBJk0F/plugin-background.png" width="500" height="300" />
+<img src="https://i.ibb.co/LpBJk0F/plugin-background.png" width="550" height="320" />
 
 ChatLab is chat plugin whose purpose is to be an optimized plugin and have the necessary options for users.
 This plugin is a recode from my old plugin.
