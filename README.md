@@ -2,8 +2,8 @@
 
 <p align="center">
  <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://i.ibb.co/tXbMdxB/plugin-background-black.png"> 
-  <img src="https://i.ibb.co/LpBJk0F/plugin-background.png" width="550" height="320" />
+  <source media="(prefers-color-scheme: dark)" srcset="https://i.ibb.co/Tvw7v4g/plugin-background-black.png"> 
+  <img src="https://i.ibb.co/fdhwS1J/plugin-background.png" width="550" height="320" />
  </pictue>
 </p>
 
