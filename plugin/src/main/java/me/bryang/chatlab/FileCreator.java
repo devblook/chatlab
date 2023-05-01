@@ -19,8 +19,8 @@ public class FileCreator {
     private final String fileName;
 
     public FileCreator(Path path, String config) {
-        this.path = path;
         this.fileName = config + ".yml";
+        this.path = path.resolve(fileName);
 
         try {
             start();
@@ -32,10 +32,10 @@ public class FileCreator {
 
     public void start() throws ConfigurateException {
 
+
         configLoader = YamlConfigurationLoader
                 .builder()
-                .path(path
-                        .resolve(fileName))
+                .path(path)
                 .build();
 
         configurationNode = configLoader.load();
