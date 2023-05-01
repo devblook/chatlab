@@ -32,10 +32,6 @@ public class MainModule extends AbstractModule {
         bind(ChatLab.class)
                 .toInstance(plugin);
 
-        multibind(Service.class).asSet()
-                .to(CommandServices.class)
-                .to(ListenerServices.class);
-
         bind(CommandCustomTranslator.class)
                 .toInstance(new CommandCustomTranslator());
 
@@ -54,5 +50,6 @@ public class MainModule extends AbstractModule {
 
         install(new ListenerModule());
         install(new CommandModule());
+        install(new ServiceModule());
     }
 }
