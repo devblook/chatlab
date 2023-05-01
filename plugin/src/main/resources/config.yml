@@ -1,11 +1,19 @@
 #
 # Config.yml
 
-config:
+# Main settings.
+settings:
+
+  # Enable bstats
+  enable-bstats: true
 
 # Private message format.
+private-message:
 
-private-messages:
-  # Format for private messages.
-  from-sender: "&fYou &8» &a%target% &8» &f%message%"
-  to-receptor: "&a%sender% &8» &fYou &8» &f%message%"
+  from-sender: "<white>You &8» <light_green>%target% <dark_grey>» <white>%message%"
+  to-receptor: "<light_green>%sender% &8» <white>You <dark_grey>» <white>%message%"
+
+reply:
+
+  # When the player left.
+  left: "<light_green>[Chat] <light_grey>| <white>The player <green>%target%<white>that you talk, left the server."
