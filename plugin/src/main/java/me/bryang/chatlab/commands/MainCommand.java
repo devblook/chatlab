@@ -10,8 +10,6 @@ import me.fixeddev.commandflow.bukkit.annotation.Sender;
 import org.bukkit.entity.Player;
 import team.unnamed.inject.InjectAll;
 
-import javax.inject.Named;
-
 @Command(names = {"clab", "chatlab"})
 @InjectAll
 public class MainCommand implements CommandClass {

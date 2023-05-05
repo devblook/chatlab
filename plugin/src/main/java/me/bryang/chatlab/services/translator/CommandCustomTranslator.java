@@ -1,13 +1,9 @@
 package me.bryang.chatlab.services.translator;
 
 import me.bryang.chatlab.file.FileWrapper;
-import me.bryang.chatlab.file.types.ConfigurationFile;
 import me.bryang.chatlab.file.types.MessagesFile;
 import me.fixeddev.commandflow.Namespace;
 import me.fixeddev.commandflow.translator.TranslationProvider;
-
-import javax.inject.Inject;
-import javax.inject.Named;
 
 public class CommandCustomTranslator implements TranslationProvider {
 

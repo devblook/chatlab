@@ -3,9 +3,6 @@ package me.bryang.chatlab.file.types;
 import me.bryang.chatlab.file.PluginFiles;
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
 import org.spongepowered.configurate.objectmapping.meta.Comment;
-import org.spongepowered.configurate.objectmapping.meta.Setting;
-
-import java.util.Set;
 
 @ConfigSerializable
 @SuppressWarnings("FieldMayBeFinal")

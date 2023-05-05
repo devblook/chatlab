@@ -11,7 +11,6 @@ import me.fixeddev.commandflow.bukkit.BukkitCommandManager;
 import me.fixeddev.commandflow.bukkit.factory.BukkitModule;
 import team.unnamed.inject.InjectAll;
 
-import javax.inject.Named;
 import java.util.Set;
 
 

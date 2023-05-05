@@ -10,14 +10,11 @@ import me.fixeddev.commandflow.annotated.annotation.Command;
 import me.fixeddev.commandflow.annotated.annotation.OptArg;
 import me.fixeddev.commandflow.annotated.annotation.Text;
 import me.fixeddev.commandflow.bukkit.annotation.Sender;
-import org.apache.logging.log4j.message.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import team.unnamed.inject.InjectAll;
 import team.unnamed.inject.InjectIgnore;
 
-import javax.inject.Named;
-import java.io.ObjectInputFilter;
 import java.util.Map;
 
 @InjectAll

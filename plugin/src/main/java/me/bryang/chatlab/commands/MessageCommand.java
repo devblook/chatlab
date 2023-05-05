@@ -14,7 +14,6 @@ import org.bukkit.entity.Player;
 import team.unnamed.inject.InjectAll;
 import team.unnamed.inject.InjectIgnore;
 
-import javax.inject.Named;
 import java.util.Map;
 
 @InjectAll

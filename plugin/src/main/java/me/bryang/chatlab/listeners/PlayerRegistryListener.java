@@ -2,7 +2,6 @@ package me.bryang.chatlab.listeners;
 
 import me.bryang.chatlab.file.FileWrapper;
 import me.bryang.chatlab.file.types.ConfigurationFile;
-import me.bryang.chatlab.file.types.MessagesFile;
 import me.bryang.chatlab.manager.SenderManager;
 import me.bryang.chatlab.user.User;
 import org.bukkit.Bukkit;
