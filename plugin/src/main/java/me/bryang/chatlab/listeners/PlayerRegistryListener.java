@@ -2,6 +2,7 @@ package me.bryang.chatlab.listeners;
 
 import me.bryang.chatlab.file.FileWrapper;
 import me.bryang.chatlab.file.types.ConfigurationFile;
+import me.bryang.chatlab.file.types.MessagesFile;
 import me.bryang.chatlab.manager.SenderManager;
 import me.bryang.chatlab.user.User;
 import org.bukkit.Bukkit;
@@ -11,6 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import team.unnamed.inject.InjectAll;
+import team.unnamed.inject.InjectIgnore;
 
 import java.util.Map;
 
@@ -19,7 +21,9 @@ public class PlayerRegistryListener implements Listener {
 
     private Map<String, User> users;
 
-    private FileCreator configFile;
+    private FileWrapper<ConfigurationFile> configWrapper;
+    @InjectIgnore
+    private final ConfigurationFile configFile = configWrapper.get();
     private SenderManager senderManager;
 
 
@@ -34,16 +38,13 @@ public class PlayerRegistryListener implements Listener {
         User user = users.get(event.getPlayer().getUniqueId().toString());
 
 
-        FileWrapper<ConfigurationFile> configFile = new FileWrapper<>(new ConfigurationFile());
-
-
         if (!user.hasRecentMessenger()) {
             return;
         }
 
         Player sender = Bukkit.getPlayer(user.recentMessenger());
 
-        senderManager.sendMessage(sender, configFile.getString("reply.left")
+        senderManager.sendMessage(sender, configFile.leftMessage()
                 .replace("%target%", event.getPlayer().getName()));
 
         user.recentMessenger(null);

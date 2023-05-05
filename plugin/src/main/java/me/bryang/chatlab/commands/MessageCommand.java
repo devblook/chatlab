@@ -12,6 +12,7 @@ import me.fixeddev.commandflow.annotated.annotation.Text;
 import me.fixeddev.commandflow.bukkit.annotation.Sender;
 import org.bukkit.entity.Player;
 import team.unnamed.inject.InjectAll;
+import team.unnamed.inject.InjectIgnore;
 
 import javax.inject.Named;
 import java.util.Map;
@@ -19,38 +20,40 @@ import java.util.Map;
 @InjectAll
 public class MessageCommand implements CommandClass {
 
-    private FileWrapper<ConfigurationFile> configFile;
-    private FileWrapper<MessagesFile> messagesFile;
+    private FileWrapper<ConfigurationFile> configWrapper;
+    private FileWrapper<MessagesFile> messagesWrapper;
 
     private Map<String, User> users;
     private SenderManager senderManager;
+
+    @InjectIgnore
+    private final ConfigurationFile configFile = configWrapper.get();
+    @InjectIgnore
+    private final MessagesFile messagesFile = messagesWrapper.get();
 
     @Command(names = {"msg", "pm", "m", "message", "tell", "w"},
             desc = "Private message command")
     public void messageCommand(@Sender Player sender, @OptArg() Player target,
                                @Text @OptArg() String senderMessage) {
 
-        ConfigurationFile configPath = configFile.get();
-        MessagesFile messagePath = messagesFile.get();
-
 
         if (target == null) {
-            senderManager.sendMessage(sender, messagePath.noArgumentMessage()
+            senderManager.sendMessage(sender, messagesFile.noArgumentMessage()
                     .replace("%usage%", "/msg <player> <message>"));
             return;
         }
 
         if (senderMessage.isEmpty()) {
-            senderManager.sendMessage(sender, messagePath.noArgumentMessage()
+            senderManager.sendMessage(sender, messagesFile.noArgumentMessage()
                     .replace("%usage%", "/msg <player> <message>"));
             return;
         }
 
-        senderManager.sendMessage(sender, configPath.fromSenderMessage()
+        senderManager.sendMessage(sender, configFile.fromSenderMessage()
                 .replace("%target%", target.getName())
                 .replace("%message%", senderMessage));
 
-        senderManager.sendMessage(target, configPath.toReceptorMessage()
+        senderManager.sendMessage(target, configFile.toReceptorMessage()
                 .replace("%sender%", sender.getName())
                 .replace("%message%", senderMessage));
 
