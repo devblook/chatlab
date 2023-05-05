@@ -1,6 +1,5 @@
 package me.bryang.chatlab.services.translator;
 
-import me.bryang.chatlab.FileCreator;
 import me.bryang.chatlab.services.Service;
 import me.fixeddev.commandflow.CommandManager;
 import me.fixeddev.commandflow.annotated.AnnotatedCommandTreeBuilder;
@@ -18,9 +17,6 @@ import java.util.Set;
 
 @InjectAll
 public class CommandServices implements Service {
-
-    @Named("messages")
-    private FileCreator messagesFile;
 
     private Set<CommandClass> commands;
 

@@ -1,7 +1,6 @@
 package me.bryang.chatlab.modules;
 
 import me.bryang.chatlab.ChatLab;
-import me.bryang.chatlab.FileCreator;
 import me.bryang.chatlab.manager.SenderManager;
 import me.bryang.chatlab.services.translator.CommandCustomTranslator;
 import me.bryang.chatlab.user.User;
@@ -27,15 +26,17 @@ public class MainModule extends AbstractModule {
         bind(ChatLab.class)
                 .toInstance(plugin);
 
-        bind(CommandCustomTranslator.class)
-                .toInstance(new CommandCustomTranslator());
-
         bind(FileCreator.class)
                 .toInstance(new FileCreator(pluginPath, "config"));
 
         bind(FileCreator.class)
                 .named("messages")
                 .toInstance(new FileCreator(pluginPath, "messages"));
+
+        bind(CommandCustomTranslator.class)
+                .toInstance(new CommandCustomTranslator());
+
+
 
         bind(new TypeReference<Map<String, User>>() {
         })
