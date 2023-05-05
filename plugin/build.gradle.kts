@@ -13,6 +13,7 @@ dependencies {
 
 tasks {
     shadowJar {
+
         archiveFileName.set("ChatLab-${project.version}.jar")
 
         relocate("me.fixeddev", "${project.group}.chatlab.libs.commandflow")
