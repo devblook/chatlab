@@ -15,6 +15,7 @@ public class ChatLab extends JavaPlugin {
 
     @Override
     public void onLoad() {
+
         Injector injector = Injector.create(new MainModule(this));
         injector.injectMembers(this);
     }

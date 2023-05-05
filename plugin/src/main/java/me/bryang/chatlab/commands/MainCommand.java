@@ -1,6 +1,8 @@
 package me.bryang.chatlab.commands;
 
-import me.bryang.chatlab.FileCreator;
+import me.bryang.chatlab.file.FileWrapper;
+import me.bryang.chatlab.file.types.ConfigurationFile;
+import me.bryang.chatlab.file.types.MessagesFile;
 import me.bryang.chatlab.manager.SenderManager;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
@@ -14,14 +16,14 @@ import javax.inject.Named;
 @InjectAll
 public class MainCommand implements CommandClass {
 
-    private FileCreator configFile;
-    @Named("messages")
-    private FileCreator messagesFile;
+    private FileWrapper<ConfigurationFile> configFile;
+    private FileWrapper<MessagesFile> messagesFile;
 
     private SenderManager senderManager;
 
     @Command(names = "")
     public void mainSubCommand(@Sender Player sender) {
+
         senderManager.sendMessage(sender, "<blue>ChatLab: <white>Main plugin command.");
         senderManager.sendMessage(sender, "<grey>- <light_blue>/clab reload");
     }

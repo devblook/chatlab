@@ -1,6 +1,8 @@
 package me.bryang.chatlab.commands;
 
-import me.bryang.chatlab.FileCreator;
+import me.bryang.chatlab.file.FileWrapper;
+import me.bryang.chatlab.file.types.ConfigurationFile;
+import me.bryang.chatlab.file.types.MessagesFile;
 import me.bryang.chatlab.manager.SenderManager;
 import me.bryang.chatlab.user.User;
 import me.fixeddev.commandflow.annotated.CommandClass;
@@ -17,10 +19,8 @@ import java.util.Map;
 @InjectAll
 public class MessageCommand implements CommandClass {
 
-    private FileCreator configFile;
-
-    @Named("messages")
-    private FileCreator messagesFile;
+    private FileWrapper<ConfigurationFile> configFile;
+    private FileWrapper<MessagesFile> messagesFile;
 
     private Map<String, User> users;
     private SenderManager senderManager;
@@ -30,23 +30,27 @@ public class MessageCommand implements CommandClass {
     public void messageCommand(@Sender Player sender, @OptArg() Player target,
                                @Text @OptArg() String senderMessage) {
 
+        ConfigurationFile configPath = configFile.get();
+        MessagesFile messagePath = messagesFile.get();
+
+
         if (target == null) {
-            senderManager.sendMessage(sender, messagesFile.getString("error.no-argument")
+            senderManager.sendMessage(sender, messagePath.noArgumentMessage()
                     .replace("%usage%", "/msg <player> <message>"));
             return;
         }
 
         if (senderMessage.isEmpty()) {
-            senderManager.sendMessage(sender, messagesFile.getString("error.no-argument")
+            senderManager.sendMessage(sender, messagePath.noArgumentMessage()
                     .replace("%usage%", "/msg <player> <message>"));
             return;
         }
 
-        senderManager.sendMessage(sender, messagesFile.getString("private-message.from-sender")
+        senderManager.sendMessage(sender, configPath.fromSenderMessage()
                 .replace("%target%", target.getName())
                 .replace("%message%", senderMessage));
 
-        senderManager.sendMessage(target, configFile.getString("private-message.to-receptor")
+        senderManager.sendMessage(target, configPath.toReceptorMessage()
                 .replace("%sender%", sender.getName())
                 .replace("%message%", senderMessage));
 

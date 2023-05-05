@@ -1,6 +1,7 @@
 package me.bryang.chatlab.listeners;
 
-import me.bryang.chatlab.FileCreator;
+import me.bryang.chatlab.file.FileWrapper;
+import me.bryang.chatlab.file.types.ConfigurationFile;
 import me.bryang.chatlab.manager.SenderManager;
 import me.bryang.chatlab.user.User;
 import org.bukkit.Bukkit;
@@ -31,6 +32,10 @@ public class PlayerRegistryListener implements Listener {
     public void onUnRegistry(PlayerQuitEvent event) {
 
         User user = users.get(event.getPlayer().getUniqueId().toString());
+
+
+        FileWrapper<ConfigurationFile> configFile = new FileWrapper<>(new ConfigurationFile());
+
 
         if (!user.hasRecentMessenger()) {
             return;
