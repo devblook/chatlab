@@ -6,23 +6,29 @@ import org.spongepowered.configurate.ConfigurationNode;
 import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
 import org.yaml.snakeyaml.Yaml;
 
+import javax.print.DocFlavor;
 import java.io.IOException;
 import java.nio.file.Path;
 
 public class FileWrapper<T extends PluginFiles> {
-    private Class<T> clazz;
+
+    private String fileName;
     private Path path;
 
     private YamlConfigurationLoader loader;
     private ConfigurationNode node;
 
-    private T internClass;
+    private final Class<T> clazz;
+    private final T internClass;
 
 
-    public FileWrapper(Path path, Class<T> clazz){
+    public FileWrapper(String fileName, Path path, Class<T> clazz, T internClass){
+        this.fileName = fileName;
         this.path = path;
 
         this.clazz = clazz;
+        this.internClass = internClass;
+
         start();
     }
 
@@ -31,14 +37,12 @@ public class FileWrapper<T extends PluginFiles> {
          loader = YamlConfigurationLoader
                 .builder()
                 .path(path)
+                 .defaultOptions(config -> config.header("#\n# " + fileName + "\n"))
                 .build();
 
         try {
             node = loader.load();
-
-            T configValues = node.get(clazz);
-            node.set(clazz, configValues);
-
+            node.set(clazz, internClass);
             loader.save(node);
 
 

@@ -28,7 +28,9 @@ public class ConfigurationFile extends PluginFiles {
 
     public static class PrivateMessage{
 
-        private String fromSender = "<white>You &8» <light_green>%target% <dark_grey>» <white>%message%";
+        private String fromSender = """
+                
+                <white>You &8» <light_green>%target% <dark_grey>» <white>%message%""";
         private String toReceptor = "<light_green>%sender% &8» <white>You <dark_grey>» <white>%message%";
 
     }
