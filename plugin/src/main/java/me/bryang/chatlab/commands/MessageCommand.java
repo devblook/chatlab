@@ -24,7 +24,6 @@ public class MessageCommand implements CommandClass {
 
     private Map<String, User> users;
     private SenderManager senderManager;
-
     @InjectIgnore
     private final ConfigurationFile configFile = configWrapper.get();
     @InjectIgnore

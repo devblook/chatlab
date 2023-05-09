@@ -11,7 +11,6 @@ import java.util.Set;
 public class ListenerServices implements Service {
 
     private ChatLab plugin;
-
     private Set<Listener> listeners;
 
     @Override
