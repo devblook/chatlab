@@ -31,11 +31,11 @@ public class MainModule extends AbstractModule {
 
         bind(new TypeReference<FileWrapper<ConfigurationFile>>(){})
                 .toInstance(new FileWrapper<>
-                        ("config.yml", pluginPath, ConfigurationFile.class, new ConfigurationFile()));
+                        ("config", pluginPath, ConfigurationFile.class, new ConfigurationFile()));
 
         bind(new TypeReference<FileWrapper<MessagesFile>>(){})
                 .toInstance(new FileWrapper<>
-                        ("messages.yml", pluginPath, MessagesFile.class, new MessagesFile()));
+                        ("messages", pluginPath, MessagesFile.class, new MessagesFile()));
 
         bind(CommandCustomTranslator.class)
                 .toInstance(new CommandCustomTranslator());
