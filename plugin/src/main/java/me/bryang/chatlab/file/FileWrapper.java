@@ -1,12 +1,9 @@
 package me.bryang.chatlab.file;
 
 
-import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.ConfigurationNode;
 import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
-import org.yaml.snakeyaml.Yaml;
 
-import javax.print.DocFlavor;
 import java.io.IOException;
 import java.nio.file.Path;
 
@@ -36,8 +33,8 @@ public class FileWrapper<T extends PluginFiles> {
 
          loader = YamlConfigurationLoader
                 .builder()
-                .path(path)
-                 .defaultOptions(config -> config.header("#\n# " + fileName + "\n"))
+                .path(path.resolve(fileName + ".yml"))
+                 .defaultOptions(config -> config.header("\n " + fileName + ".yml"))
                 .build();
 
         try {
