@@ -8,7 +8,10 @@ public class ListenerModule extends AbstractModule {
 
     @Override
     public void configure() {
-        multibind(Listener.class).asSet()
-                .to(PlayerRegistryListener.class);
+
+        multibind(Listener.class)
+                .asSet()
+                .to(PlayerRegistryListener.class)
+                .singleton();
     }
 }
