@@ -1,4 +1,4 @@
-package me.bryang.chatlab.services;
+package me.bryang.chatlab.service;
 
 public interface Service {
 

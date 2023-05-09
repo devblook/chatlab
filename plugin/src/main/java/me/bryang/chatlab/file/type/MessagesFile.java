@@ -1,4 +1,4 @@
-package me.bryang.chatlab.file.types;
+package me.bryang.chatlab.file.type;
 
 import me.bryang.chatlab.file.PluginFiles;
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;

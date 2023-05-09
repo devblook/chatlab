@@ -1,7 +1,7 @@
-package me.bryang.chatlab.services.translator;
+package me.bryang.chatlab.service.translator;
 
 import me.bryang.chatlab.file.FileWrapper;
-import me.bryang.chatlab.file.types.MessagesFile;
+import me.bryang.chatlab.file.type.MessagesFile;
 import me.fixeddev.commandflow.Namespace;
 import me.fixeddev.commandflow.translator.TranslationProvider;
 

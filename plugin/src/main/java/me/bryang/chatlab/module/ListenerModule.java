@@ -1,6 +1,6 @@
-package me.bryang.chatlab.modules;
+package me.bryang.chatlab.module;
 
-import me.bryang.chatlab.listeners.PlayerRegistryListener;
+import me.bryang.chatlab.listener.PlayerRegistryListener;
 import org.bukkit.event.Listener;
 import team.unnamed.inject.AbstractModule;
 

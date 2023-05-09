@@ -1,8 +1,8 @@
-package me.bryang.chatlab.commands;
+package me.bryang.chatlab.command;
 
 import me.bryang.chatlab.file.FileWrapper;
-import me.bryang.chatlab.file.types.ConfigurationFile;
-import me.bryang.chatlab.file.types.MessagesFile;
+import me.bryang.chatlab.file.type.ConfigurationFile;
+import me.bryang.chatlab.file.type.MessagesFile;
 import me.bryang.chatlab.manager.SenderManager;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;

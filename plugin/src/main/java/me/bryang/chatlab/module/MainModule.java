@@ -1,11 +1,11 @@
-package me.bryang.chatlab.modules;
+package me.bryang.chatlab.module;
 
 import me.bryang.chatlab.ChatLab;
 import me.bryang.chatlab.file.FileWrapper;
-import me.bryang.chatlab.file.types.ConfigurationFile;
-import me.bryang.chatlab.file.types.MessagesFile;
+import me.bryang.chatlab.file.type.ConfigurationFile;
+import me.bryang.chatlab.file.type.MessagesFile;
 import me.bryang.chatlab.manager.SenderManager;
-import me.bryang.chatlab.services.translator.CommandCustomTranslator;
+import me.bryang.chatlab.service.translator.CommandCustomTranslator;
 import me.bryang.chatlab.user.User;
 import team.unnamed.inject.AbstractModule;
 import team.unnamed.inject.key.TypeReference;

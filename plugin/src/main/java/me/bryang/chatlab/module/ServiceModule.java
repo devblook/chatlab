@@ -1,8 +1,8 @@
-package me.bryang.chatlab.modules;
+package me.bryang.chatlab.module;
 
-import me.bryang.chatlab.services.ListenerServices;
-import me.bryang.chatlab.services.Service;
-import me.bryang.chatlab.services.translator.CommandServices;
+import me.bryang.chatlab.service.ListenerServices;
+import me.bryang.chatlab.service.Service;
+import me.bryang.chatlab.service.translator.CommandServices;
 import team.unnamed.inject.AbstractModule;
 
 public class ServiceModule extends AbstractModule {

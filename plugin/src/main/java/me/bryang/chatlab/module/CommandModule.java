@@ -1,8 +1,8 @@
-package me.bryang.chatlab.modules;
+package me.bryang.chatlab.module;
 
-import me.bryang.chatlab.commands.MainCommand;
-import me.bryang.chatlab.commands.MessageCommand;
-import me.bryang.chatlab.commands.ReplyCommand;
+import me.bryang.chatlab.command.MainCommand;
+import me.bryang.chatlab.command.MessageCommand;
+import me.bryang.chatlab.command.ReplyCommand;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import team.unnamed.inject.AbstractModule;
 
