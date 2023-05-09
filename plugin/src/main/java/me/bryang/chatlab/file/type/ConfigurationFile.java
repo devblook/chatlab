@@ -14,7 +14,7 @@ public class ConfigurationFile extends PluginFiles {
     private Reply reply = new Reply();
 
 
-
+    @ConfigSerializable
     public static class Settings {
 
         @Comment("Enable bstats")
@@ -25,7 +25,7 @@ public class ConfigurationFile extends PluginFiles {
         }
 
     }
-
+    @ConfigSerializable
     public static class PrivateMessage{
 
         private String fromSender = """
@@ -35,7 +35,8 @@ public class ConfigurationFile extends PluginFiles {
 
     }
 
-   public static class Reply{
+    @ConfigSerializable
+    public static class Reply{
         private String left = "<light_green>[Chat] <light_grey>| <white>The player <green>%target%<white>that you talk, left the server.";
 
    }

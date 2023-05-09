@@ -9,7 +9,7 @@ public class MessagesFile extends PluginFiles {
 
     private Error error = new Error();
 
-
+    @ConfigSerializable
     public static class Error{
 
         @Comment("# You can't use this command in console")
