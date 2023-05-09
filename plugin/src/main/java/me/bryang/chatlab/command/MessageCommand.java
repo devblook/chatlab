@@ -24,15 +24,14 @@ public class MessageCommand implements CommandClass {
 
     private Map<String, User> users;
     private SenderManager senderManager;
-    @InjectIgnore
-    private final ConfigurationFile configFile = configWrapper.get();
-    @InjectIgnore
-    private final MessagesFile messagesFile = messagesWrapper.get();
-
     @Command(names = {"msg", "pm", "m", "message", "tell", "w"},
             desc = "Private message command")
     public void messageCommand(@Sender Player sender, @OptArg() Player target,
                                @Text @OptArg() String senderMessage) {
+
+        ConfigurationFile configFile = configWrapper.get();
+        MessagesFile messagesFile = messagesWrapper.get();
+
 
 
         if (target == null) {

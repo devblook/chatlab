@@ -21,8 +21,7 @@ public class PlayerRegistryListener implements Listener {
     private Map<String, User> users;
 
     private FileWrapper<ConfigurationFile> configWrapper;
-    @InjectIgnore
-    private final ConfigurationFile configFile = configWrapper.get();
+
     private SenderManager senderManager;
 
 
@@ -43,7 +42,7 @@ public class PlayerRegistryListener implements Listener {
 
         Player sender = Bukkit.getPlayer(user.recentMessenger());
 
-        senderManager.sendMessage(sender, configFile.leftMessage()
+        senderManager.sendMessage(sender, configWrapper.get().leftMessage()
                 .replace("%target%", event.getPlayer().getName()));
 
         user.recentMessenger(null);

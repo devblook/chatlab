@@ -26,14 +26,13 @@ public class ReplyCommand implements CommandClass {
     private Map<String, User> users;
     private SenderManager senderManager;
 
-    @InjectIgnore
-    private final ConfigurationFile configFile = configWrapper.get();
-    @InjectIgnore
-    private final MessagesFile messagesFile = messagesWrapper.get();
 
     @Command(names = {"r", "reply"},
             desc = "A reply command.")
     public void messageCommand(@Sender Player sender, @Text @OptArg() String senderMessage) {
+
+        MessagesFile messagesFile = messagesWrapper.get();
+        ConfigurationFile configFile = configWrapper.get();
 
         if (senderMessage.isEmpty()) {
             sender.sendMessage(messagesFile.noArgumentMessage()
