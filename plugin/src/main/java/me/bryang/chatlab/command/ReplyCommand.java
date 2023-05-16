@@ -10,6 +10,7 @@ import me.fixeddev.commandflow.annotated.annotation.Command;
 import me.fixeddev.commandflow.annotated.annotation.OptArg;
 import me.fixeddev.commandflow.annotated.annotation.Text;
 import me.fixeddev.commandflow.bukkit.annotation.Sender;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import team.unnamed.inject.InjectAll;
@@ -35,8 +36,9 @@ public class ReplyCommand implements CommandClass {
         ConfigurationFile configFile = configWrapper.get();
 
         if (senderMessage.isEmpty()) {
-            sender.sendMessage(messagesFile.noArgumentMessage()
-                    .replace("%usage%", "/msg <player> <message>"));
+            senderManager.sendMessage(sender, messagesFile.noArgumentMessage(),
+
+                    Placeholder.unparsed("usage", "/reply <message>"));
             return;
         }
 
@@ -54,13 +56,16 @@ public class ReplyCommand implements CommandClass {
             return;
         }
 
-        senderManager.sendMessage(sender, configFile.fromSenderMessage()
-                .replace("%target%", target.getName())
-                .replace("%message%", senderMessage));
+        senderManager.sendMessage(sender, configFile.fromSenderMessage(),
 
-        senderManager.sendMessage(target, configFile.toReceptorMessage()
-                .replace("%sender%", sender.getName())
-                .replace("%message%", senderMessage));
+                Placeholder.unparsed("target", target.getName()),
+                Placeholder.unparsed("message", senderMessage));
+
+        senderManager.sendMessage(target, configFile.toReceptorMessage(),
+
+                Placeholder.unparsed("sender", sender.getName()),
+                Placeholder.unparsed("message", senderMessage));
+
     }
 
 }
