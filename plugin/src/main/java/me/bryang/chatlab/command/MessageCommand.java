@@ -10,6 +10,8 @@ import me.fixeddev.commandflow.annotated.annotation.Command;
 import me.fixeddev.commandflow.annotated.annotation.OptArg;
 import me.fixeddev.commandflow.annotated.annotation.Text;
 import me.fixeddev.commandflow.bukkit.annotation.Sender;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import team.unnamed.inject.InjectAll;
 import team.unnamed.inject.InjectIgnore;
@@ -26,36 +28,50 @@ public class MessageCommand implements CommandClass {
     private SenderManager senderManager;
     @Command(names = {"msg", "pm", "m", "message", "tell", "w"},
             desc = "Private message command")
-    public void messageCommand(@Sender Player sender, @OptArg() Player target,
-                               @Text @OptArg() String senderMessage) {
+    public void messageCommand(@Sender Player sender, @OptArg() OfflinePlayer target,
+                               @Text @OptArg("") String senderMessage) {
 
         ConfigurationFile configFile = configWrapper.get();
         MessagesFile messagesFile = messagesWrapper.get();
 
 
-
         if (target == null) {
-            senderManager.sendMessage(sender, messagesFile.noArgumentMessage()
-                    .replace("%usage%", "/msg <player> <message>"));
+            senderManager.sendMessage(sender, messagesFile.noArgumentMessage(),
+                    Placeholder.unparsed("usage", "/msg <player> <message>"));
             return;
         }
+
+        if (sender == target.getPlayer()){
+            senderManager.sendMessage(sender, messagesFile.yourselfTalk());
+            return;
+        }
+
+        if (!target.isOnline()) {
+            senderManager.sendMessage(sender, messagesFile.playerOfflineMessage(),
+                    Placeholder.unparsed("usage", "/msg <player> <message>"));
+            return;
+        }
+
 
         if (senderMessage.isEmpty()) {
-            senderManager.sendMessage(sender, messagesFile.noArgumentMessage()
-                    .replace("%usage%", "/msg <player> <message>"));
+            senderManager.sendMessage(sender, messagesFile.noArgumentMessage(),
+                    Placeholder.unparsed("usage", "/msg <player> <message>"));
             return;
         }
 
-        senderManager.sendMessage(sender, configFile.fromSenderMessage()
-                .replace("%target%", target.getName())
-                .replace("%message%", senderMessage));
 
-        senderManager.sendMessage(target, configFile.toReceptorMessage()
-                .replace("%sender%", sender.getName())
-                .replace("%message%", senderMessage));
+        senderManager.sendMessage(sender, configFile.fromSenderMessage(),
+
+                Placeholder.unparsed("target", target.getName()),
+                Placeholder.unparsed("message", senderMessage));
+
+        senderManager.sendMessage(target.getPlayer(), configFile.toReceptorMessage(),
+
+                Placeholder.unparsed("sender", sender.getName()),
+                Placeholder.unparsed("message", senderMessage));
 
         User senderUser = users.get(sender.getUniqueId().toString());
-        User senderTarget = users.get(sender.getUniqueId().toString());
+        User senderTarget = users.get(target.getUniqueId().toString());
 
         senderUser.recentMessenger(target.getUniqueId());
         senderTarget.recentMessenger(sender.getUniqueId());
