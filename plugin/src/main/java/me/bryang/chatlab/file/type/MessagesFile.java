@@ -1,7 +1,6 @@
 package me.bryang.chatlab.file.type;
 
 import me.bryang.chatlab.file.PluginFiles;
-import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
 import org.spongepowered.configurate.objectmapping.meta.Comment;
 

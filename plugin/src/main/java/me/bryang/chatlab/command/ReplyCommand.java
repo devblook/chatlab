@@ -14,7 +14,6 @@ import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import team.unnamed.inject.InjectAll;
-import team.unnamed.inject.InjectIgnore;
 
 import java.util.Map;
 

@@ -4,7 +4,6 @@ import me.bryang.chatlab.file.FileWrapper;
 import me.bryang.chatlab.file.type.MessagesFile;
 import me.fixeddev.commandflow.Namespace;
 import me.fixeddev.commandflow.translator.TranslationProvider;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 
 import javax.inject.Inject;
 
