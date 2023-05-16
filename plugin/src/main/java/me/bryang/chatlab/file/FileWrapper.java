@@ -1,45 +1,51 @@
 package me.bryang.chatlab.file;
 
 
-import org.spongepowered.configurate.ConfigurationNode;
-import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
+import org.spongepowered.configurate.CommentedConfigurationNode;
+import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
+
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class FileWrapper<T extends PluginFiles> {
 
     private String fileName;
     private Path path;
 
-    private YamlConfigurationLoader loader;
-    private ConfigurationNode node;
+    private HoconConfigurationLoader loader;
+    private CommentedConfigurationNode node;
 
     private final Class<T> clazz;
-    private final T internClass;
+    private AtomicReference<T> internClass;
 
 
-    public FileWrapper(String fileName, Path path, Class<T> clazz, T internClass){
+    public FileWrapper(String fileName, Path path, Class<T> clazz){
         this.fileName = fileName;
         this.path = path;
 
         this.clazz = clazz;
-        this.internClass = internClass;
 
         start();
     }
 
     public void start(){
 
-         loader = YamlConfigurationLoader
+         loader = HoconConfigurationLoader
                 .builder()
-                .path(path.resolve(fileName + ".yml"))
-                 .defaultOptions(config -> config.header("\n " + fileName + ".yml"))
-                .build();
+                .path(path.resolve(fileName + ".conf"))
+                 .defaultOptions(
+                         config -> config.header("\n " + fileName + ".conf"))
+                 .build();
 
         try {
             node = loader.load();
-            node.set(clazz, internClass);
+
+            internClass = new AtomicReference<>(node.get(clazz));
+
+            node.set(clazz, internClass.get());
             loader.save(node);
 
 
@@ -49,13 +55,21 @@ public class FileWrapper<T extends PluginFiles> {
     }
 
     public T get(){
-        return internClass;
+        return internClass.get();
     }
 
     public void reload(){
 
         try {
-           node = loader.load();
+
+            node = loader.load();
+
+            T newClass = node.get(clazz);
+            node.set(clazz, newClass);
+
+            internClass.set(newClass);
+            loader.save(node);
+
         }catch(IOException exception){
             exception.fillInStackTrace();
         }

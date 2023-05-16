@@ -1,6 +1,7 @@
 package me.bryang.chatlab.file.type;
 
 import me.bryang.chatlab.file.PluginFiles;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
 import org.spongepowered.configurate.objectmapping.meta.Comment;
 
@@ -9,40 +10,37 @@ import org.spongepowered.configurate.objectmapping.meta.Comment;
 public class ConfigurationFile extends PluginFiles {
 
 
-    private Settings settings = new Settings();
+    @Comment("Main settings")
+    private Options options = new Options();
+    @Comment("Private message format")
     private PrivateMessage privateMessage = new PrivateMessage();
     private Reply reply = new Reply();
 
 
     @ConfigSerializable
-    public static class Settings {
+    public static class Options {
 
         @Comment("Enable bstats")
         private boolean enableStats = true;
-
-        public boolean enableStats(){
-            return enableStats;
-        }
 
     }
     @ConfigSerializable
     public static class PrivateMessage{
 
-        private String fromSender = """
-                
-                <white>You &8» <light_green>%target% <dark_grey>» <white>%message%""";
-        private String toReceptor = "<light_green>%sender% &8» <white>You <dark_grey>» <white>%message%";
+        private String fromSender = "<red>[MSG] <dark_gray>| <white>You <dark_gray>»<green> <target> <dark_grey>: <white><message>";
+        private String toReceptor = "<red>[MSG] <dark_gray>| <green><sender> <dark_gray>» <white>You <dark_grey>: <white><message>";
 
     }
 
     @ConfigSerializable
     public static class Reply{
-        private String left = "<light_green>[Chat] <light_grey>| <white>The player <green>%target%<white>that you talk, left the server.";
+        @Comment("When the player left")
+    private String left = "<green>[Chat] <gray>| <white>The player <green><target> <white>that you talk, left the server.";
 
    }
 
    public boolean statsEnabled(){
-        return settings.enableStats;
+        return options.enableStats;
    }
 
    public String fromSenderMessage(){

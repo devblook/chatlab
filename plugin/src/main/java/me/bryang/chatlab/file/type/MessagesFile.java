@@ -1,6 +1,7 @@
 package me.bryang.chatlab.file.type;
 
 import me.bryang.chatlab.file.PluginFiles;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
 import org.spongepowered.configurate.objectmapping.meta.Comment;
 
@@ -12,22 +13,23 @@ public class MessagesFile extends PluginFiles {
     @ConfigSerializable
     public static class Error{
 
-        @Comment("# You can't use this command in console")
+        @Comment("You can't use this command in console")
         private String console = "You can't do this in console";
 
-        @Comment("# Specific argument is missing")
-        private String noArgument = "&a[Server] &8| &fUnknown argument. Usage: &a%usage%&f.";
+        @Comment("Specific argument is missing")
+        private String noArgument = "<red>[Error] <dark_gray>| <white>Unknown argument. \n<gray>-<white>Usage: <green><usage><white>.";
 
-        @Comment("# Player isn't online.")
-        private String playerOffline = "&a[Server] &8| &fUnknown argument. Usage: &a%usage%&f.";
+        @Comment("Player isn't online.")
+        private String playerOffline = "<red>[Error] <dark_gray>| <white>The player is offline.";
 
-        @Comment("# No have a recent messenger for use reply command")
-        private String noReply = "&a[Server] &8| &FYou doesn't reply with anyone.";
+        @Comment("No have a recent messenger for use reply command")
+        private String noReply = "<red>[Error] <dark_gray>| <white>You doesn't reply with anyone.";
 
-        @Comment("# General message for player without permissions")
-        private String noPermission = "&a[Server] &8| &fYou don't have permission to do this.";
+        @Comment("General message for player without permissions")
+        private String noPermission = "<red>[Error] <dark_gray>| <white>You don't have permission to do this.";
 
-
+        @Comment("Talking to yourself")
+        private String yourselfTalk = "<red>[Error] <dark_gray>| <white>You can't send private message to yourself.";
     }
 
 
@@ -51,4 +53,7 @@ public class MessagesFile extends PluginFiles {
         return error.noPermission;
     }
 
+    public String yourselfTalk() {
+        return error.yourselfTalk;
+    }
 }
