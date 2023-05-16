@@ -9,21 +9,11 @@ import org.spongepowered.configurate.objectmapping.meta.Comment;
 @SuppressWarnings("FieldMayBeFinal")
 public class ConfigurationFile extends PluginFiles {
 
-
-    @Comment("Main settings")
-    private Options options = new Options();
     @Comment("Private message format")
     private PrivateMessage privateMessage = new PrivateMessage();
     private Reply reply = new Reply();
 
 
-    @ConfigSerializable
-    public static class Options {
-
-        @Comment("Enable bstats")
-        private boolean enableStats = true;
-
-    }
     @ConfigSerializable
     public static class PrivateMessage{
 
@@ -37,10 +27,6 @@ public class ConfigurationFile extends PluginFiles {
         @Comment("When the player left")
     private String left = "<green>[Chat] <gray>| <white>The player <green><target> <white>that you talk, left the server.";
 
-   }
-
-   public boolean statsEnabled(){
-        return options.enableStats;
    }
 
    public String fromSenderMessage(){
