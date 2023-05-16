@@ -7,8 +7,8 @@ dependencies {
 
     implementation("me.fixeddev:commandflow-bukkit:0.5.2")
     implementation("team.unnamed:inject:1.0.1")
+    compileOnly("org.spongepowered:configurate-hocon:4.0.0")
 
-    compileOnly("org.spongepowered:configurate-yaml:4.0.0")
 }
 
 tasks {
@@ -20,4 +20,10 @@ tasks {
         relocate("team.unnamed.inject", "${project.group}.chatlab.libs.inject")
 
     }
+
+
+}
+
+tasks.withType<JavaCompile> {
+    options.encoding = "UTF-8"
 }
