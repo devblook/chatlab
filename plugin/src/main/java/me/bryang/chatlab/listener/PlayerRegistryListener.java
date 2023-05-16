@@ -4,6 +4,7 @@ import me.bryang.chatlab.file.FileWrapper;
 import me.bryang.chatlab.file.type.ConfigurationFile;
 import me.bryang.chatlab.manager.SenderManager;
 import me.bryang.chatlab.user.User;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -42,11 +43,13 @@ public class PlayerRegistryListener implements Listener {
 
         Player sender = Bukkit.getPlayer(user.recentMessenger());
 
-        senderManager.sendMessage(sender, configWrapper.get().leftMessage()
-                .replace("%target%", event.getPlayer().getName()));
+        User target = users.get(user.recentMessenger().toString());
+
+        senderManager.sendMessage(sender, configWrapper.get().leftMessage(),
+                Placeholder.unparsed("target", event.getPlayer().getName()));
 
         user.recentMessenger(null);
-
+        target.recentMessenger(null);
 
     }
 }
