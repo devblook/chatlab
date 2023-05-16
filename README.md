@@ -20,8 +20,7 @@ You need:
 
 ### How to install:
 
-Coming soon..
-
+You can install in the [releases](https://github.com/devblook/chatlab/releases)
 
 
 ## Features:
