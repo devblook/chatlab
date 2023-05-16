@@ -4,11 +4,14 @@ import me.bryang.chatlab.file.FileWrapper;
 import me.bryang.chatlab.file.type.MessagesFile;
 import me.fixeddev.commandflow.Namespace;
 import me.fixeddev.commandflow.translator.TranslationProvider;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+
+import javax.inject.Inject;
 
 public class CommandCustomTranslator implements TranslationProvider {
 
-    private FileWrapper<MessagesFile> messagesFile;
-
+    @Inject
+    private FileWrapper<MessagesFile>  messagesFile;
     @Override
     public String getTranslation(Namespace namespace, String key) {
 
@@ -17,12 +20,6 @@ public class CommandCustomTranslator implements TranslationProvider {
         switch (key) {
             case "sender.only-player":
                 return messagesPath.consoleMessage();
-
-            case "player.offline":
-                return messagesPath.playerOfflineMessage();
-
-            case "command.no-permission":
-                return messagesPath.noPermissionMessage();
 
         }
         return "Si ves este mensaje, contacta con el programador.";
