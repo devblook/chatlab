@@ -23,15 +23,20 @@ public class MainCommand implements CommandClass {
     public void mainSubCommand(@Sender Player sender) {
 
         senderManager.sendMessage(sender, "<blue>ChatLab: <white>Main plugin command.");
-        senderManager.sendMessage(sender, "<grey>- <light_blue>/clab reload");
+        senderManager.sendMessage(sender, "<dark_grey>- <white>/clab reload");
     }
 
-    @Command(names = "reload", permission = "chatlab.reload")
+    @Command(names = "reload")
     public void reloadSubCommand(@Sender Player sender) {
+
+        if (!sender.hasPermission("clab.reload")) {
+            senderManager.sendMessage(sender, messagesFile.get().noPermissionMessage());
+            return;
+        }
 
         configFile.reload();
         messagesFile.reload();
-        senderManager.sendMessage(sender,"<blue>[ChatLab] <black>| <f>Plugin reloaded.");
+        senderManager.sendMessage(sender,"<blue>[ChatLab] <black>| <white>Plugin reloaded.");
 
     }
 
