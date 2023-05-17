@@ -9,10 +9,9 @@ import org.eclipse.aether.repository.RemoteRepository;
 import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings({"UnstableApiUsage"})
-public class InyectLoader implements PluginLoader {
+public class DependenciesLoader implements PluginLoader {
     @Override
     public void classloader(final @NotNull PluginClasspathBuilder classpathBuilder) {
-
         final MavenLibraryResolver resolver = new MavenLibraryResolver();
 
         final RemoteRepository mavenCentral = new RemoteRepository
@@ -23,10 +22,8 @@ public class InyectLoader implements PluginLoader {
                 null
         );
 
-
         resolver.addRepository(mavenCentral);
         resolver.addDependency(configurateHocon);
-
         classpathBuilder.addLibrary(resolver);
     }
 }
