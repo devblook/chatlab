@@ -43,7 +43,7 @@ public class ReplyCommand implements CommandClass {
 
         User user = users.get(sender.getUniqueId().toString());
 
-        if (!user.hasRecentMessenger()) {
+        if (user.isMessengerEmpty()) {
             senderManager.sendMessage(sender, messagesFile.replyMessage());
             return;
         }

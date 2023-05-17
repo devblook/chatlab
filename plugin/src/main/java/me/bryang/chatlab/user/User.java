@@ -18,8 +18,8 @@ public class User {
         this.recentMessenger = messenger;
     }
 
-    public boolean hasRecentMessenger() {
-        return recentMessenger != null;
+    public boolean isMessengerEmpty() {
+        return recentMessenger == null;
     }
 
 

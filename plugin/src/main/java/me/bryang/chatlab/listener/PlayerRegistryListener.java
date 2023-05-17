@@ -32,6 +32,7 @@ public class PlayerRegistryListener implements Listener {
 
         User user = users.get(event.getPlayer().getUniqueId().toString());
 
+        if (user.isMessengerEmpty()) {
             return;
         }
 
