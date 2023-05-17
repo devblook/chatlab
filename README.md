@@ -1,4 +1,4 @@
-<img src= "https://img.shields.io/github/license/devblook/chatlab?style=for-the-badge"> <img src= "https://img.shields.io/github/stars/devblook/chatlab?style=for-the-badge"> <img src= "https://img.shields.io/github/forks/devblook/chatlab?style=for-the-badge"> <img src = "https://img.shields.io/github/actions/workflow/status/devblook/chatlab/gradle.yml?style=for-the-badge"> [<img src = "https://img.shields.io/badge/Support-grey?logo=discord&style=for-the-badge">](https://discord.devblook.team)
+<img src= "https://img.shields.io/github/license/devblook/chatlab?style=for-the-badge"> <img src= "https://img.shields.io/github/stars/devblook/chatlab?style=for-the-badge"> <img src= "https://img.shields.io/github/v/release/devblook/chatlab?style=for-the-badge"> <img src = "https://img.shields.io/github/downloads/devblook/chatlab/total?style=for-the-badge"> <img src = "https://img.shields.io/github/actions/workflow/status/devblook/chatlab/gradle.yml?style=for-the-badge"> [<img src = "https://img.shields.io/badge/Support-grey?logo=discord&style=for-the-badge">](https://discord.devblook.team)
 
 <p align="center">
  <picture>
@@ -20,8 +20,7 @@ You need:
 
 ### How to install:
 
-Coming soon..
-
+You can install in the releases option.
 
 
 ## Features:
