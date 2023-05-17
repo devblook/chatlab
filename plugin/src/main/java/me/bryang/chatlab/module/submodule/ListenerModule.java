@@ -1,4 +1,4 @@
-package me.bryang.chatlab.module;
+package me.bryang.chatlab.module.submodule;
 
 import me.bryang.chatlab.listener.PlayerRegistryListener;
 import org.bukkit.event.Listener;
@@ -8,7 +8,6 @@ public class ListenerModule extends AbstractModule {
 
     @Override
     public void configure() {
-
         multibind(Listener.class)
                 .asSet()
                 .to(PlayerRegistryListener.class)

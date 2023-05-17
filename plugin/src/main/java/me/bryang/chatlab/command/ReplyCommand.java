@@ -1,9 +1,9 @@
 package me.bryang.chatlab.command;
 
-import me.bryang.chatlab.file.FileWrapper;
-import me.bryang.chatlab.file.type.ConfigurationFile;
-import me.bryang.chatlab.file.type.MessagesFile;
-import me.bryang.chatlab.manager.SenderManager;
+import me.bryang.chatlab.configuration.ConfigurationContainer;
+import me.bryang.chatlab.configuration.section.RootSection;
+import me.bryang.chatlab.configuration.section.MessageSection;
+import me.bryang.chatlab.manager.MessageManager;
 import me.bryang.chatlab.user.User;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
@@ -20,47 +20,46 @@ import java.util.Map;
 @InjectAll
 public class ReplyCommand implements CommandClass {
 
-    private FileWrapper<ConfigurationFile> configWrapper;
-    private FileWrapper<MessagesFile> messagesWrapper;
-
+    private ConfigurationContainer<RootSection> configurationContainer;
+    private ConfigurationContainer<MessageSection> messageContainer;
     private Map<String, User> users;
-    private SenderManager senderManager;
+    private MessageManager messageManager;
 
 
     @Command(names = {"r", "reply"},
             desc = "A reply command.")
     public void messageCommand(@Sender Player sender, @Text @OptArg() String senderMessage) {
 
-        MessagesFile messagesFile = messagesWrapper.get();
-        ConfigurationFile configFile = configWrapper.get();
+        MessageSection messageSection = this.messageContainer.get();
+        RootSection configFile = this.configurationContainer.get();
 
         if (senderMessage.isEmpty()) {
-            senderManager.sendMessage(sender, messagesFile.noArgumentMessage(),
+            this.messageManager.sendMessage(sender, messageSection.error.noArgument,
 
                     Placeholder.unparsed("usage", "/reply <message>"));
             return;
         }
 
-        User user = users.get(sender.getUniqueId().toString());
+        User user = this.users.get(sender.getUniqueId().toString());
 
         if (!user.hasRecentMessenger()) {
-            senderManager.sendMessage(sender, messagesFile.replyMessage());
+            this.messageManager.sendMessage(sender, messageSection.error.noReply);
             return;
         }
 
         Player target = Bukkit.getPlayer(user.recentMessenger());
 
         if (target == null) {
-            senderManager.sendMessage(sender, messagesFile.replyMessage());
+            this.messageManager.sendMessage(sender, messageSection.error.noReply);
             return;
         }
 
-        senderManager.sendMessage(sender, configFile.fromSenderMessage(),
+        this.messageManager.sendMessage(sender, configFile.privateMessage.fromSender,
 
                 Placeholder.unparsed("target", target.getName()),
                 Placeholder.unparsed("message", senderMessage));
 
-        senderManager.sendMessage(target, configFile.toReceptorMessage(),
+        this.messageManager.sendMessage(target, configFile.privateMessage.toReceptor,
 
                 Placeholder.unparsed("sender", sender.getName()),
                 Placeholder.unparsed("message", senderMessage));

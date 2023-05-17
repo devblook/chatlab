@@ -13,27 +13,24 @@ import team.unnamed.inject.InjectAll;
 
 import java.util.Set;
 
-
 @InjectAll
 public class CommandServices implements Service {
 
     private Set<CommandClass> commands;
-
     private CommandCustomTranslator commandCustomTranslator;
 
     @Override
     public void start() {
-
         CommandManager commandManager = new BukkitCommandManager("ChatLab");
 
-        commandManager.getTranslator().setProvider(commandCustomTranslator);
+        commandManager.getTranslator().setProvider(this.commandCustomTranslator);
         PartInjector partInjector = PartInjector.create();
 
         partInjector.install(new DefaultsModule());
         partInjector.install(new BukkitModule());
 
         AnnotatedCommandTreeBuilder builder = new AnnotatedCommandTreeBuilderImpl(partInjector);
-        for (CommandClass command : commands) {
+        for (CommandClass command : this.commands) {
             commandManager.registerCommands(builder.fromClass(command));
         }
     }

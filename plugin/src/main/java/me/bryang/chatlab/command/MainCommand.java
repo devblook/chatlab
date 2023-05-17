@@ -1,9 +1,9 @@
 package me.bryang.chatlab.command;
 
-import me.bryang.chatlab.file.FileWrapper;
-import me.bryang.chatlab.file.type.ConfigurationFile;
-import me.bryang.chatlab.file.type.MessagesFile;
-import me.bryang.chatlab.manager.SenderManager;
+import me.bryang.chatlab.configuration.ConfigurationContainer;
+import me.bryang.chatlab.configuration.section.RootSection;
+import me.bryang.chatlab.configuration.section.MessageSection;
+import me.bryang.chatlab.manager.MessageManager;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
 import me.fixeddev.commandflow.bukkit.annotation.Sender;
@@ -14,29 +14,26 @@ import team.unnamed.inject.InjectAll;
 @InjectAll
 public class MainCommand implements CommandClass {
 
-    private FileWrapper<ConfigurationFile> configFile;
-    private FileWrapper<MessagesFile> messagesFile;
-
-    private SenderManager senderManager;
+    private ConfigurationContainer<RootSection> configurationContainer;
+    private ConfigurationContainer<MessageSection> messageContainer;
+    private MessageManager messageManager;
 
     @Command(names = "")
     public void mainSubCommand(@Sender Player sender) {
-
-        senderManager.sendMessage(sender, "<blue>ChatLab: <white>Main plugin command.");
-        senderManager.sendMessage(sender, "<dark_grey>- <white>/clab reload");
+        this.messageManager.sendMessage(sender, "<blue>ChatLab: <white>Main plugin command.");
+        this.messageManager.sendMessage(sender, "<dark_grey>- <white>/clab reload");
     }
 
     @Command(names = "reload")
     public void reloadSubCommand(@Sender Player sender) {
-
         if (!sender.hasPermission("clab.reload")) {
-            senderManager.sendMessage(sender, messagesFile.get().noPermissionMessage());
+            this.messageManager.sendMessage(sender, this.messageContainer.get().error.noPermission);
             return;
         }
 
-        configFile.reload();
-        messagesFile.reload();
-        senderManager.sendMessage(sender,"<blue>[ChatLab] <black>| <white>Plugin reloaded.");
+        this.configurationContainer.reload();
+        this.messageContainer.reload();
+        this.messageManager.sendMessage(sender, "<blue>[ChatLab] <black>| <white>Plugin reloaded.");
 
     }
 
