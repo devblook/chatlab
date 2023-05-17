@@ -1,8 +1,8 @@
 package me.bryang.chatlab.listener;
 
-import me.bryang.chatlab.file.FileWrapper;
-import me.bryang.chatlab.file.type.ConfigurationFile;
-import me.bryang.chatlab.manager.SenderManager;
+import me.bryang.chatlab.configuration.ConfigurationContainer;
+import me.bryang.chatlab.configuration.section.RootSection;
+import me.bryang.chatlab.manager.MessageManager;
 import me.bryang.chatlab.user.User;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
@@ -19,35 +19,29 @@ import java.util.Map;
 public class PlayerRegistryListener implements Listener {
 
     private Map<String, User> users;
-
-    private FileWrapper<ConfigurationFile> configWrapper;
-
-    private SenderManager senderManager;
-
+    private ConfigurationContainer<RootSection> configurationContainer;
+    private MessageManager messageManager;
 
     @EventHandler
     public void onRegistry(PlayerJoinEvent event) {
-        users.put(event.getPlayer().getUniqueId().toString(), new User());
+        this.users.put(event.getPlayer().getUniqueId().toString(), new User());
     }
 
     @EventHandler
     public void onUnRegistry(PlayerQuitEvent event) {
-
-        User user = users.get(event.getPlayer().getUniqueId().toString());
+        User user = this.users.get(event.getPlayer().getUniqueId().toString());
 
         if (!user.hasRecentMessenger()) {
             return;
         }
 
         Player sender = Bukkit.getPlayer(user.recentMessenger());
+        User target = this.users.get(user.recentMessenger().toString());
 
-        User target = users.get(user.recentMessenger().toString());
-
-        senderManager.sendMessage(sender, configWrapper.get().leftMessage(),
+        this.messageManager.sendMessage(sender, this.configurationContainer.get().reply.left,
                 Placeholder.unparsed("target", event.getPlayer().getName()));
 
         user.recentMessenger(null);
         target.recentMessenger(null);
-
     }
 }

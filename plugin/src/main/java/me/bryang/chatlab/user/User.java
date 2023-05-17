@@ -7,11 +7,10 @@ public class User {
 
     private UUID recentMessenger;
 
-    // Start customizable data user
 
     @Nullable
     public UUID recentMessenger() {
-        return recentMessenger;
+        return this.recentMessenger;
     }
 
     public void recentMessenger(UUID messenger) {
@@ -19,7 +18,7 @@ public class User {
     }
 
     public boolean hasRecentMessenger() {
-        return recentMessenger != null;
+        return this.recentMessenger != null;
     }
 
 

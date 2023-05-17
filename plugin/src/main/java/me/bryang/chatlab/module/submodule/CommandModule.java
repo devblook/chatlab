@@ -1,4 +1,4 @@
-package me.bryang.chatlab.module;
+package me.bryang.chatlab.module.submodule;
 
 import me.bryang.chatlab.command.MainCommand;
 import me.bryang.chatlab.command.MessageCommand;
