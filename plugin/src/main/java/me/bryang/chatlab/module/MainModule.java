@@ -1,15 +1,17 @@
 package me.bryang.chatlab.module;
 
 import me.bryang.chatlab.ChatLab;
-import me.bryang.chatlab.file.FileWrapper;
-import me.bryang.chatlab.file.type.ConfigurationFile;
-import me.bryang.chatlab.file.type.MessagesFile;
-import me.bryang.chatlab.manager.SenderManager;
-import me.bryang.chatlab.service.translator.CommandCustomTranslator;
+import me.bryang.chatlab.module.submodule.CommandModule;
+import me.bryang.chatlab.module.submodule.ConfigurationModule;
+import me.bryang.chatlab.module.submodule.ListenerModule;
+import me.bryang.chatlab.module.submodule.ServiceModule;
 import me.bryang.chatlab.user.User;
+import org.slf4j.Logger;
 import team.unnamed.inject.AbstractModule;
+import team.unnamed.inject.Provides;
 import team.unnamed.inject.key.TypeReference;
 
+import javax.inject.Singleton;
 import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,32 +26,27 @@ public class MainModule extends AbstractModule {
         this.pluginPath = plugin.getDataFolder().toPath();
     }
 
+    @Provides
+    @Singleton
+    private Logger provideLogger(ChatLab plugin) {
+        return plugin.getSLF4JLogger();
+    }
+
     @Override
     public void configure() {
-        bind(ChatLab.class)
+        super.bind(ChatLab.class)
                 .toInstance(plugin);
 
-        bind(new TypeReference<FileWrapper<ConfigurationFile>>(){})
-                .toInstance(new FileWrapper<>
-                        ("config", pluginPath, ConfigurationFile.class));
+        super.bind(Path.class)
+                .named("PluginFolder")
+                .toInstance(pluginPath);
 
-        bind(new TypeReference<FileWrapper<MessagesFile>>(){})
-                .toInstance(new FileWrapper<>
-                        ("messages", pluginPath, MessagesFile.class));
-
-        bind(CommandCustomTranslator.class)
-                .singleton();
-
-
-
-        bind(new TypeReference<Map<String, User>>() {})
+        super.bind(new TypeReference<Map<String, User>>() {})
                 .toInstance(new HashMap<>());
 
-        bind(SenderManager.class)
-                .toInstance(new SenderManager());
-
-        install(new ListenerModule());
-        install(new CommandModule());
-        install(new ServiceModule());
+        super.install(new ListenerModule());
+        super.install(new CommandModule());
+        super.install(new ServiceModule());
+        super.install(new ConfigurationModule());
     }
 }
