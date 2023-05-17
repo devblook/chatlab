@@ -4,21 +4,18 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.entity.Player;
 
-public class SenderManager {
+import javax.inject.Singleton;
 
-    private final MiniMessage miniMessage;
+@Singleton
+public class MessageManager {
 
-    public SenderManager() {
-        miniMessage = MiniMessage
-                .builder()
-                .build();
-    }
+    private static final MiniMessage MINI_MESSAGE = MiniMessage.miniMessage();
 
     public void sendMessage(Player sender, String message) {
-        sender.sendMessage(miniMessage.deserialize(message));
+        sender.sendMessage(MINI_MESSAGE.deserialize(message));
     }
 
     public void sendMessage(Player sender, String message, TagResolver... tagResolver) {
-        sender.sendMessage(miniMessage.deserialize(message, tagResolver));
+        sender.sendMessage(MINI_MESSAGE.deserialize(message, tagResolver));
     }
 }
