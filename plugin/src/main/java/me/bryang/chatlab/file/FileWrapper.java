@@ -15,6 +15,7 @@ public class FileWrapper<T extends PluginFiles> {
 
     private HoconConfigurationLoader loader;
     private CommentedConfigurationNode node;
+
     private final Class<T> clazz;
     private AtomicReference<T> internClass;
 

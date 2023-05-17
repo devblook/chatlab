@@ -19,9 +19,12 @@ import java.util.Map;
 public class PlayerRegistryListener implements Listener {
 
     private Map<String, User> users;
+
     private FileWrapper<ConfigurationFile> configWrapper;
+
     private SenderManager senderManager;
 
+    
     @EventHandler
     public void onRegistry(PlayerJoinEvent event) {
         users.put(event.getPlayer().getUniqueId().toString(), new User());
@@ -32,7 +35,7 @@ public class PlayerRegistryListener implements Listener {
 
         User user = users.get(event.getPlayer().getUniqueId().toString());
 
-        if (user.isMessengerEmpty()) {
+        if (!user.hasRecentMessenger()) {
             return;
         }
 
