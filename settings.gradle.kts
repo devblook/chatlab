@@ -1,3 +1,3 @@
-rootProject.name = "Chatlab"
+rootProject.name = "chatlab"
 
 include(":api", ":plugin")
