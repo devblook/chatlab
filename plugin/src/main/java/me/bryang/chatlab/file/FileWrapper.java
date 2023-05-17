@@ -20,7 +20,8 @@ public class FileWrapper<T extends PluginFiles> {
     private AtomicReference<T> internClass;
 
 
-    public FileWrapper(String fileName, Path path, Class<T> clazz){
+    public FileWrapper(String fileName, Path path, Class<T> clazz) {
+
 
         this.fileName = fileName;
         this.path = path;

@@ -24,7 +24,7 @@ public class PlayerRegistryListener implements Listener {
 
     private SenderManager senderManager;
 
-    
+
     @EventHandler
     public void onRegistry(PlayerJoinEvent event) {
         users.put(event.getPlayer().getUniqueId().toString(), new User());
