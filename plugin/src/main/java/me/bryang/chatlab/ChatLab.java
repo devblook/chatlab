@@ -25,14 +25,14 @@ public class ChatLab extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        this.services.forEach(Service::start);
+        services.forEach(Service::start);
 
-        this.logger.info("Loaded services");
-        this.logger.info("Thanks for using my plugin!");
+        logger.info("Loaded services");
+        logger.info("Thanks for using my plugin!");
     }
 
     @Override
     public void onDisable() {
-        this.services.forEach(Service::stop);
+        services.forEach(Service::stop);
     }
 }

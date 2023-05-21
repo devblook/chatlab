@@ -30,6 +30,7 @@ public class MessageCommand implements CommandClass {
             desc = "Private message command")
     public void messageCommand(@Sender Player sender, @OptArg() OfflinePlayer target,
                                @Text @OptArg("") String senderMessage) {
+
         RootSection configFile = this.configurationContainer.get();
         MessageSection messageSection = this.messageContainer.get();
 

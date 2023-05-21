@@ -15,13 +15,13 @@ public class ConfigurationModule extends AbstractModule {
     @Provides
     @Singleton
     private ConfigurationContainer<RootSection> provideRootConfiguration(@Named("PluginFolder") Path pluginPath) {
-        return ConfigurationContainer.create("config", pluginPath, RootSection.class);
+        return new ConfigurationContainer<>("config", pluginPath, RootSection.class);
     }
 
     @Provides
     @Singleton
     private ConfigurationContainer<MessageSection> provideMessageConfiguration(@Named("PluginFolder") Path pluginPath) {
-        return ConfigurationContainer.create("messages", pluginPath, MessageSection.class);
+        return new ConfigurationContainer<>("messages", pluginPath, MessageSection.class);
     }
 
 }

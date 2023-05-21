@@ -34,19 +34,19 @@ public class MainModule extends AbstractModule {
 
     @Override
     public void configure() {
-        super.bind(ChatLab.class)
+        bind(ChatLab.class)
                 .toInstance(plugin);
 
-        super.bind(Path.class)
+        bind(Path.class)
                 .named("PluginFolder")
                 .toInstance(pluginPath);
 
-        super.bind(new TypeReference<Map<String, User>>() {})
+        bind(new TypeReference<Map<String, User>>() {})
                 .toInstance(new HashMap<>());
 
-        super.install(new ListenerModule());
-        super.install(new CommandModule());
-        super.install(new ServiceModule());
-        super.install(new ConfigurationModule());
+        install(new ListenerModule());
+        install(new CommandModule());
+        install(new ServiceModule());
+        install(new ConfigurationModule());
     }
 }

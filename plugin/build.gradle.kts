@@ -1,5 +1,6 @@
 import org.gradle.configurationcache.extensions.capitalized
 
+
 plugins {
     id("chatlab.common-conventions")
     id("com.github.johnrengelman.shadow") version "7.1.2"

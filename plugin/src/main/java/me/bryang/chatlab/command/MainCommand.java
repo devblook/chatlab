@@ -20,20 +20,21 @@ public class MainCommand implements CommandClass {
 
     @Command(names = "")
     public void mainSubCommand(@Sender Player sender) {
-        this.messageManager.sendMessage(sender, "<blue>ChatLab: <white>Main plugin command.");
-        this.messageManager.sendMessage(sender, "<dark_grey>- <white>/clab reload");
+        messageManager.sendMessage(sender, "<blue>ChatLab: <white>Main plugin command.");
+        messageManager.sendMessage(sender, "<dark_grey>- <white>/clab reload");
     }
 
     @Command(names = "reload")
     public void reloadSubCommand(@Sender Player sender) {
+
         if (!sender.hasPermission("clab.reload")) {
-            this.messageManager.sendMessage(sender, this.messageContainer.get().error.noPermission);
+            messageManager.sendMessage(sender, this.messageContainer.get().error.noPermission);
             return;
         }
 
-        this.configurationContainer.reload();
-        this.messageContainer.reload();
-        this.messageManager.sendMessage(sender, "<blue>[ChatLab] <black>| <white>Plugin reloaded.");
+        configurationContainer.reload();
+        messageContainer.reload();
+        messageManager.sendMessage(sender, "<blue>[ChatLab] <black>| <white>Plugin reloaded.");
 
     }
 
