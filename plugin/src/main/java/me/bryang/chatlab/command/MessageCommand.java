@@ -27,7 +27,7 @@ public class MessageCommand implements CommandClass {
     private MessageManager messageManager;
 
     @Command(names = {"msg", "pm", "m", "message", "tell", "w"},
-            desc = "Private message command")
+            desc = "Command to send a private message.")
     public void messageCommand(@Sender Player sender, @OptArg() OfflinePlayer target,
                                @Text @OptArg("") String senderMessage) {
 

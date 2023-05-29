@@ -27,7 +27,7 @@ public class ReplyCommand implements CommandClass {
 
 
     @Command(names = {"r", "reply"},
-            desc = "A reply command.")
+            desc = "Command to reply to a message.")
     public void messageCommand(@Sender Player sender, @Text @OptArg() String senderMessage) {
 
         MessageSection messageSection = this.messageContainer.get();
