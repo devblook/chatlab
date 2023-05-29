@@ -21,7 +21,7 @@ public class RootSection extends ConfigurationSection {
 
     @ConfigSerializable
     public static class Reply {
-        @Comment("When the player left")
-        public String left = "<green>[Chat] <gray>| <white>The player <green><target> <white>that you talk, left the server.";
+        @Comment("Message to notify when the player he's talking to left")
+        public String left = "<green>[Chat] <gray>| <white>The player <green><target> <white>you were talking to, has left the server.";
     }
 }
