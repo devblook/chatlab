@@ -20,7 +20,7 @@ public class DependenciesLoader implements PluginLoader {
                 .build();
 
          RemoteRepository unnamedRepo = new RemoteRepository
-                .Builder("unnamed", "default", "https://repo.unnamed.team/repository/unnamed-public/")
+                .Builder("unnamed-public", "default", "https://repo.unnamed.team/repository/unnamed-public/")
                 .build();
 
 
