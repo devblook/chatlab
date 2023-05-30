@@ -11,7 +11,7 @@ public class RootSection extends ConfigurationSection {
     @Comment("Private message format")
     public PrivateMessage privateMessage = new PrivateMessage();
     public Reply reply = new Reply();
-    public String chatFormat = "<white>%player% <grey>: <white>%message%";
+    public ChatFormat chatFormat = new ChatFormat();
 
 
     @ConfigSerializable
@@ -24,6 +24,16 @@ public class RootSection extends ConfigurationSection {
     public static class Reply {
         @Comment("Message to notify when the player he's talking to left")
         public String left = "<green>[Chat] <gray>| <white>The player <green><target> <white>you were talking to, has left the server.";
+    }
+
+    @ConfigSerializable
+    public static class ChatFormat{
+
+        @Comment("Enable option")
+        public boolean enabled;
+
+        @Comment("Format to the chat")
+        public String format = "<white>%player% <grey>: <white>%message%";
     }
 
 }
