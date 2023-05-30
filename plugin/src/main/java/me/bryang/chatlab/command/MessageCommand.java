@@ -31,34 +31,34 @@ public class MessageCommand implements CommandClass {
     public void messageCommand(@Sender Player sender, @OptArg() OfflinePlayer target,
                                @Text @OptArg("") String senderMessage) {
 
-        RootSection configFile = this.configurationContainer.get();
-        MessageSection messageSection = this.messageContainer.get();
+        RootSection configFile = configurationContainer.get();
+        MessageSection messageSection = messageContainer.get();
 
         if (target == null) {
-            this.messageManager.sendMessage(sender, messageSection.error.noArgument,
+            messageManager.sendMessage(sender, messageSection.error.noArgument,
                     Placeholder.unparsed("usage", "/msg <player> <message>"));
             return;
         }
 
         if (sender == target.getPlayer()) {
-            this.messageManager.sendMessage(sender, messageSection.error.yourselfTalk);
+            messageManager.sendMessage(sender, messageSection.error.yourselfTalk);
             return;
         }
 
         if (!target.isOnline()) {
-            this.messageManager.sendMessage(sender, messageSection.error.playerOffline,
+            messageManager.sendMessage(sender, messageSection.error.playerOffline,
                     Placeholder.unparsed("usage", "/msg <player> <message>"));
             return;
         }
 
 
         if (senderMessage.isEmpty()) {
-            this.messageManager.sendMessage(sender, messageSection.error.noArgument,
+            messageManager.sendMessage(sender, messageSection.error.noArgument,
                     Placeholder.unparsed("usage", "/msg <player> <message>"));
             return;
         }
 
-        this.messageManager.sendMessage(sender, configFile.privateMessage.fromSender,
+        messageManager.sendMessage(sender, configFile.privateMessage.fromSender,
                 Placeholder.unparsed("target", target.getName()),
                 Placeholder.unparsed("message", senderMessage));
 
@@ -66,8 +66,8 @@ public class MessageCommand implements CommandClass {
                 Placeholder.unparsed("sender", sender.getName()),
                 Placeholder.unparsed("message", senderMessage));
 
-        User senderUser = this.users.get(sender.getUniqueId().toString());
-        User senderTarget = this.users.get(target.getUniqueId().toString());
+        User senderUser = users.get(sender.getUniqueId().toString());
+        User senderTarget = users.get(target.getUniqueId().toString());
 
         senderUser.recentMessenger(target.getUniqueId());
         senderTarget.recentMessenger(sender.getUniqueId());

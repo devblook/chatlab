@@ -15,10 +15,10 @@ public class ListenerServices implements Service {
 
     @Override
     public void start() {
-        PluginManager pluginManager = this.plugin.getServer().getPluginManager();
+        PluginManager pluginManager = plugin.getServer().getPluginManager();
 
-        for (Listener listener : this.listeners) {
-            pluginManager.registerEvents(listener, this.plugin);
+        for (Listener listener : listeners) {
+            pluginManager.registerEvents(listener, plugin);
         }
     }
 }

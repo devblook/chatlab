@@ -15,7 +15,7 @@ public class CommandCustomTranslator implements TranslationProvider {
     private ConfigurationContainer<MessageSection> messageContainer;
     @Override
     public String getTranslation(Namespace namespace, String key) {
-        MessageSection messageSection = this.messageContainer.get();
+        MessageSection messageSection = messageContainer.get();
 
         if (key.equals("sender.only-player")) {
             return messageSection.error.console;

@@ -30,36 +30,35 @@ public class ReplyCommand implements CommandClass {
             desc = "Command to reply to a message.")
     public void messageCommand(@Sender Player sender, @Text @OptArg() String senderMessage) {
 
-        MessageSection messageSection = this.messageContainer.get();
-        RootSection configFile = this.configurationContainer.get();
+        MessageSection messageSection = messageContainer.get();
+        RootSection configFile = configurationContainer.get();
 
-        if (senderMessage.isEmpty()) {
-            this.messageManager.sendMessage(sender, messageSection.error.noArgument,
-
+        if (senderMessage.isEmpty()) {messageManager.sendMessage(sender, messageSection.error.noArgument,
                     Placeholder.unparsed("usage", "/reply <message>"));
+
             return;
         }
 
-        User user = this.users.get(sender.getUniqueId().toString());
+        User user = users.get(sender.getUniqueId().toString());
 
         if (!user.hasRecentMessenger()) {
-            this.messageManager.sendMessage(sender, messageSection.error.noReply);
+            messageManager.sendMessage(sender, messageSection.error.noReply);
             return;
         }
 
         Player target = Bukkit.getPlayer(user.recentMessenger());
 
         if (target == null) {
-            this.messageManager.sendMessage(sender, messageSection.error.noReply);
+            messageManager.sendMessage(sender, messageSection.error.noReply);
             return;
         }
 
-        this.messageManager.sendMessage(sender, configFile.privateMessage.fromSender,
+        messageManager.sendMessage(sender, configFile.privateMessage.fromSender,
 
                 Placeholder.unparsed("target", target.getName()),
                 Placeholder.unparsed("message", senderMessage));
 
-        this.messageManager.sendMessage(target, configFile.privateMessage.toReceptor,
+        messageManager.sendMessage(target, configFile.privateMessage.toReceptor,
 
                 Placeholder.unparsed("sender", sender.getName()),
                 Placeholder.unparsed("message", senderMessage));

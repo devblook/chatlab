@@ -23,14 +23,14 @@ public class CommandServices implements Service {
     public void start() {
         CommandManager commandManager = new BukkitCommandManager("ChatLab");
 
-        commandManager.getTranslator().setProvider(this.commandCustomTranslator);
+        commandManager.getTranslator().setProvider(commandCustomTranslator);
         PartInjector partInjector = PartInjector.create();
 
         partInjector.install(new DefaultsModule());
         partInjector.install(new BukkitModule());
 
         AnnotatedCommandTreeBuilder builder = new AnnotatedCommandTreeBuilderImpl(partInjector);
-        for (CommandClass command : this.commands) {
+        for (CommandClass command : commands) {
             commandManager.registerCommands(builder.fromClass(command));
         }
     }

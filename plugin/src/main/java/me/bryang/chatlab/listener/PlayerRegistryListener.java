@@ -24,21 +24,21 @@ public class PlayerRegistryListener implements Listener {
 
     @EventHandler
     public void onRegistry(PlayerJoinEvent event) {
-        this.users.put(event.getPlayer().getUniqueId().toString(), new User());
+        users.put(event.getPlayer().getUniqueId().toString(), new User());
     }
 
     @EventHandler
     public void onUnRegistry(PlayerQuitEvent event) {
-        User user = this.users.get(event.getPlayer().getUniqueId().toString());
+        User user = users.get(event.getPlayer().getUniqueId().toString());
 
         if (!user.hasRecentMessenger()) {
             return;
         }
 
         Player sender = Bukkit.getPlayer(user.recentMessenger());
-        User target = this.users.get(user.recentMessenger().toString());
+        User target = users.get(user.recentMessenger().toString());
 
-        this.messageManager.sendMessage(sender, this.configurationContainer.get().reply.left,
+        messageManager.sendMessage(sender, configurationContainer.get().reply.left,
                 Placeholder.unparsed("target", event.getPlayer().getName()));
 
         user.recentMessenger(null);

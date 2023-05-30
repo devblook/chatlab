@@ -28,7 +28,7 @@ public class MainCommand implements CommandClass {
     public void reloadSubCommand(@Sender Player sender) {
 
         if (!sender.hasPermission("clab.reload")) {
-            messageManager.sendMessage(sender, this.messageContainer.get().error.noPermission);
+            messageManager.sendMessage(sender, messageContainer.get().error.noPermission);
             return;
         }
 
