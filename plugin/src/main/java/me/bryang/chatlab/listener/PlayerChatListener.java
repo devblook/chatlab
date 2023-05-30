@@ -17,18 +17,19 @@ public class PlayerChatListener implements Listener {
 
     private ConfigurationContainer<RootSection> configurationContainer;
     private MessageManager messageManager;
-    public void onChat(AsyncChatEvent event){
 
-        if (!configurationContainer.get().chatFormat.enabled){
+    public void onChat(AsyncChatEvent event) {
+
+        if (!configurationContainer.get().chatFormat.enabled) {
             return;
         }
-        
+
         event.message(
                 messageManager.format(
                         configurationContainer.get().chatFormat.format,
 
-               Placeholder.unparsed("%player%", event.getPlayer().getName()),
-               Placeholder.unparsed("%message%", event.originalMessage().toString())));
+                        Placeholder.unparsed("%player%", event.getPlayer().getName()),
+                        Placeholder.unparsed("%message%", event.originalMessage().toString())));
 
     }
 }

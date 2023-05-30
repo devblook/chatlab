@@ -33,7 +33,8 @@ public class ReplyCommand implements CommandClass {
         MessageSection messageSection = messageContainer.get();
         RootSection configFile = configurationContainer.get();
 
-        if (senderMessage.isEmpty()) {messageManager.sendMessage(sender, messageSection.error.noArgument,
+        if (senderMessage.isEmpty()) {
+            messageManager.sendMessage(sender, messageSection.error.noArgument,
                     Placeholder.unparsed("usage", "/reply <message>"));
 
             return;

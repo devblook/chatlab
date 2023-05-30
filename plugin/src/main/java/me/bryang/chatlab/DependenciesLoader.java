@@ -13,18 +13,18 @@ public class DependenciesLoader implements PluginLoader {
     @Override
     public void classloader(final @NotNull PluginClasspathBuilder classpathBuilder) {
 
-         MavenLibraryResolver resolver = new MavenLibraryResolver();
+        MavenLibraryResolver resolver = new MavenLibraryResolver();
 
-         RemoteRepository mavenCentral = new RemoteRepository
+        RemoteRepository mavenCentral = new RemoteRepository
                 .Builder("central", "default", "https://repo1.maven.org/maven2/")
                 .build();
 
-         RemoteRepository unnamedRepo = new RemoteRepository
+        RemoteRepository unnamedRepo = new RemoteRepository
                 .Builder("unnamed-public", "default", "https://repo.unnamed.team/repository/unnamed-public/")
                 .build();
 
 
-         Dependency configurateHocon = new Dependency(
+        Dependency configurateHocon = new Dependency(
                 new DefaultArtifact("org.spongepowered:configurate-hocon:4.0.0"),
                 null
         );

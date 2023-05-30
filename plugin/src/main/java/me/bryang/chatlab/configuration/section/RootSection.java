@@ -27,7 +27,7 @@ public class RootSection extends ConfigurationSection {
     }
 
     @ConfigSerializable
-    public static class ChatFormat{
+    public static class ChatFormat {
 
         @Comment("Enable option")
         public boolean enabled;

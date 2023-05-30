@@ -13,13 +13,13 @@ public class ConfigurationContainer<T extends ConfigurationSection> {
     private final Class<T> clazz;
     private AtomicReference<T> internClass;
 
-    public ConfigurationContainer(String fileName, Path path, Class<T> clazz){
+    public ConfigurationContainer(String fileName, Path path, Class<T> clazz) {
 
         this.clazz = clazz;
         start(fileName, path);
     }
 
-    public void start(String fileName, Path path){
+    public void start(String fileName, Path path) {
 
         loader = HoconConfigurationLoader
                 .builder()
@@ -37,16 +37,16 @@ public class ConfigurationContainer<T extends ConfigurationSection> {
             loader.save(node);
 
 
-        }catch(IOException exception){
+        } catch (IOException exception) {
             exception.fillInStackTrace();
         }
     }
 
-    public T get(){
+    public T get() {
         return internClass.get();
     }
 
-    public void reload(){
+    public void reload() {
 
         try {
 
@@ -58,7 +58,7 @@ public class ConfigurationContainer<T extends ConfigurationSection> {
             internClass.set(newClass);
             loader.save(node);
 
-        }catch(IOException exception){
+        } catch (IOException exception) {
             exception.fillInStackTrace();
         }
 

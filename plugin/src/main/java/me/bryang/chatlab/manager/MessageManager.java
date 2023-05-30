@@ -20,7 +20,7 @@ public class MessageManager {
         sender.sendMessage(format(message, tagResolver));
     }
 
-    public Component format(String message, TagResolver... tagResolver){
+    public Component format(String message, TagResolver... tagResolver) {
         return MINI_MESSAGE.deserialize(message, tagResolver);
 
     }

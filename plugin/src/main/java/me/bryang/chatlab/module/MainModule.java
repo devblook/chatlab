@@ -41,7 +41,8 @@ public class MainModule extends AbstractModule {
                 .named("PluginFolder")
                 .toInstance(pluginPath);
 
-        bind(new TypeReference<Map<String, User>>() {})
+        bind(new TypeReference<Map<String, User>>() {
+        })
                 .toInstance(new HashMap<>());
 
         install(new ListenerModule());
