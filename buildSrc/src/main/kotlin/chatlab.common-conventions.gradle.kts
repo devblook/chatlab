@@ -5,6 +5,8 @@ plugins {
 repositories {
     mavenCentral()
     maven("https://repo.papermc.io/repository/maven-public/")
+    maven("https://repo.unnamed.team/repository/unnamed-public/")
+
     mavenLocal()
 }
 
