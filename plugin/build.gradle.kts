@@ -16,14 +16,6 @@ dependencies {
 tasks {
     shadowJar {
         archiveBaseName.set(rootProject.name.capitalized())
-
-        arrayOf(
-            "me.fixeddev",
-            "javax",
-            "team.unnamed.inject"
-        ).forEach {
-            relocate(it, "${project.group}.chatlab.libs.${it}")
-        }
     }
 
     build {
