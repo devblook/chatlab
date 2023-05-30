@@ -20,7 +20,6 @@ tasks {
         arrayOf(
             "me.fixeddev",
             "javax",
-            "org",
             "team.unnamed.inject"
         ).forEach {
             relocate(it, "${project.group}.chatlab.libs.${it}")
