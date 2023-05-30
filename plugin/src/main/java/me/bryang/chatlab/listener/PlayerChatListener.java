@@ -5,11 +5,8 @@ import me.bryang.chatlab.configuration.ConfigurationContainer;
 import me.bryang.chatlab.configuration.section.RootSection;
 import me.bryang.chatlab.manager.MessageManager;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
-import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.event.Listener;
 import team.unnamed.inject.InjectAll;
-
-import javax.inject.Inject;
 
 
 @InjectAll
