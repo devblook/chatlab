@@ -30,10 +30,10 @@ public class RootSection extends ConfigurationSection {
     public static class ChatFormat {
 
         @Comment("Enable option")
-        public boolean enabled;
+        public boolean enabled = false;
 
         @Comment("Format to the chat")
-        public String format = "<white>%player% <grey>: <white>%message%";
+        public String format = "<white><player> <grey>: <white><message>";
     }
 
 }

@@ -5,7 +5,9 @@ import me.bryang.chatlab.configuration.ConfigurationContainer;
 import me.bryang.chatlab.configuration.section.RootSection;
 import me.bryang.chatlab.manager.MessageManager;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.slf4j.Logger;
 import team.unnamed.inject.InjectAll;
 
 
@@ -26,8 +28,8 @@ public class PlayerChatListener implements Listener {
                 messageManager.format(
                         configurationContainer.get().chatFormat.format,
 
-                        Placeholder.unparsed("%player%", event.getPlayer().getName()),
-                        Placeholder.unparsed("%message%", event.originalMessage().toString())));
+                        Placeholder.unparsed("player", event.getPlayer().getName()),
+                        Placeholder.unparsed("message", event.originalMessage().toString())));
 
     }
 }
