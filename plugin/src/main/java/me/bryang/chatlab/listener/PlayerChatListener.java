@@ -15,6 +15,7 @@ public class PlayerChatListener implements Listener {
     private ConfigurationContainer<RootSection> configurationContainer;
     private MessageManager messageManager;
 
+    @EventHandler
     public void onChat(AsyncChatEvent event) {
 
         if (!configurationContainer.get().chatFormat.enabled) {
