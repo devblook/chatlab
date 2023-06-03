@@ -33,7 +33,7 @@ public class PlayerChatListener implements Listener {
             TagResolver.Single messagePlaceholder;
 
             if (source.hasPermission("chatlab.tags")){
-                messagePlaceholder = Placeholder.unparsed("<message>",formattedMessage);
+                messagePlaceholder = Placeholder.parsed("<message>",formattedMessage);
             }else{
                 messagePlaceholder = Placeholder.unparsed("<message>", formattedMessage);
             }
