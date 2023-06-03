@@ -8,7 +8,7 @@ import team.unnamed.inject.InjectAll;
 import java.util.Set;
 
 @InjectAll
-public class ListenerServices implements Service {
+public class ListenerService implements Service {
 
     private ChatLab plugin;
     private Set<Listener> listeners;

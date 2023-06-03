@@ -14,7 +14,7 @@ import team.unnamed.inject.InjectAll;
 import java.util.Set;
 
 @InjectAll
-public class CommandServices implements Service {
+public class CommandService implements Service {
 
     private Set<CommandClass> commands;
     private CommandCustomTranslator commandCustomTranslator;
