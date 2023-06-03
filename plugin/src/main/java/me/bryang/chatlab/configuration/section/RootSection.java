@@ -32,7 +32,7 @@ public class RootSection extends ConfigurationSection {
         @Comment("Enable option")
         public boolean enabled = false;
 
-        @Comment("Format to the chat")
+        @Comment("Format when you chat (Permission to use tags (clab.colors)")
         public String format = "<white><player> <grey>: <white><message>";
     }
 
