@@ -38,7 +38,7 @@ public class MainModule extends AbstractModule {
                 .toInstance(plugin);
 
         bind(Path.class)
-                .named("PluginFolder")
+                .named("plugin-folder")
                 .toInstance(pluginPath);
 
         bind(new TypeReference<Map<String, User>>() {
