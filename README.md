@@ -12,7 +12,7 @@ This plugin is a recode from my old plugin.
 
 ## Introduction
 
-### Requeriments:
+### Requirements:
 
 You need:
 - Paper or fork of this.
@@ -34,7 +34,7 @@ With the plugin you can:
 ## To do:
 
 - [X] Release
-- [ ] Multilanguage support 
+- [ ] Multi-language support 
 - [ ] Chat format
 
 Note: Coming soon more features.
