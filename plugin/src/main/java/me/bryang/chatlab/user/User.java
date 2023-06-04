@@ -1,7 +1,6 @@
 package me.bryang.chatlab.user;
 
 import javax.annotation.Nullable;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 

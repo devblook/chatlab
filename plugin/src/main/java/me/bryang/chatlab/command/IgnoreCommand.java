@@ -4,7 +4,6 @@ import me.bryang.chatlab.configuration.ConfigurationContainer;
 import me.bryang.chatlab.configuration.section.MessageSection;
 import me.bryang.chatlab.configuration.section.RootSection;
 import me.bryang.chatlab.manager.MessageManager;
-import me.bryang.chatlab.manager.UserDataManager;
 import me.bryang.chatlab.user.User;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;

@@ -1,15 +1,16 @@
 package me.bryang.chatlab.manager;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import me.bryang.chatlab.user.User;
-import team.unnamed.inject.InjectAll;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Map;
 

@@ -1,7 +1,6 @@
 package me.bryang.chatlab.configuration.section;
 
 import me.bryang.chatlab.configuration.ConfigurationSection;
-import org.checkerframework.checker.units.qual.C;
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
 import org.spongepowered.configurate.objectmapping.meta.Comment;
 
