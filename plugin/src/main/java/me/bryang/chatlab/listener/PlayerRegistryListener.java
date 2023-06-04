@@ -24,11 +24,17 @@ public class PlayerRegistryListener implements Listener {
 
     @EventHandler
     public void onRegistry(PlayerJoinEvent event) {
+
+        if (!users.containsKey(event.getPlayer().getUniqueId().toString())){
+            return;
+        }
+
         users.put(event.getPlayer().getUniqueId().toString(), new User());
     }
 
     @EventHandler
     public void onUnRegistry(PlayerQuitEvent event) {
+
         User user = users.get(event.getPlayer().getUniqueId().toString());
 
         if (!user.hasRecentMessenger()) {
