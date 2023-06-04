@@ -1,10 +1,7 @@
 package me.bryang.chatlab.module;
 
 import me.bryang.chatlab.ChatLab;
-import me.bryang.chatlab.module.submodule.CommandModule;
-import me.bryang.chatlab.module.submodule.ConfigurationModule;
-import me.bryang.chatlab.module.submodule.ListenerModule;
-import me.bryang.chatlab.module.submodule.ServiceModule;
+import me.bryang.chatlab.module.submodule.*;
 import me.bryang.chatlab.user.User;
 import org.slf4j.Logger;
 import team.unnamed.inject.AbstractModule;
@@ -45,6 +42,7 @@ public class MainModule extends AbstractModule {
         })
                 .toInstance(new HashMap<>());
 
+        install(new ManagerModule());
         install(new ListenerModule());
         install(new CommandModule());
         install(new ServiceModule());
