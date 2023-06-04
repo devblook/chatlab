@@ -29,5 +29,12 @@ public class MessageSection extends ConfigurationSection {
 
         @Comment("Message to player that's messaging to itself.")
         public String yourselfTalk = "<red>[Error] <dark_gray>| <white>You cannot send private message to yourself.";
+
+        @Comment("Message when you input a player to ignore that already is ignored")
+        public String playerAlreadyIgnored = "<red>[Error] <dark_gray>| <white>The player <green><player> <white>is already ignored.";
+
+        @Comment("Message when you input a player to unignore that already is unignored")
+        public String playerAlreadyUnIgnored = "<red>[Error] <dark_gray>| <white>The player <green><player> <white>is already unignored.";
+
     }
 }
