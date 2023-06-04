@@ -34,8 +34,9 @@ With the plugin you can:
 ## To do:
 
 - [X] Release
-- [ ] Multi-language support 
 - [ ] Chat format
+- [ ] Ignore and unignore command
+- [ ] Multilanguage support 
 
 Note: Coming soon more features.
 
