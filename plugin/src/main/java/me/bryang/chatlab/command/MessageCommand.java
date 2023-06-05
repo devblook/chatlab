@@ -1,5 +1,6 @@
 package me.bryang.chatlab.command;
 
+import me.bryang.chatlab.authorizer.MessageAuthorizer;
 import me.bryang.chatlab.configuration.ConfigurationContainer;
 import me.bryang.chatlab.configuration.section.MessageSection;
 import me.bryang.chatlab.configuration.section.RootSection;
@@ -25,6 +26,7 @@ public class MessageCommand implements CommandClass {
     private ConfigurationContainer<MessageSection> messageContainer;
     private Map<String, User> users;
     private MessageManager messageManager;
+    private MessageAuthorizer messageAuthorizer;
 
     @Command(names = {"msg", "pm", "m", "message", "tell", "w"},
             desc = "Command to send a private message.")
@@ -53,6 +55,13 @@ public class MessageCommand implements CommandClass {
 
 
         if (senderMessage.isEmpty()) {
+            messageManager.sendMessage(sender, messageSection.error.noArgument,
+                    Placeholder.unparsed("usage", "/msg <player> <message>"));
+            return;
+        }
+
+
+        if (messageAuthorizer.isAuthorized(sender.getUniqueId().toString(), target.getUniqueId().toString())){
             messageManager.sendMessage(sender, messageSection.error.noArgument,
                     Placeholder.unparsed("usage", "/msg <player> <message>"));
             return;
