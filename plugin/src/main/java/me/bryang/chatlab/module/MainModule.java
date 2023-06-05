@@ -42,7 +42,6 @@ public class MainModule extends AbstractModule {
         })
                 .toInstance(new HashMap<>());
 
-        install(new ManagerModule());
         install(new ListenerModule());
         install(new CommandModule());
         install(new ServiceModule());
