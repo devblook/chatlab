@@ -7,6 +7,7 @@ import me.bryang.chatlab.user.User;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.inject.Singleton;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Map;
 
+@Singleton
 public class UserDataManager {
 
     @Inject @Named("plugin-folder")
