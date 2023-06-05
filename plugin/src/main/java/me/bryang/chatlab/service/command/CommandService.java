@@ -1,4 +1,4 @@
-package me.bryang.chatlab.service.translator;
+package me.bryang.chatlab.service.command;
 
 import me.bryang.chatlab.service.Service;
 import me.fixeddev.commandflow.CommandManager;
