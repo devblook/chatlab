@@ -2,7 +2,6 @@ package me.bryang.chatlab.authorizer;
 
 import javax.inject.Inject;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MessageAuthorizer {
 

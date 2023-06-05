@@ -4,7 +4,6 @@ import me.bryang.chatlab.authorizer.Authorizer;
 import me.bryang.chatlab.user.User;
 
 import javax.inject.Inject;
-import java.rmi.server.UID;
 import java.util.Map;
 import java.util.UUID;
 
