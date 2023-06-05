@@ -28,6 +28,7 @@ public class IgnoreCommand implements CommandClass {
     private Map<String, User> userData;
 
 
+    @Command(names = "")
     public void ignoreCommand(@Sender Player sender, @OptArg OfflinePlayer target){
 
         RootSection rootSection = configurationContainer.get();
