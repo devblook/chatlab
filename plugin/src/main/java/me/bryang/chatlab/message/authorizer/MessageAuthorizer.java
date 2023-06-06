@@ -14,7 +14,7 @@ public class MessageAuthorizer {
 
         for (Authorizer authorizer : authorizers){
 
-            if (!authorizer.denied(senderUniqueId, receptorUniqueId)){
+            if (authorizer.denied(senderUniqueId, receptorUniqueId)){
                 return false;
             }
 
