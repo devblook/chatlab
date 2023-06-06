@@ -26,7 +26,7 @@ public class CommandCustomTranslator implements TranslationProvider {
     public String getTranslation(Namespace namespace, String path){
         MessageSection messageSection = messageContainer.get();
 
-        String key = path.split("\\|")[0].trim();
+        String key = path.split("\\|")[0];
 
         String text = switch (key) {
             case "sender.only_player" -> messageSection.error.console;

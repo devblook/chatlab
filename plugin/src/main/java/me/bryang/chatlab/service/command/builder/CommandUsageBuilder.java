@@ -22,7 +22,7 @@ public class CommandUsageBuilder implements UsageBuilder {
         String command = commandContext.getCommand().getName();
         ArgumentList argumentList = ArgumentList.valueOf(command.toUpperCase());
 
-        return TranslatableComponent.of("command.subcommand.invalid | " + argumentList.getUsage());
+        return TranslatableComponent.of("command.subcommand.invalid|" + argumentList.getUsage());
 
     }
 }
