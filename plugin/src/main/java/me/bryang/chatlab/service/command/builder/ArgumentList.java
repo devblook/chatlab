@@ -1,4 +1,4 @@
-package me.bryang.chatlab.service.command.argument;
+package me.bryang.chatlab.service.command.builder;
 
 public enum ArgumentList{
     MSG("/msg <player> <message>"),

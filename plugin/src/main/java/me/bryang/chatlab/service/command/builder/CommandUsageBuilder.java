@@ -1,4 +1,4 @@
-package me.bryang.chatlab.service.command.argument;
+package me.bryang.chatlab.service.command.builder;
 
 import me.fixeddev.commandflow.CommandContext;
 import me.fixeddev.commandflow.usage.UsageBuilder;
