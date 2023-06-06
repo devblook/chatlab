@@ -14,7 +14,6 @@ public class IgnoreTask implements Authorizer {
     @Override
     public boolean denied(String senderUniqueId, String receptorUniqueId) {
 
-        System.out.println(userData.keySet());
-        return userData.get(senderUniqueId).containsIgnoredPlayers(UUID.fromString(receptorUniqueId));
+        return userData.get(receptorUniqueId).containsIgnoredPlayers(UUID.fromString(senderUniqueId));
     }
 }
