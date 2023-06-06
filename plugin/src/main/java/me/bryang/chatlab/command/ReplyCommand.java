@@ -7,7 +7,6 @@ import me.bryang.chatlab.manager.MessageManager;
 import me.bryang.chatlab.user.User;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
-import me.fixeddev.commandflow.annotated.annotation.OptArg;
 import me.fixeddev.commandflow.annotated.annotation.Text;
 import me.fixeddev.commandflow.bukkit.annotation.Sender;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
@@ -26,19 +25,12 @@ public class ReplyCommand implements CommandClass {
     private MessageManager messageManager;
 
 
-    @Command(names = {"r", "reply"},
+    @Command(names = {"reply", "r"},
             desc = "Command to reply to a message.")
-    public void messageCommand(@Sender Player sender, @Text @OptArg() String senderMessage) {
+    public void messageCommand(@Sender Player sender, @Text String senderMessage) {
 
         MessageSection messageSection = messageContainer.get();
         RootSection configFile = configurationContainer.get();
-
-        if (senderMessage.isEmpty()) {
-            messageManager.sendMessage(sender, messageSection.error.noArgument,
-                    Placeholder.unparsed("usage", "/reply <message>"));
-
-            return;
-        }
 
         User user = users.get(sender.getUniqueId().toString());
 

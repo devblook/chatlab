@@ -7,10 +7,8 @@ import me.bryang.chatlab.manager.MessageManager;
 import me.bryang.chatlab.user.User;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
-import me.fixeddev.commandflow.annotated.annotation.OptArg;
 import me.fixeddev.commandflow.bukkit.annotation.Sender;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import team.unnamed.inject.InjectAll;
 
@@ -29,16 +27,10 @@ public class IgnoreCommand implements CommandClass {
 
 
     @Command(names = "")
-    public void ignoreCommand(@Sender Player sender, @OptArg OfflinePlayer target){
+    public void ignoreCommand(@Sender Player sender, Player target){
 
         RootSection rootSection = configurationContainer.get();
         MessageSection messageSection = messageContainer.get();
-
-        if (target == null){
-            messageManager.sendMessage(sender, messageSection.error.noArgument,
-                    Placeholder.unparsed("usage", "/ignore <player>"));
-            return;
-        }
 
         User user = userData.get(target.getUniqueId().toString());
 

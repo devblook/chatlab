@@ -8,11 +8,9 @@ import me.bryang.chatlab.manager.MessageManager;
 import me.bryang.chatlab.user.User;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
-import me.fixeddev.commandflow.annotated.annotation.OptArg;
 import me.fixeddev.commandflow.annotated.annotation.Text;
 import me.fixeddev.commandflow.bukkit.annotation.Sender;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import team.unnamed.inject.InjectAll;
 
@@ -30,36 +28,17 @@ public class MessageCommand implements CommandClass {
 
     @Command(names = {"msg", "pm", "m", "message", "tell", "w"},
             desc = "Command to send a private message.")
-    public void messageCommand(@Sender Player sender, @OptArg() OfflinePlayer target,
-                               @Text @OptArg("") String senderMessage) {
+    public void messageCommand(@Sender Player sender, Player target,
+                               @Text String senderMessage) {
 
         RootSection configFile = configurationContainer.get();
         MessageSection messageSection = messageContainer.get();
 
-        if (target == null) {
-            messageManager.sendMessage(sender, messageSection.error.noArgument,
-                    Placeholder.unparsed("usage", "/msg <player> <message>"));
-            return;
-        }
 
         if (sender == target.getPlayer()) {
             messageManager.sendMessage(sender, messageSection.error.yourselfTalk);
             return;
         }
-
-        if (!target.isOnline()) {
-            messageManager.sendMessage(sender, messageSection.error.playerOffline,
-                    Placeholder.unparsed("usage", "/msg <player> <message>"));
-            return;
-        }
-
-
-        if (senderMessage.isEmpty()) {
-            messageManager.sendMessage(sender, messageSection.error.noArgument,
-                    Placeholder.unparsed("usage", "/msg <player> <message>"));
-            return;
-        }
-
 
         if (messageAuthorizer.isAuthorized(sender.getUniqueId().toString(), target.getUniqueId().toString())){
             messageManager.sendMessage(sender, messageSection.error.noArgument,

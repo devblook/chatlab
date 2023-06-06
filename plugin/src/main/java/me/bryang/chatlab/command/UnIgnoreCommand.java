@@ -7,7 +7,6 @@ import me.bryang.chatlab.manager.MessageManager;
 import me.bryang.chatlab.user.User;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
-import me.fixeddev.commandflow.annotated.annotation.OptArg;
 import me.fixeddev.commandflow.bukkit.annotation.Sender;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.OfflinePlayer;
@@ -27,16 +26,10 @@ public class UnIgnoreCommand implements CommandClass {
     private Map<String, User> userData;
 
 
-    public void unIgnoreCommand(@Sender Player sender, @OptArg OfflinePlayer target){
+    public void unIgnoreCommand(@Sender Player sender, OfflinePlayer target){
 
         RootSection rootSection = configurationContainer.get();
         MessageSection messageSection = messageContainer.get();
-
-        if (target == null){
-            messageManager.sendMessage(sender, messageSection.error.noArgument,
-                    Placeholder.unparsed("usage", "/unignore <player>"));
-            return;
-        }
 
         User user = userData.get(target.getUniqueId().toString());
 
