@@ -38,7 +38,8 @@ public class CommandCustomTranslator implements TranslationProvider {
         };
 
 
-        return ChatColor.translateAlternateColorCodes('&', LegacyComponentSerializer.legacyAmpersand().serialize(MiniMessage.miniMessage().deserialize(text)));
+        return ChatColor.translateAlternateColorCodes('&', LegacyComponentSerializer.legacyAmpersand()
+                .serialize(MiniMessage.miniMessage().deserialize(text)));
 
 
     }
