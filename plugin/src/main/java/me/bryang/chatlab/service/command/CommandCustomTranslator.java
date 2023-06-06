@@ -34,6 +34,8 @@ public class CommandCustomTranslator implements TranslationProvider {
                     .replace("<usage>", path.split("\\|")[1]);
             case "player.offline" -> messageSection.error.playerOffline
                     .replace("<player>", "%s");
+            case "command.no-permission" -> messageSection.error.noPermission;
+
             default -> "If u see this message, please contact with us.";
         };
 
