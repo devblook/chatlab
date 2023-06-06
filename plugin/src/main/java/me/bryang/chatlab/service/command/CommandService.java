@@ -1,6 +1,7 @@
 package me.bryang.chatlab.service.command;
 
 import me.bryang.chatlab.service.Service;
+import me.bryang.chatlab.service.command.builder.CommandUsageBuilder;
 import me.fixeddev.commandflow.CommandManager;
 import me.fixeddev.commandflow.annotated.AnnotatedCommandTreeBuilder;
 import me.fixeddev.commandflow.annotated.AnnotatedCommandTreeBuilderImpl;
@@ -18,12 +19,15 @@ public class CommandService implements Service {
 
     private Set<CommandClass> commands;
     private CommandCustomTranslator commandCustomTranslator;
+    private CommandUsageBuilder commandUsageBuilder;
 
     @Override
     public void start() {
         CommandManager commandManager = new BukkitCommandManager("ChatLab");
 
+        commandManager.setUsageBuilder(commandUsageBuilder);
         commandManager.getTranslator().setProvider(commandCustomTranslator);
+
         PartInjector partInjector = PartInjector.create();
 
         partInjector.install(new DefaultsModule());
