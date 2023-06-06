@@ -1,4 +1,4 @@
-package me.bryang.chatlab.authorizer;
+package me.bryang.chatlab.message.authorizer;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

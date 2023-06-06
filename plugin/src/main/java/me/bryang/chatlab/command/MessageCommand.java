@@ -1,6 +1,6 @@
 package me.bryang.chatlab.command;
 
-import me.bryang.chatlab.authorizer.MessageAuthorizer;
+import me.bryang.chatlab.message.authorizer.MessageAuthorizer;
 import me.bryang.chatlab.configuration.ConfigurationContainer;
 import me.bryang.chatlab.configuration.section.MessageSection;
 import me.bryang.chatlab.configuration.section.RootSection;

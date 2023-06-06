@@ -1,4 +1,4 @@
-package me.bryang.chatlab.authorizer;
+package me.bryang.chatlab.message.authorizer;
 
 public interface Authorizer {
 

@@ -1,7 +1,7 @@
 package me.bryang.chatlab.module.submodule;
 
-import me.bryang.chatlab.authorizer.Authorizer;
-import me.bryang.chatlab.authorizer.tasks.IgnoreTask;
+import me.bryang.chatlab.message.authorizer.Authorizer;
+import me.bryang.chatlab.message.authorizer.tasks.IgnoreTask;
 import team.unnamed.inject.AbstractModule;
 
 public class AuthorizerModule extends AbstractModule{
