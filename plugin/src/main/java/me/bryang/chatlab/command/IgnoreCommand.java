@@ -35,7 +35,7 @@ public class IgnoreCommand implements CommandClass {
             return;
         }
 
-        User user = userData.get(target.getUniqueId().toString());
+        User user = userData.get(sender.getUniqueId().toString());
 
         if (user.containsIgnoredPlayers(target.getUniqueId())){
             messageManager.sendMessage(sender, messageSection.error.playerAlreadyIgnored,
