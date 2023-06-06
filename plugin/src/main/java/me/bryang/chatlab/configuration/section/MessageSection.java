@@ -27,10 +27,10 @@ public class MessageSection extends ConfigurationSection {
         @Comment("General message for player with no permissions")
         public String noPermission = "<red>[Error] <dark_gray>| <white>You don't have permission to do this.";
 
-        @Comment("Message to player that's messaging to itself.")
+        @Comment("Message to player that's try to messaging to itself.")
         public String yourselfTalk = "<red>[Error] <dark_gray>| <white>You cannot send private message to yourself.";
 
-        @Comment("Message to player that's ignoring to itself.")
+        @Comment("Message to player that's try to ignoring to itself.")
         public String yourselfIgnore = "<red>[Error] <dark_gray>| <white>You cannot ignore to yourself.";
 
         @Comment("Message when you input a player to ignore that already is ignored")
