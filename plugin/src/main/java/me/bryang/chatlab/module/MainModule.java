@@ -1,7 +1,6 @@
 package me.bryang.chatlab.module;
 
 import me.bryang.chatlab.ChatLab;
-import me.bryang.chatlab.authorizer.MessageAuthorizer;
 import me.bryang.chatlab.module.submodule.*;
 import me.bryang.chatlab.user.User;
 import org.slf4j.Logger;
@@ -31,6 +30,7 @@ public class MainModule extends AbstractModule {
     }
 
     @Override
+
     public void configure() {
         bind(ChatLab.class)
                 .toInstance(plugin);
@@ -39,8 +39,6 @@ public class MainModule extends AbstractModule {
                 .named("plugin-folder")
                 .toInstance(pluginPath);
 
-        bind(MessageAuthorizer.class)
-                .toInstance(new MessageAuthorizer());
         bind(new TypeReference<Map<String, User>>() {
         })
                 .toInstance(new HashMap<>());
