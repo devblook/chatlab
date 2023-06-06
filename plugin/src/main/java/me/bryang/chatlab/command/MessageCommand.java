@@ -40,15 +40,14 @@ public class MessageCommand implements CommandClass {
             return;
         }
 
-        if (messageAuthorizer.isAuthorized(sender.getUniqueId().toString(), target.getUniqueId().toString())){
-            messageManager.sendMessage(sender, messageSection.error.noArgument,
-                    Placeholder.unparsed("usage", "/msg <player> <message>"));
-            return;
-        }
 
         messageManager.sendMessage(sender, configFile.privateMessage.fromSender,
                 Placeholder.unparsed("target", target.getName()),
                 Placeholder.unparsed("message", senderMessage));
+
+        if (!messageAuthorizer.isAuthorized(sender.getUniqueId().toString(), target.getUniqueId().toString())){
+            return;
+        }
 
         messageManager.sendMessage(target, configFile.privateMessage.toReceptor,
                 Placeholder.unparsed("sender", sender.getName()),
