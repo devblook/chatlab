@@ -1,6 +1,7 @@
 package me.bryang.chatlab.manager;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import me.bryang.chatlab.user.User;
@@ -25,7 +26,6 @@ public class UserDataManager {
     private Map<String, User> users;
 
     private File jsonFile;
-    private JsonObject jsonObject;
 
     public void init(){
 
@@ -38,11 +38,20 @@ public class UserDataManager {
                 return;
             }
 
-             jsonObject = JsonParser
-                    .parseReader(new FileReader(jsonFile))
-                    .getAsJsonObject();
+            JsonElement jsonElement = JsonParser
+                    .parseReader(new FileReader(jsonFile));
 
-            jsonObject
+            if (jsonElement.isJsonNull()){
+                return;
+            }
+
+            JsonObject jsonObject = jsonElement.getAsJsonObject();
+
+            if (jsonObject == null){
+                return;
+            }
+
+            jsonObject.getAsJsonObject()
                     .keySet()
                     .forEach(targetUniqueId -> {
 
