@@ -7,7 +7,6 @@ import me.fixeddev.commandflow.translator.TranslationProvider;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.ChatColor;
-import org.slf4j.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -18,8 +17,6 @@ public class CommandCustomTranslator implements TranslationProvider {
     @Inject
     private ConfigurationContainer<MessageSection> messageContainer;
 
-    @Inject
-    private Logger logger;
 
 
     @Override
