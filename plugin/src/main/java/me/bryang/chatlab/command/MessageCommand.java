@@ -22,7 +22,7 @@ public class MessageCommand implements CommandClass {
 
     private ConfigurationContainer<RootSection> configurationContainer;
     private ConfigurationContainer<MessageSection> messageContainer;
-    private Map<String, User> users;
+    private Map<String, User> userData;
     private MessageManager messageManager;
     private MessageAuthorizer messageAuthorizer;
 
@@ -50,12 +50,12 @@ public class MessageCommand implements CommandClass {
                 Placeholder.unparsed("target", target.getName()),
                 Placeholder.unparsed("message", senderMessage));
 
-        messageManager.sendMessage(target.getPlayer(), configFile.privateMessage.toReceptor,
+        messageManager.sendMessage(target, configFile.privateMessage.toReceptor,
                 Placeholder.unparsed("sender", sender.getName()),
                 Placeholder.unparsed("message", senderMessage));
 
-        User senderUser = users.get(sender.getUniqueId().toString());
-        User senderTarget = users.get(target.getUniqueId().toString());
+        User senderUser = userData.get(sender.getUniqueId().toString());
+        User senderTarget = userData.get(target.getUniqueId().toString());
 
         senderUser.recentMessenger(target.getUniqueId());
         senderTarget.recentMessenger(sender.getUniqueId());
