@@ -1,13 +1,14 @@
 package me.bryang.chatlab.user;
 
 import javax.annotation.Nullable;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
 public class User {
 
     private UUID recentMessenger;
-    private Set<String> ignoredPlayers;
+    private Set<String> ignoredPlayers = new HashSet<>();
 
 
     @Nullable
