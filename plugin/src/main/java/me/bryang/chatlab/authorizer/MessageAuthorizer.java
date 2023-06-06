@@ -1,8 +1,10 @@
 package me.bryang.chatlab.authorizer;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.util.Set;
 
+@Singleton
 public class MessageAuthorizer {
 
     @Inject
