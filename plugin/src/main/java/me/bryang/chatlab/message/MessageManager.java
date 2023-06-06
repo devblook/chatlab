@@ -1,4 +1,4 @@
-package me.bryang.chatlab.manager;
+package me.bryang.chatlab.message;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;

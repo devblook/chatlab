@@ -3,7 +3,7 @@ package me.bryang.chatlab.listener;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import me.bryang.chatlab.configuration.ConfigurationContainer;
 import me.bryang.chatlab.configuration.section.RootSection;
-import me.bryang.chatlab.manager.MessageManager;
+import me.bryang.chatlab.message.MessageManager;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
