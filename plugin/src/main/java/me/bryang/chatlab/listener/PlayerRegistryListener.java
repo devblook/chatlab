@@ -25,7 +25,7 @@ public class PlayerRegistryListener implements Listener {
     @EventHandler
     public void onRegistry(PlayerJoinEvent event) {
 
-        if (!users.containsKey(event.getPlayer().getUniqueId().toString())){
+        if (users.containsKey(event.getPlayer().getUniqueId().toString())){
             return;
         }
 
