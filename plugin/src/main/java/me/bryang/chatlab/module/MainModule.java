@@ -2,10 +2,7 @@ package me.bryang.chatlab.module;
 
 import me.bryang.chatlab.ChatLab;
 import me.bryang.chatlab.authorizer.MessageAuthorizer;
-import me.bryang.chatlab.module.submodule.CommandModule;
-import me.bryang.chatlab.module.submodule.ConfigurationModule;
-import me.bryang.chatlab.module.submodule.ListenerModule;
-import me.bryang.chatlab.module.submodule.ServiceModule;
+import me.bryang.chatlab.module.submodule.*;
 import me.bryang.chatlab.user.User;
 import org.slf4j.Logger;
 import team.unnamed.inject.AbstractModule;
@@ -44,7 +41,6 @@ public class MainModule extends AbstractModule {
 
         bind(MessageAuthorizer.class)
                 .toInstance(new MessageAuthorizer());
-
         bind(new TypeReference<Map<String, User>>() {
         })
                 .toInstance(new HashMap<>());
@@ -52,6 +48,7 @@ public class MainModule extends AbstractModule {
         install(new ListenerModule());
         install(new CommandModule());
         install(new ServiceModule());
+        install(new AuthorizerModule());
         install(new ConfigurationModule());
     }
 }
