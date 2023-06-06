@@ -19,17 +19,19 @@ import java.util.Map;
 public class UnIgnoreCommand implements CommandClass {
 
     private MessageManager messageManager;
-
     private ConfigurationContainer<RootSection> configurationContainer;
     private ConfigurationContainer<MessageSection> messageContainer;
-
     private Map<String, User> userData;
-
 
     public void unIgnoreCommand(@Sender Player sender, OfflinePlayer target){
 
         RootSection rootSection = configurationContainer.get();
         MessageSection messageSection = messageContainer.get();
+
+        if (sender.getUniqueId() == target.getUniqueId()){
+            messageManager.sendMessage(sender, messageSection.error.yourselfIgnore);
+            return;
+        }
 
         User user = userData.get(target.getUniqueId().toString());
 
