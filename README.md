@@ -7,10 +7,11 @@
  </picture>
 </p>
 
+## Introduction
+
 ChatLab is chat plugin whose purpose is to be an optimized plugin and have the necessary options for users.
 This plugin is a recode from my old plugin.
 
-## Introduction
 
 ### Requirements:
 
@@ -20,22 +21,31 @@ You need:
 
 ### How to install:
 
-You can install in the releases option.
-
+You can check the last version of the plugin in the [releases](https://github.com/devblook/chatlab/releases) option.
 
 ## Features:
 
 With the plugin you can:
 
+
 - Use [MiniMessage](https://docs.advntr.dev/minimessage/index.html) in message paths.
 - Send private messages and reply.
-- Ignore or unignore a player.
+- Ignore or unignore a player and see the list.
+- Use the chat format.
+
+## Permissions:
+
+| Permission  | Description                                 |
+|-------------|---------------------------------------------|
+| clab.tags   | To use the MiniMessage tags in chat format. |
+| clab.reload | To reload the plugin.                       |
+
 
 ## To do:
 
 - [X] Release
-- [ ] Chat format
-- [ ] Ignore and unignore command
+- [ ] Chat format 
+- [ ] Ignore and unignore command 
 - [ ] Multilanguage support 
 
 Note: Coming soon more features.
