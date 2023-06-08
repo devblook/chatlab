@@ -24,12 +24,17 @@ public class User {
         return this.recentMessenger != null;
     }
 
-    public void putIgnorePlayers(Set<String> ignoredPlayers) {
-        this.ignoredPlayers = ignoredPlayers;
+
+    public Set<String> ignoredPlayers(){
+        return ignoredPlayers;
     }
 
     public void ignore(UUID target) {
         ignoredPlayers.add(target.toString());
+    }
+
+    public void ignore(String target){
+        ignoredPlayers.add(target);
     }
 
     public void unIgnore(UUID target){
