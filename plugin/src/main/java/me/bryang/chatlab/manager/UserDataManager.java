@@ -1,10 +1,12 @@
 package me.bryang.chatlab.manager;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import me.bryang.chatlab.user.User;
+import org.slf4j.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -25,6 +27,9 @@ public class UserDataManager {
     @Inject
     private Map<String, User> users;
 
+    @Inject
+    private Logger logger;
+
     private File jsonFile;
 
     public void init(){
@@ -35,7 +40,8 @@ public class UserDataManager {
 
             if (!jsonFile.exists()) {
                 jsonFile.createNewFile();
-                return;
+                logger.info("Data created");
+
             }
 
             JsonElement jsonElement = JsonParser
@@ -56,14 +62,23 @@ public class UserDataManager {
                     .forEach(targetUniqueId -> {
 
                         User user = new User();
-                        user.putIgnorePlayers(jsonObject.get(targetUniqueId).getAsJsonObject().keySet());
+
+                        JsonElement ignoredPlayers = jsonObject.get(targetUniqueId);
+
+                        if (!ignoredPlayers.isJsonNull() && ignoredPlayers.isJsonArray()) {
+                            ignoredPlayers.getAsJsonArray().forEach(
+                                    element ->
+                                    {
+                                        user.ignore(element.getAsString());
+                                    }
+                            );
+                        }
 
                         users.put(targetUniqueId, user);
 
                     });
 
-
-
+            logger.info("Data loaded");
         }catch(IOException exception){
             exception.fillInStackTrace();
         }
@@ -72,12 +87,28 @@ public class UserDataManager {
 
     public void stop() {
 
+        JsonObject jsonObject = new JsonObject();
+
+        users.keySet().forEach(userField -> {
+
+            JsonArray jsonArray = new JsonArray();
+
+            User user = users.get(userField);
+            user.ignoredPlayers().forEach(jsonArray::add);
+
+            jsonObject.add(userField, jsonArray);
+
+
+        });
+
+        String jsonString = new Gson().toJson(jsonObject);
         try {
 
-            String jsonPath = new Gson().toJson(users);
-
             FileWriter fileWriter = new FileWriter(jsonFile);
-            fileWriter.write(jsonPath);
+            fileWriter.write(jsonString);
+            fileWriter.close();
+
+            logger.info("Data saved");
 
         }catch(IOException exception){
             exception.fillInStackTrace();
