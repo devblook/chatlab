@@ -55,7 +55,10 @@ public class IgnoreCommand implements CommandClass {
                 if (ignoredPlayersSize != 0){
 
                     List<String> listIgnoredPlayers = new ArrayList<>();
-                    ignoredPlayers.forEach(fieldUniqueId -> listIgnoredPlayers.add(Bukkit.getOfflinePlayer(UUID.fromString(fieldUniqueId)).getName()));
+                    ignoredPlayers
+                            .forEach(fieldUniqueId -> listIgnoredPlayers
+                                    .add(Bukkit.getOfflinePlayer(UUID.fromString(fieldUniqueId)).getName()));
+
                     ignoredPlayersData = String.join(", ", listIgnoredPlayers);
                 }else{
                     ignoredPlayersData =  ignoredPlayersSector.error;

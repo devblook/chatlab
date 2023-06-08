@@ -34,12 +34,10 @@ public class MessageCommand implements CommandClass {
         RootSection configFile = configurationContainer.get();
         MessageSection messageSection = messageContainer.get();
 
-
         if (sender == target.getPlayer()) {
             messageManager.sendMessage(sender, messageSection.error.yourselfTalk);
             return;
         }
-
 
         messageManager.sendMessage(sender, configFile.privateMessage.fromSender,
                 Placeholder.unparsed("target", target.getName()),
