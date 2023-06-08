@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import java.util.Map;
 import java.util.UUID;
 
-public class IgnoreTask implements Authorizer {
+public class IgnoreAuthorizer implements Authorizer {
     @Inject
     private Map<String, User> userData;
 
