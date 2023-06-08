@@ -29,7 +29,6 @@ public class IgnoreCommand implements CommandClass {
     private ConfigurationContainer<MessageSection> messageContainer;
     private Map<String, User> userData;
 
-
     @Command(names = "")
     public void ignoreCommand(@Sender Player sender, OfflinePlayer target){
 

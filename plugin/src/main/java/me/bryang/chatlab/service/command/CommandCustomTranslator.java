@@ -17,8 +17,6 @@ public class CommandCustomTranslator implements TranslationProvider {
     @Inject
     private ConfigurationContainer<MessageSection> messageContainer;
 
-
-
     @Override
     public String getTranslation(Namespace namespace, String path){
         MessageSection messageSection = messageContainer.get();

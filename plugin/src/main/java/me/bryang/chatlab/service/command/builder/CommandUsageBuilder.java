@@ -7,10 +7,8 @@ import net.kyori.text.TranslatableComponent;
 
 import javax.inject.Singleton;
 
-
 @Singleton
 public class CommandUsageBuilder implements UsageBuilder {
-
 
     @Override
     public Component getUsage(CommandContext commandContext) {

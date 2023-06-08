@@ -24,7 +24,6 @@ public class ReplyCommand implements CommandClass {
     private Map<String, User> users;
     private MessageManager messageManager;
 
-
     @Command(names = {"reply", "r"},
             desc = "Command to reply to a message.")
     public void messageCommand(@Sender Player sender, @Text String senderMessage) {

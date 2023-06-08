@@ -9,8 +9,6 @@ public class User {
 
     private UUID recentMessenger;
     private Set<String> ignoredPlayers = new HashSet<>();
-
-
     @Nullable
     public UUID recentMessenger() {
         return this.recentMessenger;

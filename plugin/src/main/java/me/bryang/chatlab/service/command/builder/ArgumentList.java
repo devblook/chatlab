@@ -5,7 +5,6 @@ public enum ArgumentList{
     REPLY("/reply <message>"),
     IGNORE("/ignore <player>"),
     UNIGNORE("/unignore <player>"),
-
     CLAB("/clab help");
 
     private String usage;
