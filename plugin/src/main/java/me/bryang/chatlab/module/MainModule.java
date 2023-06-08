@@ -1,7 +1,11 @@
 package me.bryang.chatlab.module;
 
 import me.bryang.chatlab.ChatLab;
-import me.bryang.chatlab.module.submodule.*;
+import me.bryang.chatlab.module.submodule.AuthorizerModule;
+import me.bryang.chatlab.module.submodule.CommandModule;
+import me.bryang.chatlab.module.submodule.ConfigurationModule;
+import me.bryang.chatlab.module.submodule.ListenerModule;
+import me.bryang.chatlab.module.submodule.ServiceModule;
 import me.bryang.chatlab.user.User;
 import org.slf4j.Logger;
 import team.unnamed.inject.AbstractModule;
