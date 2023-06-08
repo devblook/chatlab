@@ -13,4 +13,9 @@ public class ManagerService implements Service{
     public void start() {
         userDataManager.init();
     }
+
+    @Override
+    public void stop(){
+        userDataManager.stop();
+    }
 }
