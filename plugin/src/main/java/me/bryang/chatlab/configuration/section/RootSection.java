@@ -4,6 +4,9 @@ import me.bryang.chatlab.configuration.ConfigurationSection;
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
 import org.spongepowered.configurate.objectmapping.meta.Comment;
 
+import java.util.Arrays;
+import java.util.List;
+
 @ConfigSerializable
 @SuppressWarnings("FieldMayBeFinal")
 public class RootSection extends ConfigurationSection {
@@ -33,10 +36,19 @@ public class RootSection extends ConfigurationSection {
     public static class Ignore{
 
         @Comment("Message when the player input a target to ignore")
-        public String ignoredPlayer = "<red>[Ignore] <dark_gray> | <white>You ignored a player. <green>[<player>]<green>";
+        public String ignoredPlayer = "<red>[Ignore] <dark_gray>| <white>You ignored a player. <green>[<player>]<green>";
 
         @Comment("Message when the player input a target to unignore")
-        public String unignoredPlayer = "<red>[Ignore] <dark_gray> | <white>You unignored a player. <green>[<player>]<green>";
+        public String unignoredPlayer = "<red>[Ignore] <dark_gray>| <white>You unignored a player. <green>[<player>]<green>";
+
+        @Comment("Message when you see the list of ignored players")
+        public SeeIgnoredPlayers seeIgnoredPlayers = new SeeIgnoredPlayers();
+
+        @ConfigSerializable
+        public static class SeeIgnoredPlayers{
+            public List<String> format = Arrays.asList("<red>[Ignore] <white>List of ignored players <green>[<ignored_players_size>]<white>:", "<dark_green>>> <green><ignored_players_data>");
+            public String error = "You aren't ignoring anyone.";
+        }
     }
     @ConfigSerializable
     public static class ChatFormat {
