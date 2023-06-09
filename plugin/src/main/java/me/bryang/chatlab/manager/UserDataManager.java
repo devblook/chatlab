@@ -26,13 +26,10 @@ public class UserDataManager {
 	@Inject
 	@Named("plugin-folder")
 	private Path path;
-
 	@Inject
 	private Map<String, User> users;
-
 	@Inject
 	private Logger logger;
-
 	private File jsonFile;
 
 	public void init() {
