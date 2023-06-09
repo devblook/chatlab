@@ -22,4 +22,8 @@ public class MessageAuthorizer {
 
 		return true;
 	}
+
+	public void init(){
+		authorizers.forEach(Authorizer::init);
+	}
 }
