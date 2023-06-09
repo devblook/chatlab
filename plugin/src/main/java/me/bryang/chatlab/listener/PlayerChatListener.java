@@ -18,7 +18,6 @@ public class PlayerChatListener implements Listener {
 	private ConfigurationContainer<RootSection> configurationContainer;
 	private MessageManager messageManager;
 
-
 	@EventHandler
 	public void onChat(AsyncChatEvent event) {
 
@@ -39,10 +38,9 @@ public class PlayerChatListener implements Listener {
 			}
 
 
-			return messageManager.format(
+			return messageManager.formatChat(
+				source,
 				configurationContainer.get().chatFormat.format,
-
-				Placeholder.unparsed("player", source.getName()),
 				messagePlaceholder);
 
 		});
