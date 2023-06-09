@@ -19,42 +19,42 @@ import java.util.Map;
 @InjectAll
 public class ReplyCommand implements CommandClass {
 
-    private ConfigurationContainer<RootSection> configurationContainer;
-    private ConfigurationContainer<MessageSection> messageContainer;
-    private Map<String, User> users;
-    private MessageManager messageManager;
+	private ConfigurationContainer<RootSection> configurationContainer;
+	private ConfigurationContainer<MessageSection> messageContainer;
+	private Map<String, User> users;
+	private MessageManager messageManager;
 
-    @Command(names = {"reply", "r"},
-            desc = "Command to reply to a message.")
-    public void messageCommand(@Sender Player sender, @Text String senderMessage) {
+	@Command(names = {"reply", "r"},
+		desc = "Command to reply to a message.")
+	public void messageCommand(@Sender Player sender, @Text String senderMessage) {
 
-        MessageSection messageSection = messageContainer.get();
-        RootSection configFile = configurationContainer.get();
+		MessageSection messageSection = messageContainer.get();
+		RootSection configFile = configurationContainer.get();
 
-        User user = users.get(sender.getUniqueId().toString());
+		User user = users.get(sender.getUniqueId().toString());
 
-        if (!user.hasRecentMessenger()) {
-            messageManager.sendMessage(sender, messageSection.error.noReply);
-            return;
-        }
+		if (!user.hasRecentMessenger()) {
+			messageManager.sendMessage(sender, messageSection.error.noReply);
+			return;
+		}
 
-        Player target = Bukkit.getPlayer(user.recentMessenger());
+		Player target = Bukkit.getPlayer(user.recentMessenger());
 
-        if (target == null) {
-            messageManager.sendMessage(sender, messageSection.error.noReply);
-            return;
-        }
+		if (target == null) {
+			messageManager.sendMessage(sender, messageSection.error.noReply);
+			return;
+		}
 
-        messageManager.sendMessage(sender, configFile.privateMessage.fromSender,
+		messageManager.sendMessage(sender, configFile.privateMessage.fromSender,
 
-                Placeholder.unparsed("target", target.getName()),
-                Placeholder.unparsed("message", senderMessage));
+			Placeholder.unparsed("target", target.getName()),
+			Placeholder.unparsed("message", senderMessage));
 
-        messageManager.sendMessage(target, configFile.privateMessage.toReceptor,
+		messageManager.sendMessage(target, configFile.privateMessage.toReceptor,
 
-                Placeholder.unparsed("sender", sender.getName()),
-                Placeholder.unparsed("message", senderMessage));
+			Placeholder.unparsed("sender", sender.getName()),
+			Placeholder.unparsed("message", senderMessage));
 
-    }
+	}
 
 }

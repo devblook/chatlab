@@ -19,38 +19,38 @@ import java.util.Map;
 
 public class MainModule extends AbstractModule {
 
-    private final ChatLab plugin;
-    private final Path pluginPath;
+	private final ChatLab plugin;
+	private final Path pluginPath;
 
-    public MainModule(ChatLab plugin) {
-        this.plugin = plugin;
-        this.pluginPath = plugin.getDataFolder().toPath();
-    }
+	public MainModule(ChatLab plugin) {
+		this.plugin = plugin;
+		this.pluginPath = plugin.getDataFolder().toPath();
+	}
 
-    @Provides
-    @Singleton
-    private Logger provideLogger(ChatLab plugin) {
-        return plugin.getSLF4JLogger();
-    }
+	@Provides
+	@Singleton
+	private Logger provideLogger(ChatLab plugin) {
+		return plugin.getSLF4JLogger();
+	}
 
-    @Override
+	@Override
 
-    public void configure() {
-        bind(ChatLab.class)
-                .toInstance(plugin);
+	public void configure() {
+		bind(ChatLab.class)
+			.toInstance(plugin);
 
-        bind(Path.class)
-                .named("plugin-folder")
-                .toInstance(pluginPath);
+		bind(Path.class)
+			.named("plugin-folder")
+			.toInstance(pluginPath);
 
-        bind(new TypeReference<Map<String, User>>() {
-        })
-                .toInstance(new HashMap<>());
+		bind(new TypeReference<Map<String, User>>() {
+		})
+			.toInstance(new HashMap<>());
 
-        install(new ListenerModule());
-        install(new CommandModule());
-        install(new ServiceModule());
-        install(new AuthorizerModule());
-        install(new ConfigurationModule());
-    }
+		install(new ListenerModule());
+		install(new CommandModule());
+		install(new ServiceModule());
+		install(new AuthorizerModule());
+		install(new ConfigurationModule());
+	}
 }

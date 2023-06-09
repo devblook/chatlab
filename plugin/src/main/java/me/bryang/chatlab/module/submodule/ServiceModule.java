@@ -8,11 +8,11 @@ import team.unnamed.inject.AbstractModule;
 
 public class ServiceModule extends AbstractModule {
 
-    @Override
-    public void configure() {
-        multibind(Service.class).asSet()
-                .to(CommandService.class)
-                .to(ListenerService.class)
-                .to(ManagerService.class);
-    }
+	@Override
+	public void configure() {
+		multibind(Service.class).asSet()
+			.to(CommandService.class)
+			.to(ListenerService.class)
+			.to(ManagerService.class);
+	}
 }

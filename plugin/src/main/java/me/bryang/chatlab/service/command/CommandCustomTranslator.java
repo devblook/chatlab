@@ -14,30 +14,30 @@ import javax.inject.Singleton;
 @Singleton
 public class CommandCustomTranslator implements TranslationProvider {
 
-    @Inject
-    private ConfigurationContainer<MessageSection> messageContainer;
+	@Inject
+	private ConfigurationContainer<MessageSection> messageContainer;
 
-    @Override
-    public String getTranslation(Namespace namespace, String path){
-        MessageSection messageSection = messageContainer.get();
+	@Override
+	public String getTranslation(Namespace namespace, String path) {
+		MessageSection messageSection = messageContainer.get();
 
-        String key = path.split("\\|")[0];
+		String key = path.split("\\|")[0];
 
-        String text = switch (key) {
-            case "sender.only_player" -> messageSection.error.console;
-            case "command.subcommand.invalid" -> messageSection.error.noArgument
-                    .replace("<usage>", path.split("\\|")[1]);
-            case "player.offline" -> messageSection.error.playerOffline
-                    .replace("<player>", "%s");
-            case "command.no-permission" -> messageSection.error.noPermission;
+		String text = switch (key) {
+			case "sender.only_player" -> messageSection.error.console;
+			case "command.subcommand.invalid" -> messageSection.error.noArgument
+				.replace("<usage>", path.split("\\|")[1]);
+			case "player.offline" -> messageSection.error.playerOffline
+				.replace("<player>", "%s");
+			case "command.no-permission" -> messageSection.error.noPermission;
 
-            default -> "If u see this message, please contact with us.";
-        };
-
-
-        return ChatColor.translateAlternateColorCodes('&', LegacyComponentSerializer.legacyAmpersand()
-                .serialize(MiniMessage.miniMessage().deserialize(text)));
+			default -> "If u see this message, please contact with us.";
+		};
 
 
-    }
+		return ChatColor.translateAlternateColorCodes('&', LegacyComponentSerializer.legacyAmpersand()
+			.serialize(MiniMessage.miniMessage().deserialize(text)));
+
+
+	}
 }

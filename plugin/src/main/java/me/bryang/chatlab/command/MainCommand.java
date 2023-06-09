@@ -14,23 +14,23 @@ import team.unnamed.inject.InjectAll;
 @InjectAll
 public class MainCommand implements CommandClass {
 
-    private ConfigurationContainer<RootSection> configurationContainer;
-    private ConfigurationContainer<MessageSection> messageContainer;
-    private MessageManager messageManager;
+	private ConfigurationContainer<RootSection> configurationContainer;
+	private ConfigurationContainer<MessageSection> messageContainer;
+	private MessageManager messageManager;
 
-    @Command(names = "")
-    public void mainSubCommand(@Sender Player sender) {
-        messageManager.sendMessage(sender, "<blue>ChatLab: <white>Main plugin command.");
-        messageManager.sendMessage(sender, "<dark_grey>- <white>/clab reload");
-    }
+	@Command(names = "")
+	public void mainSubCommand(@Sender Player sender) {
+		messageManager.sendMessage(sender, "<blue>ChatLab: <white>Main plugin command.");
+		messageManager.sendMessage(sender, "<dark_grey>- <white>/clab reload");
+	}
 
-    @Command(names = "reload", permission = "clab.reload")
-    public void reloadSubCommand(@Sender Player sender) {
+	@Command(names = "reload", permission = "clab.reload")
+	public void reloadSubCommand(@Sender Player sender) {
 
-        configurationContainer.reload();
-        messageContainer.reload();
-        messageManager.sendMessage(sender, "<blue>[ChatLab] <black>| <white>Plugin has been reloaded.");
+		configurationContainer.reload();
+		messageContainer.reload();
+		messageManager.sendMessage(sender, "<blue>[ChatLab] <black>| <white>Plugin has been reloaded.");
 
-    }
+	}
 
 }

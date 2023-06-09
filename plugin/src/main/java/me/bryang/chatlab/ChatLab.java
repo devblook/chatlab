@@ -11,28 +11,27 @@ import java.util.Set;
 
 public class ChatLab extends JavaPlugin {
 
-    @Inject
-    private Set<Service> services;
+	@Inject
+	private Set<Service> services;
+	@Inject
+	private Logger logger;
 
-    @Inject
-    private Logger logger;
+	@Override
+	public void onLoad() {
+		Injector.create(new MainModule(this))
+			.injectMembers(this);
+	}
 
-    @Override
-    public void onLoad() {
-        Injector.create(new MainModule(this))
-                .injectMembers(this);
-    }
+	@Override
+	public void onEnable() {
+		services.forEach(Service::start);
 
-    @Override
-    public void onEnable() {
-        services.forEach(Service::start);
+		logger.info("Loaded services");
+		logger.info("Thanks for using my plugin!");
+	}
 
-        logger.info("Loaded services");
-        logger.info("Thanks for using my plugin!");
-    }
-
-    @Override
-    public void onDisable() {
-        services.forEach(Service::stop);
-    }
+	@Override
+	public void onDisable() {
+		services.forEach(Service::stop);
+	}
 }

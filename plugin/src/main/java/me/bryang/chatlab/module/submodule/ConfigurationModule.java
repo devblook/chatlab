@@ -12,16 +12,16 @@ import java.nio.file.Path;
 
 public class ConfigurationModule extends AbstractModule {
 
-    @Provides
-    @Singleton
-    private ConfigurationContainer<RootSection> provideRootConfiguration(@Named("plugin-folder") Path pluginPath) {
-        return new ConfigurationContainer<>("config", pluginPath, RootSection.class);
-    }
+	@Provides
+	@Singleton
+	private ConfigurationContainer<RootSection> provideRootConfiguration(@Named("plugin-folder") Path pluginPath) {
+		return new ConfigurationContainer<>("config", pluginPath, RootSection.class);
+	}
 
-    @Provides
-    @Singleton
-    private ConfigurationContainer<MessageSection> provideMessageConfiguration(@Named("plugin-folder") Path pluginPath) {
-        return new ConfigurationContainer<>("messages", pluginPath, MessageSection.class);
-    }
+	@Provides
+	@Singleton
+	private ConfigurationContainer<MessageSection> provideMessageConfiguration(@Named("plugin-folder") Path pluginPath) {
+		return new ConfigurationContainer<>("messages", pluginPath, MessageSection.class);
+	}
 
 }

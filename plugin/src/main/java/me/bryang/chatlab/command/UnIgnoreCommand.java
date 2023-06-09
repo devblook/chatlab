@@ -18,32 +18,32 @@ import java.util.Map;
 
 public class UnIgnoreCommand implements CommandClass {
 
-    private MessageManager messageManager;
-    private ConfigurationContainer<RootSection> configurationContainer;
-    private ConfigurationContainer<MessageSection> messageContainer;
-    private Map<String, User> userData;
+	private MessageManager messageManager;
+	private ConfigurationContainer<RootSection> configurationContainer;
+	private ConfigurationContainer<MessageSection> messageContainer;
+	private Map<String, User> userData;
 
-    public void unIgnoreCommand(@Sender Player sender, OfflinePlayer target){
+	public void unIgnoreCommand(@Sender Player sender, OfflinePlayer target) {
 
-        RootSection rootSection = configurationContainer.get();
-        MessageSection messageSection = messageContainer.get();
+		RootSection rootSection = configurationContainer.get();
+		MessageSection messageSection = messageContainer.get();
 
-        if (sender.getUniqueId() == target.getUniqueId()){
-            messageManager.sendMessage(sender, messageSection.error.yourselfIgnore);
-            return;
-        }
+		if (sender.getUniqueId() == target.getUniqueId()) {
+			messageManager.sendMessage(sender, messageSection.error.yourselfIgnore);
+			return;
+		}
 
-        User user = userData.get(target.getUniqueId().toString());
+		User user = userData.get(target.getUniqueId().toString());
 
-        if (user.containsIgnoredPlayers(target.getUniqueId())){
-            messageManager.sendMessage(sender, messageSection.error.playerAlreadyUnIgnored,
-                    Placeholder.unparsed("player", target.getName()));
-            return;
-        }
+		if (user.containsIgnoredPlayers(target.getUniqueId())) {
+			messageManager.sendMessage(sender, messageSection.error.playerAlreadyUnIgnored,
+				Placeholder.unparsed("player", target.getName()));
+			return;
+		}
 
-        user.unIgnore(target.getUniqueId());
-        messageManager.sendMessage(sender, rootSection.ignore.unignoredPlayer,
-                Placeholder.unparsed("player", target.getName()));
+		user.unIgnore(target.getUniqueId());
+		messageManager.sendMessage(sender, rootSection.ignore.unignoredPlayer,
+			Placeholder.unparsed("player", target.getName()));
 
-    }
+	}
 }

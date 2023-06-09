@@ -18,36 +18,36 @@ import java.util.Map;
 @InjectAll
 public class PlayerRegistryListener implements Listener {
 
-    private Map<String, User> users;
-    private ConfigurationContainer<RootSection> configurationContainer;
-    private MessageManager messageManager;
+	private Map<String, User> users;
+	private ConfigurationContainer<RootSection> configurationContainer;
+	private MessageManager messageManager;
 
-    @EventHandler
-    public void onRegistry(PlayerJoinEvent event) {
+	@EventHandler
+	public void onRegistry(PlayerJoinEvent event) {
 
-        if (users.containsKey(event.getPlayer().getUniqueId().toString())){
-            return;
-        }
+		if (users.containsKey(event.getPlayer().getUniqueId().toString())) {
+			return;
+		}
 
-        users.put(event.getPlayer().getUniqueId().toString(), new User());
-    }
+		users.put(event.getPlayer().getUniqueId().toString(), new User());
+	}
 
-    @EventHandler
-    public void onUnRegistry(PlayerQuitEvent event) {
+	@EventHandler
+	public void onUnRegistry(PlayerQuitEvent event) {
 
-        User user = users.get(event.getPlayer().getUniqueId().toString());
+		User user = users.get(event.getPlayer().getUniqueId().toString());
 
-        if (!user.hasRecentMessenger()) {
-            return;
-        }
+		if (!user.hasRecentMessenger()) {
+			return;
+		}
 
-        Player sender = Bukkit.getPlayer(user.recentMessenger());
-        User target = users.get(user.recentMessenger().toString());
+		Player sender = Bukkit.getPlayer(user.recentMessenger());
+		User target = users.get(user.recentMessenger().toString());
 
-        messageManager.sendMessage(sender, configurationContainer.get().reply.left,
-                Placeholder.unparsed("target", event.getPlayer().getName()));
+		messageManager.sendMessage(sender, configurationContainer.get().reply.left,
+			Placeholder.unparsed("target", event.getPlayer().getName()));
 
-        user.recentMessenger(null);
-        target.recentMessenger(null);
-    }
+		user.recentMessenger(null);
+		target.recentMessenger(null);
+	}
 }

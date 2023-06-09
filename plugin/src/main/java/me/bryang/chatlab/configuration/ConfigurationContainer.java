@@ -9,59 +9,59 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class ConfigurationContainer<T extends ConfigurationSection> {
 
-    private HoconConfigurationLoader loader;
-    private final Class<T> clazz;
-    private AtomicReference<T> internClass;
+	private HoconConfigurationLoader loader;
+	private final Class<T> clazz;
+	private AtomicReference<T> internClass;
 
-    public ConfigurationContainer(String fileName, Path path, Class<T> clazz) {
+	public ConfigurationContainer(String fileName, Path path, Class<T> clazz) {
 
-        this.clazz = clazz;
-        start(fileName, path);
-    }
+		this.clazz = clazz;
+		start(fileName, path);
+	}
 
-    public void start(String fileName, Path path) {
+	public void start(String fileName, Path path) {
 
-        loader = HoconConfigurationLoader
-                .builder()
-                .path(path.resolve(fileName + ".conf"))
-                .defaultOptions(
-                        config -> config.header("\n " + fileName + ".conf"))
-                .build();
+		loader = HoconConfigurationLoader
+			.builder()
+			.path(path.resolve(fileName + ".conf"))
+			.defaultOptions(
+				config -> config.header("\n " + fileName + ".conf"))
+			.build();
 
-        try {
-            CommentedConfigurationNode node = loader.load();
+		try {
+			CommentedConfigurationNode node = loader.load();
 
-            internClass = new AtomicReference<>(node.get(clazz));
+			internClass = new AtomicReference<>(node.get(clazz));
 
-            node.set(clazz, internClass.get());
-            loader.save(node);
+			node.set(clazz, internClass.get());
+			loader.save(node);
 
 
-        } catch (IOException exception) {
-            exception.fillInStackTrace();
-        }
-    }
+		} catch (IOException exception) {
+			exception.fillInStackTrace();
+		}
+	}
 
-    public T get() {
-        return internClass.get();
-    }
+	public T get() {
+		return internClass.get();
+	}
 
-    public void reload() {
+	public void reload() {
 
-        try {
+		try {
 
-            CommentedConfigurationNode node = loader.load();
+			CommentedConfigurationNode node = loader.load();
 
-            T newClass = node.get(clazz);
-            node.set(clazz, newClass);
+			T newClass = node.get(clazz);
+			node.set(clazz, newClass);
 
-            internClass.set(newClass);
-            loader.save(node);
+			internClass.set(newClass);
+			loader.save(node);
 
-        } catch (IOException exception) {
-            exception.fillInStackTrace();
-        }
+		} catch (IOException exception) {
+			exception.fillInStackTrace();
+		}
 
-    }
+	}
 
 }

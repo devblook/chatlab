@@ -10,18 +10,18 @@ import javax.inject.Singleton;
 @Singleton
 public class MessageManager {
 
-    private static final MiniMessage MINI_MESSAGE = MiniMessage.miniMessage();
+	private static final MiniMessage MINI_MESSAGE = MiniMessage.miniMessage();
 
-    public void sendMessage(Player sender, String message) {
-        sender.sendMessage(MINI_MESSAGE.deserialize(message));
-    }
+	public void sendMessage(Player sender, String message) {
+		sender.sendMessage(MINI_MESSAGE.deserialize(message));
+	}
 
-    public void sendMessage(Player sender, String message, TagResolver... tagResolver) {
-        sender.sendMessage(format(message, tagResolver));
-    }
+	public void sendMessage(Player sender, String message, TagResolver... tagResolver) {
+		sender.sendMessage(format(message, tagResolver));
+	}
 
-    public Component format(String message, TagResolver... tagResolver) {
-        return MINI_MESSAGE.deserialize(message, tagResolver);
+	public Component format(String message, TagResolver... tagResolver) {
+		return MINI_MESSAGE.deserialize(message, tagResolver);
 
-    }
+	}
 }

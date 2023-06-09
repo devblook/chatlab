@@ -20,41 +20,41 @@ import java.util.Map;
 @InjectAll
 public class MessageCommand implements CommandClass {
 
-    private ConfigurationContainer<RootSection> configurationContainer;
-    private ConfigurationContainer<MessageSection> messageContainer;
-    private Map<String, User> userData;
-    private MessageManager messageManager;
-    private MessageAuthorizer messageAuthorizer;
+	private ConfigurationContainer<RootSection> configurationContainer;
+	private ConfigurationContainer<MessageSection> messageContainer;
+	private Map<String, User> userData;
+	private MessageManager messageManager;
+	private MessageAuthorizer messageAuthorizer;
 
-    @Command(names = {"msg", "pm", "m", "message", "tell", "w"},
-            desc = "Command to send a private message.")
-    public void messageCommand(@Sender Player sender, Player target,
-                               @Text String senderMessage) {
+	@Command(names = {"msg", "pm", "m", "message", "tell", "w"},
+		desc = "Command to send a private message.")
+	public void messageCommand(@Sender Player sender, Player target,
+							   @Text String senderMessage) {
 
-        RootSection configFile = configurationContainer.get();
-        MessageSection messageSection = messageContainer.get();
+		RootSection configFile = configurationContainer.get();
+		MessageSection messageSection = messageContainer.get();
 
-        if (sender == target.getPlayer()) {
-            messageManager.sendMessage(sender, messageSection.error.yourselfTalk);
-            return;
-        }
+		if (sender == target.getPlayer()) {
+			messageManager.sendMessage(sender, messageSection.error.yourselfTalk);
+			return;
+		}
 
-        messageManager.sendMessage(sender, configFile.privateMessage.fromSender,
-                Placeholder.unparsed("target", target.getName()),
-                Placeholder.unparsed("message", senderMessage));
+		messageManager.sendMessage(sender, configFile.privateMessage.fromSender,
+			Placeholder.unparsed("target", target.getName()),
+			Placeholder.unparsed("message", senderMessage));
 
-        if (!messageAuthorizer.isAuthorized(sender.getUniqueId().toString(), target.getUniqueId().toString())){
-            return;
-        }
+		if (!messageAuthorizer.isAuthorized(sender.getUniqueId().toString(), target.getUniqueId().toString())) {
+			return;
+		}
 
-        messageManager.sendMessage(target, configFile.privateMessage.toReceptor,
-                Placeholder.unparsed("sender", sender.getName()),
-                Placeholder.unparsed("message", senderMessage));
+		messageManager.sendMessage(target, configFile.privateMessage.toReceptor,
+			Placeholder.unparsed("sender", sender.getName()),
+			Placeholder.unparsed("message", senderMessage));
 
-        User senderUser = userData.get(sender.getUniqueId().toString());
-        User senderTarget = userData.get(target.getUniqueId().toString());
+		User senderUser = userData.get(sender.getUniqueId().toString());
+		User senderTarget = userData.get(target.getUniqueId().toString());
 
-        senderUser.recentMessenger(target.getUniqueId());
-        senderTarget.recentMessenger(sender.getUniqueId());
-    }
+		senderUser.recentMessenger(target.getUniqueId());
+		senderTarget.recentMessenger(sender.getUniqueId());
+	}
 }

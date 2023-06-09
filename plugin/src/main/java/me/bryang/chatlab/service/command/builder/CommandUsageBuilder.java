@@ -10,13 +10,13 @@ import javax.inject.Singleton;
 @Singleton
 public class CommandUsageBuilder implements UsageBuilder {
 
-    @Override
-    public Component getUsage(CommandContext commandContext) {
+	@Override
+	public Component getUsage(CommandContext commandContext) {
 
-        String command = commandContext.getCommand().getName();
-        ArgumentList argumentList = ArgumentList.valueOf(command.toUpperCase());
+		String command = commandContext.getCommand().getName();
+		ArgumentList argumentList = ArgumentList.valueOf(command.toUpperCase());
 
-        return TranslatableComponent.of("command.subcommand.invalid|" + argumentList.getUsage());
+		return TranslatableComponent.of("command.subcommand.invalid|" + argumentList.getUsage());
 
-    }
+	}
 }

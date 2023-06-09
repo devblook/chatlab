@@ -24,69 +24,69 @@ import java.util.UUID;
 @InjectAll
 public class IgnoreCommand implements CommandClass {
 
-    private MessageManager messageManager;
-    private ConfigurationContainer<RootSection> configurationContainer;
-    private ConfigurationContainer<MessageSection> messageContainer;
-    private Map<String, User> userData;
+	private MessageManager messageManager;
+	private ConfigurationContainer<RootSection> configurationContainer;
+	private ConfigurationContainer<MessageSection> messageContainer;
+	private Map<String, User> userData;
 
-    @Command(names = "")
-    public void ignoreCommand(@Sender Player sender, OfflinePlayer target){
+	@Command(names = "")
+	public void ignoreCommand(@Sender Player sender, OfflinePlayer target) {
 
-        RootSection rootSection = configurationContainer.get();
-        MessageSection messageSection = messageContainer.get();
+		RootSection rootSection = configurationContainer.get();
+		MessageSection messageSection = messageContainer.get();
 
-        if (sender.getUniqueId() == target.getUniqueId()){
-            messageManager.sendMessage(sender, messageSection.error.yourselfIgnore);
-            return;
-        }
+		if (sender.getUniqueId() == target.getUniqueId()) {
+			messageManager.sendMessage(sender, messageSection.error.yourselfIgnore);
+			return;
+		}
 
-        if (target.getName().startsWith("-")){
-            String command = target.getName().substring(1);
-            
-            if (command.equalsIgnoreCase("list")){
-                Set<String> ignoredPlayers = userData.get(sender.getUniqueId().toString()).ignoredPlayers();
+		if (target.getName().startsWith("-")) {
+			String command = target.getName().substring(1);
 
-                int ignoredPlayersSize = ignoredPlayers.size();
+			if (command.equalsIgnoreCase("list")) {
+				Set<String> ignoredPlayers = userData.get(sender.getUniqueId().toString()).ignoredPlayers();
 
-                RootSection.Ignore.SeeIgnoredPlayers ignoredPlayersSector = rootSection.ignore.seeIgnoredPlayers;
+				int ignoredPlayersSize = ignoredPlayers.size();
 
-                String ignoredPlayersData;
-                if (ignoredPlayersSize != 0){
+				RootSection.Ignore.SeeIgnoredPlayers ignoredPlayersSector = rootSection.ignore.seeIgnoredPlayers;
 
-                    List<String> listIgnoredPlayers = new ArrayList<>();
-                    ignoredPlayers
-                            .forEach(fieldUniqueId -> listIgnoredPlayers
-                                    .add(Bukkit.getOfflinePlayer(UUID.fromString(fieldUniqueId)).getName()));
+				String ignoredPlayersData;
+				if (ignoredPlayersSize != 0) {
 
-                    ignoredPlayersData = String.join(", ", listIgnoredPlayers);
-                }else{
-                    ignoredPlayersData =  ignoredPlayersSector.error;
-                }
+					List<String> listIgnoredPlayers = new ArrayList<>();
+					ignoredPlayers
+						.forEach(fieldUniqueId -> listIgnoredPlayers
+							.add(Bukkit.getOfflinePlayer(UUID.fromString(fieldUniqueId)).getName()));
 
-                ignoredPlayersSector.format
-                        .forEach(message -> messageManager.sendMessage(sender, message,
-                                Placeholder.unparsed("ignored_players_size", String.valueOf(ignoredPlayers.size())),
-                                Placeholder.unparsed("ignored_players_data", ignoredPlayersData)));
-                return;
-            }
-        }
-        
-        if (!target.isOnline()){
-            messageManager.sendMessage(sender, messageSection.error.playerOffline);
-            return;
-        }
+					ignoredPlayersData = String.join(", ", listIgnoredPlayers);
+				} else {
+					ignoredPlayersData = ignoredPlayersSector.error;
+				}
 
-        User user = userData.get(sender.getUniqueId().toString());
+				ignoredPlayersSector.format
+					.forEach(message -> messageManager.sendMessage(sender, message,
+						Placeholder.unparsed("ignored_players_size", String.valueOf(ignoredPlayers.size())),
+						Placeholder.unparsed("ignored_players_data", ignoredPlayersData)));
+				return;
+			}
+		}
 
-        if (user.containsIgnoredPlayers(target.getUniqueId())){
-            messageManager.sendMessage(sender, messageSection.error.playerAlreadyIgnored,
-                    Placeholder.unparsed("player", target.getName()));
-            return;
-        }
+		if (!target.isOnline()) {
+			messageManager.sendMessage(sender, messageSection.error.playerOffline);
+			return;
+		}
 
-        user.ignore(target.getUniqueId());
-        messageManager.sendMessage(sender, rootSection.ignore.ignoredPlayer,
-                Placeholder.unparsed("player", target.getName()));
+		User user = userData.get(sender.getUniqueId().toString());
 
-    }
+		if (user.containsIgnoredPlayers(target.getUniqueId())) {
+			messageManager.sendMessage(sender, messageSection.error.playerAlreadyIgnored,
+				Placeholder.unparsed("player", target.getName()));
+			return;
+		}
+
+		user.ignore(target.getUniqueId());
+		messageManager.sendMessage(sender, rootSection.ignore.ignoredPlayer,
+			Placeholder.unparsed("player", target.getName()));
+
+	}
 }

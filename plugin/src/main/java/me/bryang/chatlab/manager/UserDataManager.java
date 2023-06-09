@@ -1,10 +1,11 @@
 package me.bryang.chatlab.manager;
 
+import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import me.bryang.chatlab.manager.gson.LocalExclusionStrategy;
 import me.bryang.chatlab.user.User;
 import org.slf4j.Logger;
 
@@ -15,105 +16,74 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.nio.file.Path;
 import java.util.Map;
 
 @Singleton
 public class UserDataManager {
 
-    @Inject @Named("plugin-folder")
-    private Path path;
+	@Inject
+	@Named("plugin-folder")
+	private Path path;
 
-    @Inject
-    private Map<String, User> users;
+	@Inject
+	private Map<String, User> users;
 
-    @Inject
-    private Logger logger;
+	@Inject
+	private Logger logger;
 
-    private File jsonFile;
+	private File jsonFile;
 
-    public void init(){
+	public void init() {
 
-        jsonFile = new File(path.resolve("players.json").toUri());
+		jsonFile = new File(path.resolve("players.json").toUri());
 
-        try {
+		try {
 
-            if (!jsonFile.exists()) {
-                jsonFile.createNewFile();
-                logger.info("Data created");
+			if (!jsonFile.exists()) {
+				jsonFile.createNewFile();
+				logger.info("Data created");
+			}
 
-            }
+			if (jsonFile.length() == 0L) {
+				logger.info("Data loaded");
+				return;
+			}
 
-            JsonElement jsonElement = JsonParser
-                    .parseReader(new FileReader(jsonFile));
+			JsonElement jsonParsed = JsonParser.parseReader(new FileReader(jsonFile));
+			Type type = new TypeToken<Map<String, User>>() {
+			}.getType();
+			Map<String, User> newUserData = new Gson().fromJson(jsonParsed, type);
+			users.putAll(newUserData);
 
-            if (jsonElement.isJsonNull()){
-                return;
-            }
+			logger.info("Data loaded");
+		} catch (IOException exception) {
+			exception.fillInStackTrace();
+		}
 
-            JsonObject jsonObject = jsonElement.getAsJsonObject();
+	}
 
-            if (jsonObject == null){
-                return;
-            }
+	public void stop() {
 
-            jsonObject.getAsJsonObject()
-                    .keySet()
-                    .forEach(targetUniqueId -> {
+		Gson gson = new GsonBuilder()
+			.addSerializationExclusionStrategy(new LocalExclusionStrategy())
+			.create();
 
-                        User user = new User();
+		String jsonPath = gson.toJson(users);
 
-                        JsonElement ignoredPlayers = jsonObject.get(targetUniqueId);
+		try {
 
-                        if (!ignoredPlayers.isJsonNull() && ignoredPlayers.isJsonArray()) {
-                            ignoredPlayers.getAsJsonArray().forEach(
-                                    element ->
-                                    {
-                                        user.ignore(element.getAsString());
-                                    }
-                            );
-                        }
+			FileWriter fileWriter = new FileWriter(jsonFile);
+			fileWriter.write(jsonPath);
+			fileWriter.close();
 
-                        users.put(targetUniqueId, user);
+			logger.info("Data saved");
 
-                    });
+		} catch (IOException exception) {
+			exception.fillInStackTrace();
 
-            logger.info("Data loaded");
-        }catch(IOException exception){
-            exception.fillInStackTrace();
-        }
+		}
 
-    }
-
-    public void stop() {
-
-        JsonObject jsonObject = new JsonObject();
-
-        users.keySet().forEach(userField -> {
-
-            JsonArray jsonArray = new JsonArray();
-
-            User user = users.get(userField);
-            user.ignoredPlayers().forEach(jsonArray::add);
-
-            jsonObject.add(userField, jsonArray);
-
-
-        });
-
-        String jsonString = new Gson().toJson(jsonObject);
-        try {
-
-            FileWriter fileWriter = new FileWriter(jsonFile);
-            fileWriter.write(jsonString);
-            fileWriter.close();
-
-            logger.info("Data saved");
-
-        }catch(IOException exception){
-            exception.fillInStackTrace();
-
-        }
-
-    }
+	}
 }

@@ -8,12 +8,13 @@ import java.util.Map;
 import java.util.UUID;
 
 public class IgnoreAuthorizer implements Authorizer {
-    @Inject
-    private Map<String, User> userData;
 
-    @Override
-    public boolean denied(String senderUniqueId, String receptorUniqueId) {
+	@Inject
+	private Map<String, User> userData;
 
-        return userData.get(receptorUniqueId).containsIgnoredPlayers(UUID.fromString(senderUniqueId));
-    }
+	@Override
+	public boolean denied(String senderUniqueId, String receptorUniqueId) {
+
+		return userData.get(receptorUniqueId).containsIgnoredPlayers(UUID.fromString(senderUniqueId));
+	}
 }

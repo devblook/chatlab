@@ -17,26 +17,26 @@ import java.util.Set;
 @InjectAll
 public class CommandService implements Service {
 
-    private Set<CommandClass> commands;
-    private CommandCustomTranslator commandCustomTranslator;
-    private CommandUsageBuilder commandUsageBuilder;
+	private Set<CommandClass> commands;
+	private CommandCustomTranslator commandCustomTranslator;
+	private CommandUsageBuilder commandUsageBuilder;
 
-    @Override
-    public void start() {
-        CommandManager commandManager = new BukkitCommandManager("ChatLab");
+	@Override
+	public void start() {
+		CommandManager commandManager = new BukkitCommandManager("ChatLab");
 
-        commandManager.setUsageBuilder(commandUsageBuilder);
-        commandManager.getTranslator().setProvider(commandCustomTranslator);
+		commandManager.setUsageBuilder(commandUsageBuilder);
+		commandManager.getTranslator().setProvider(commandCustomTranslator);
 
-        PartInjector partInjector = PartInjector.create();
+		PartInjector partInjector = PartInjector.create();
 
-        partInjector.install(new DefaultsModule());
-        partInjector.install(new BukkitModule());
+		partInjector.install(new DefaultsModule());
+		partInjector.install(new BukkitModule());
 
-        AnnotatedCommandTreeBuilder builder = new AnnotatedCommandTreeBuilderImpl(partInjector);
-        for (CommandClass command : commands) {
-            commandManager.registerCommands(builder.fromClass(command));
-        }
-    }
+		AnnotatedCommandTreeBuilder builder = new AnnotatedCommandTreeBuilderImpl(partInjector);
+		for (CommandClass command : commands) {
+			commandManager.registerCommands(builder.fromClass(command));
+		}
+	}
 
 }

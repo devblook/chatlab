@@ -4,18 +4,18 @@ import me.bryang.chatlab.manager.UserDataManager;
 
 import javax.inject.Inject;
 
-public class ManagerService implements Service{
+public class ManagerService implements Service {
 
-    @Inject
-    private UserDataManager userDataManager;
+	@Inject
+	private UserDataManager userDataManager;
 
-    @Override
-    public void start() {
-        userDataManager.init();
-    }
+	@Override
+	public void start() {
+		userDataManager.init();
+	}
 
-    @Override
-    public void stop(){
-        userDataManager.stop();
-    }
+	@Override
+	public void stop() {
+		userDataManager.stop();
+	}
 }

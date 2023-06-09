@@ -2,9 +2,9 @@ package me.bryang.chatlab.service;
 
 public interface Service {
 
-    void start();
+	void start();
 
-    default void stop() {
-        // do nothing
-    }
+	default void stop() {
+		// do nothing
+	}
 }

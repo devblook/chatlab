@@ -15,37 +15,37 @@ import team.unnamed.inject.InjectAll;
 @InjectAll
 public class PlayerChatListener implements Listener {
 
-    private ConfigurationContainer<RootSection> configurationContainer;
-    private MessageManager messageManager;
+	private ConfigurationContainer<RootSection> configurationContainer;
+	private MessageManager messageManager;
 
 
-    @EventHandler
-    public void onChat(AsyncChatEvent event) {
+	@EventHandler
+	public void onChat(AsyncChatEvent event) {
 
-        if (!configurationContainer.get().chatFormat.enabled) {
-            return;
-        }
+		if (!configurationContainer.get().chatFormat.enabled) {
+			return;
+		}
 
-        event.renderer((source, sourceDisplayName, message, viewer) -> {
+		event.renderer((source, sourceDisplayName, message, viewer) -> {
 
-            String formattedMessage = PlainTextComponentSerializer.plainText().serialize(message);
+			String formattedMessage = PlainTextComponentSerializer.plainText().serialize(message);
 
-            TagResolver.Single messagePlaceholder;
+			TagResolver.Single messagePlaceholder;
 
-            if (source.hasPermission("chatlab.tags")){
-                messagePlaceholder = Placeholder.parsed("message",formattedMessage);
-            }else{
-                messagePlaceholder = Placeholder.unparsed("message", formattedMessage);
-            }
+			if (source.hasPermission("chatlab.tags")) {
+				messagePlaceholder = Placeholder.parsed("message", formattedMessage);
+			} else {
+				messagePlaceholder = Placeholder.unparsed("message", formattedMessage);
+			}
 
 
-            return messageManager.format(
-                            configurationContainer.get().chatFormat.format,
+			return messageManager.format(
+				configurationContainer.get().chatFormat.format,
 
-                            Placeholder.unparsed("player", source.getName()),
-                            messagePlaceholder);
+				Placeholder.unparsed("player", source.getName()),
+				messagePlaceholder);
 
-        });
+		});
 
-    }
+	}
 }
