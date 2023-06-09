@@ -43,7 +43,7 @@ public class MessageCommand implements CommandClass {
 			Placeholder.unparsed("target", target.getName()),
 			Placeholder.unparsed("message", senderMessage));
 
-		if (!messageAuthorizer.isAuthorized(sender.getUniqueId().toString(), target.getUniqueId().toString())) {
+		if (!messageAuthorizer.isAuthorized(sender.getUniqueId().toString(), target.getUniqueId().toString()) && !target.hasPermission("clab.ignore-bypass")) {
 			return;
 		}
 

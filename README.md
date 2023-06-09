@@ -35,10 +35,11 @@ With the plugin you can:
 
 ## Permissions:
 
-| Permission  | Description                                 |
-|-------------|---------------------------------------------|
-| clab.tags   | To use the MiniMessage tags in chat format. |
-| clab.reload | To reload the plugin.                       |
+| Permission  | Description                                    |
+|-------------|------------------------------------------------|
+| clab.tags   | To use the MiniMessage tags in chat format.    |
+| clab.reload | To reload the plugin.                          |
+| clab.ignore-bypass | To bypass the ignore event.                    |
 
 
 ## To do:
