@@ -41,6 +41,7 @@ public class UserDataManager {
 			if (!jsonFile.exists()) {
 				jsonFile.createNewFile();
 				logger.info("Data created");
+				return;
 			}
 
 			if (jsonFile.length() == 0L) {
@@ -49,8 +50,7 @@ public class UserDataManager {
 			}
 
 			JsonElement jsonParsed = JsonParser.parseReader(new FileReader(jsonFile));
-			Type type = new TypeToken<Map<String, User>>() {
-			}.getType();
+			Type type = new TypeToken<Map<String, User>>() {}.getType();
 			Map<String, User> newUserData = new Gson().fromJson(jsonParsed, type);
 			users.putAll(newUserData);
 
