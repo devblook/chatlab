@@ -2,6 +2,7 @@ package me.bryang.chatlab;
 
 import me.bryang.chatlab.module.MainModule;
 import me.bryang.chatlab.service.Service;
+import me.bryang.chatlab.update.UpdateChecker;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.slf4j.Logger;
 import team.unnamed.inject.Injector;
@@ -16,19 +17,28 @@ public class ChatLab extends JavaPlugin {
 	@Inject
 	private Logger logger;
 
+	@Inject
+	private UpdateChecker updateChecker;
+
 	@Override
 	public void onLoad() {
+
 		Injector.create(new MainModule(this))
 			.injectMembers(this);
+		updateChecker.init();
+
 	}
 
 	@Override
 	public void onEnable() {
+
 		services.forEach(Service::start);
+		updateChecker.checkUpdate();
 
 		logger.info("Loaded services");
 		logger.info("Thanks for using my plugin!");
 	}
+
 
 	@Override
 	public void onDisable() {

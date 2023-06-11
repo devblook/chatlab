@@ -67,10 +67,8 @@ public class UpdateChecker {
 
 				jsonObject.set(jsonElement.getAsJsonObject());
 
-				String selectedLatestVersion = jsonObject.get().get("tag_name").getAsString();
-
-				lastVersion = selectedLatestVersion;
-				updated = selectedLatestVersion.equalsIgnoreCase(plugin.getPluginMeta().getVersion());
+				lastVersion = jsonObject.get().get("tag_name").getAsString();
+				updated = lastVersion.equalsIgnoreCase(plugin.getPluginMeta().getVersion());
 
 				try {
 
@@ -82,20 +80,16 @@ public class UpdateChecker {
 
 				}
 
-				if (!enabledInAsync()) {
-					return;
-				}
-
-				checkUpdate();
-
-
+				isSent = true;
 
 			});
-			isSent = true;
 	}
 
 	public void checkUpdate(){
 
+		if (!enabledInAsync()) {
+			return;
+		}
 
 		if (!announcementPresent(UpdateAnnouncementType.CONSOLE)){
 			return;
@@ -122,6 +116,10 @@ public class UpdateChecker {
 	}
 	public boolean enabledInAsync(){
 		return isSent;
+	}
+
+	public boolean setSent(){
+
 	}
 
 
