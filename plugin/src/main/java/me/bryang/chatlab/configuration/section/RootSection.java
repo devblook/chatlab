@@ -11,15 +11,28 @@ import java.util.List;
 @SuppressWarnings("FieldMayBeFinal")
 public class RootSection extends ConfigurationSection {
 
+	@Comment("Plugin settings")
+	public Settings settings = new Settings();
+
 	@Comment("Private message format")
 	public PrivateMessage privateMessage = new PrivateMessage();
 	public Reply reply = new Reply();
 	public ChatFormat chatFormat = new ChatFormat();
-
 	@Comment("Ignore input messages")
 	public Ignore ignore = new Ignore();
 
+	@ConfigSerializable
+	public static class Settings{
+		@Comment("""
+			Type of announcement when the plugin has a update:
+			- server: When you enter to the server, if you have "clab.update-check" permission
+			- console: When the console load the plugin
+			- both: Both of them
+			>> Note: If you put a unknown type, the type will be set to console.
+			""")
 
+		public String updateAnnouncementType = "both";
+	}
 	@ConfigSerializable
 	public static class PrivateMessage {
 
