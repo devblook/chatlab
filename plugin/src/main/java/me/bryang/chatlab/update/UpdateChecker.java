@@ -98,7 +98,7 @@ public class UpdateChecker {
 		}
 
 		if (!isUpdated()) {
-			logger.info("The plugin has a new update. New version:" + lastVersion());
+			logger.info("The plugin has a new update. New version: " + lastVersion());
 			logger.info("Download here: https://github.com/devblook/chatlab/releases/latest");
 
 		}
