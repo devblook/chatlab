@@ -41,4 +41,5 @@ public class MessageManager {
 		return MINI_MESSAGE.deserialize(formatMessage, tagBuilder.build());
 
 	}
+
 }

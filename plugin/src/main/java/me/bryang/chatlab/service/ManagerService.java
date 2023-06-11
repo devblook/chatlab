@@ -12,10 +12,13 @@ public class ManagerService implements Service {
 	@Inject
 	private MessageAuthorizer messageAuthorizer;
 
+
 	@Override
 	public void start() {
+
 		userDataManager.init();
 		messageAuthorizer.init();
+
 	}
 
 	@Override

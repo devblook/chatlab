@@ -24,7 +24,6 @@ public class CommandService implements Service {
 	@Override
 	public void start() {
 		CommandManager commandManager = new BukkitCommandManager("ChatLab");
-
 		commandManager.setUsageBuilder(commandUsageBuilder);
 		commandManager.getTranslator().setProvider(commandCustomTranslator);
 
