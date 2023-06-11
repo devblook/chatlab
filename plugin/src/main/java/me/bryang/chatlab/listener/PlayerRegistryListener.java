@@ -3,6 +3,8 @@ package me.bryang.chatlab.listener;
 import me.bryang.chatlab.configuration.ConfigurationContainer;
 import me.bryang.chatlab.configuration.section.RootSection;
 import me.bryang.chatlab.message.MessageManager;
+import me.bryang.chatlab.update.UpdateAnnouncementType;
+import me.bryang.chatlab.update.UpdateChecker;
 import me.bryang.chatlab.user.User;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
@@ -21,9 +23,22 @@ public class PlayerRegistryListener implements Listener {
 	private Map<String, User> users;
 	private ConfigurationContainer<RootSection> configurationContainer;
 	private MessageManager messageManager;
+	private UpdateChecker updateChecker;
 
 	@EventHandler
 	public void onRegistry(PlayerJoinEvent event) {
+
+
+		if (event.getPlayer().hasPermission("clab.update-check")){
+
+			if (updateChecker.isUpdated() && updateChecker.announcementPresent(UpdateAnnouncementType.SERVER)){
+
+				messageManager.sendMessage(
+					event.getPlayer(),
+					"<blue>ChatLab <dark_grey>| <white>The plugin has a new update. Last version:" + updateChecker.lastVersion() +
+						"\n<dark_blue>>> <click:open_url:'https://github.com/devblook/chatlab/releases/latest'><aqua>Click here</click> <white>to download");
+			}
+		}
 
 		if (users.containsKey(event.getPlayer().getUniqueId().toString())) {
 			return;
