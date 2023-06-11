@@ -29,7 +29,7 @@ public class MainCommand implements CommandClass {
 
 		configurationContainer.reload();
 		messageContainer.reload();
-		messageManager.sendMessage(sender, "<blue>[ChatLab] <black>| <white>Plugin has been reloaded.");
+		messageManager.sendMessage(sender, "<blue>[ChatLab] <dark_grey>| <white>Plugin has been reloaded.");
 
 	}
 
