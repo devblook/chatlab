@@ -29,7 +29,9 @@ public class UpdateChecker {
 	@Inject
 	private Logger logger;
 
+	private boolean asyncFinished;
 	private boolean isSent;
+
 	private boolean updated;
 	private String lastVersion;
 	private UpdateAnnouncementType updateAnnouncementType;
@@ -80,14 +82,14 @@ public class UpdateChecker {
 
 				}
 
-				isSent = true;
+				asyncFinished = true;
 
 			});
 	}
 
 	public void checkUpdate(){
 
-		if (!enabledInAsync()) {
+		if (!asyncFinished) {
 			return;
 		}
 
@@ -99,8 +101,8 @@ public class UpdateChecker {
 			logger.info("The plugin has a new update. New version:" + lastVersion());
 			logger.info("Download here: https://github.com/devblook/chatlab/releases/latest");
 
-
 		}
+		isSent = true;
 
 	}
 	public String lastVersion() {
@@ -116,10 +118,6 @@ public class UpdateChecker {
 	}
 	public boolean enabledInAsync(){
 		return isSent;
-	}
-
-	public boolean setSent(){
-
 	}
 
 

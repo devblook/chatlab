@@ -15,7 +15,7 @@ public class ServerLoadListener implements Listener {
 	@EventHandler
 	public void onLoad(ServerLoadEvent event){
 
-		if (updateChecker.enabledInAsync()){
+		if (!updateChecker.enabledInAsync()){
 			return;
 		}
 
