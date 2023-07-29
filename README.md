@@ -33,15 +33,6 @@ With the plugin you can:
 - Ignore or unignore a player and see the list.
 - Use the chat format.
 
-## Permissions:
-
-| Permission  | Description                                    |
-|-------------|------------------------------------------------|
-| clab.tags   | To use the MiniMessage tags in chat format.    |
-| clab.reload | To reload the plugin.                          |
-| clab.ignore-bypass | To bypass the ignore event.                    |
-
-
 ## To do:
 
 - [X] Release
