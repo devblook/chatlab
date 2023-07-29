@@ -11,7 +11,9 @@ public class User {
 
 	@GsonIgnore
 	private UUID recentMessenger;
-	private Set<String> ignoredPlayers = new HashSet<>();
+	private boolean privateMessages = true;
+
+	private final Set<String> ignoredPlayers = new HashSet<>();
 
 	@Nullable
 	public UUID recentMessenger() {
