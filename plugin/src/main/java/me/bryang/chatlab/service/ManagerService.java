@@ -1,28 +1,23 @@
 package me.bryang.chatlab.service;
 
-import me.bryang.chatlab.manager.UserDataManager;
-import me.bryang.chatlab.message.authorizer.MessageAuthorizer;
+import me.bryang.chatlab.user.UserDataHandler;
 
 import javax.inject.Inject;
 
 public class ManagerService implements Service {
 
 	@Inject
-	private UserDataManager userDataManager;
-	@Inject
-	private MessageAuthorizer messageAuthorizer;
-
+	private UserDataHandler userDataHandler;
 
 	@Override
 	public void start() {
 
-		userDataManager.init();
-		messageAuthorizer.init();
+		userDataHandler.init();
 
 	}
 
 	@Override
 	public void stop() {
-		userDataManager.stop();
+		userDataHandler.stop();
 	}
 }
