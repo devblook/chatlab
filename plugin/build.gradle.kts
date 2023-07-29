@@ -9,7 +9,7 @@ plugins {
 dependencies {
     compileOnly("team.unnamed:inject:1.0.1")
     compileOnly("org.spongepowered:configurate-hocon:4.0.0")
-    compileOnly("me.fixeddev:commandflow-bukkit:0.5.2")
+    compileOnly("me.fixeddev:commandflow-bukkit:0.6.0")
     compileOnly("io.github.miniplaceholders:miniplaceholders-api:2.1.0")
 }
 
