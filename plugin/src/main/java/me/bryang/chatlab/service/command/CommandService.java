@@ -1,7 +1,7 @@
 package me.bryang.chatlab.service.command;
 
 import me.bryang.chatlab.service.Service;
-import me.bryang.chatlab.service.command.builder.CommandUsageBuilder;
+import me.bryang.chatlab.service.command.builder.LocalUsageBuilder;
 import me.fixeddev.commandflow.CommandManager;
 import me.fixeddev.commandflow.annotated.AnnotatedCommandTreeBuilder;
 import me.fixeddev.commandflow.annotated.AnnotatedCommandTreeBuilderImpl;
@@ -18,14 +18,15 @@ import java.util.Set;
 public class CommandService implements Service {
 
 	private Set<CommandClass> commands;
-	private CommandCustomTranslator commandCustomTranslator;
-	private CommandUsageBuilder commandUsageBuilder;
+	private LocalTranslationProvider commandTranslatorHandler;
+	private LocalUsageBuilder localUsageBuilder;
 
 	@Override
 	public void start() {
 		CommandManager commandManager = new BukkitCommandManager("ChatLab");
-		commandManager.setUsageBuilder(commandUsageBuilder);
-		commandManager.getTranslator().setProvider(commandCustomTranslator);
+
+		commandManager.setUsageBuilder(localUsageBuilder);
+		commandManager.getTranslator().setProvider(commandTranslatorHandler);
 
 		PartInjector partInjector = PartInjector.create();
 
@@ -33,9 +34,8 @@ public class CommandService implements Service {
 		partInjector.install(new BukkitModule());
 
 		AnnotatedCommandTreeBuilder builder = new AnnotatedCommandTreeBuilderImpl(partInjector);
-		for (CommandClass command : commands) {
-			commandManager.registerCommands(builder.fromClass(command));
-		}
+		commands
+			.forEach(commandClass -> commandManager.registerCommands(builder.fromClass(commandClass)));
 	}
 
 }
