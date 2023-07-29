@@ -33,4 +33,40 @@ public class MainCommand implements CommandClass {
 
 	}
 
+	@Command(names = "check-update", permission = "clab.check-update")
+	public void executeCheckUpdateSubCommand(@Sender Player sender){
+
+		if (!updateChecker.requestSuccess()){
+			messageManager.sendMessage(sender, "<green>Checking update!");
+			updateChecker
+				.request()
+				.thenAccept(action -> checkUpdate(sender));
+			return;
+
+		}
+		checkUpdate(sender);
+
+	}
+
+	@Command(names = "re-check", permission = "clab.check-update")
+	public void executeReCheckUpdateSubCommand(@Sender Player sender){
+
+		messageManager.sendMessage(sender, "<green>Checking update!");
+		updateChecker
+			.request()
+			.thenAccept(action -> checkUpdate(sender));
+	}
+
+	private void checkUpdate(Player sender){
+		if (!updateChecker.updated()){
+			messageManager.sendMessage(sender, """
+						<green>Checked! <white>The plugin has a new update.
+						<dark_green>>> <green><u><click:open_url:'https://github.com/devblook/chatlab/releases/tag/%s'>Click here</click></u> <white>to download the plugin."""
+				.formatted(updateChecker.lastVersion()));
+		}else{
+			messageManager.sendMessage(sender, "<green>Checked! <white>You have the latest update!");
+		}
+
+	}
+
 }
