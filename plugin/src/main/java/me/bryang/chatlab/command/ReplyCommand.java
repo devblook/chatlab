@@ -24,9 +24,10 @@ public class ReplyCommand implements CommandClass {
 	private Map<String, User> users;
 	private MessageManager messageManager;
 
-	@Command(names = {"reply", "r"},
+	@Command(
+		names = {"reply", "r"},
 		desc = "Command to reply to a message.")
-	public void messageCommand(@Sender Player sender, @Text String senderMessage) {
+	public void execute(@Sender Player sender, @Text String senderMessage) {
 
 		MessageSection messageSection = messageContainer.get();
 		RootSection configFile = configurationContainer.get();
@@ -46,12 +47,10 @@ public class ReplyCommand implements CommandClass {
 		}
 
 		messageManager.sendMessage(sender, configFile.privateMessage.fromSender,
-
-			Placeholder.unparsed("target", target.getName()),
+			Placeholder.unparsed("receptor", target.getName()),
 			Placeholder.unparsed("message", senderMessage));
 
 		messageManager.sendMessage(target, configFile.privateMessage.toReceptor,
-
 			Placeholder.unparsed("sender", sender.getName()),
 			Placeholder.unparsed("message", senderMessage));
 
