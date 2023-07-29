@@ -1,10 +1,9 @@
 package me.bryang.chatlab.listener;
 
+import me.bryang.chatlab.UpdateCheckHandler;
 import me.bryang.chatlab.configuration.ConfigurationContainer;
 import me.bryang.chatlab.configuration.section.RootSection;
 import me.bryang.chatlab.message.MessageManager;
-import me.bryang.chatlab.update.UpdateAnnouncementType;
-import me.bryang.chatlab.update.UpdateChecker;
 import me.bryang.chatlab.user.User;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
@@ -23,28 +22,28 @@ public class PlayerRegistryListener implements Listener {
 	private Map<String, User> users;
 	private ConfigurationContainer<RootSection> configurationContainer;
 	private MessageManager messageManager;
-	private UpdateChecker updateChecker;
+	private UpdateCheckHandler updateChecker;
 
 	@EventHandler
 	public void onRegistry(PlayerJoinEvent event) {
 
+		Player sender = event.getPlayer();
 
-		if (event.getPlayer().hasPermission("clab.update-check")){
+		if (updateChecker.requestSuccess() &&
+			sender.hasPermission("clab.check-update") &&
+			configurationContainer.get().mainSettings.updateCheckChat &&
+			!updateChecker.updated()){
 
-			if (updateChecker.isUpdated() && updateChecker.announcementPresent(UpdateAnnouncementType.SERVER)){
-
-				messageManager.sendMessage(
-					event.getPlayer(),
-					"<blue>ChatLab <dark_grey>| <white>The plugin has a new update. Last version:" + updateChecker.lastVersion() +
-						"\n<dark_blue>>> <click:open_url:'https://github.com/devblook/chatlab/releases/latest'><aqua>Click here</click> <white>to download");
-			}
+			messageManager.sendMessage(sender, """
+				<blue>[ChatLab] <white>| <green>Hello! There is a update.
+				<dark_green>>> <green><u><click:open_url:'https://github.com/devblook/chatlab/releases/tag/%s'>Click here</click></u> <white>to download the plugin."""
+				.formatted(updateChecker.lastVersion()));
 		}
 
-		if (users.containsKey(event.getPlayer().getUniqueId().toString())) {
-			return;
-		}
+		users.putIfAbsent(sender.getUniqueId().toString(), new User());
 
-		users.put(event.getPlayer().getUniqueId().toString(), new User());
+
+
 	}
 
 	@EventHandler
@@ -64,5 +63,6 @@ public class PlayerRegistryListener implements Listener {
 
 		user.recentMessenger(null);
 		target.recentMessenger(null);
+
 	}
 }
