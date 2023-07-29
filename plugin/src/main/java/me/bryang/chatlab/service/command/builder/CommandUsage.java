@@ -1,7 +1,8 @@
 package me.bryang.chatlab.service.command.builder;
 
-public enum ArgumentList {
+public enum CommandUsage {
 	MSG("/msg <player> <message>"),
+	TOGGLE_MSG("/toggle_msg <on/off/toggle>"),
 	REPLY("/reply <message>"),
 	IGNORE("/ignore <player>"),
 	UNIGNORE("/unignore <player>"),
@@ -9,11 +10,11 @@ public enum ArgumentList {
 
 	private String usage;
 
-	ArgumentList(String usage) {
+	CommandUsage(String usage) {
 		this.usage = usage;
 	}
 
-	public String getUsage() {
+	public String usage() {
 		return usage;
 	}
 }
