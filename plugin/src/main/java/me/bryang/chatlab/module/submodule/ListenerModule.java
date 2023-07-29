@@ -2,7 +2,6 @@ package me.bryang.chatlab.module.submodule;
 
 import me.bryang.chatlab.listener.PlayerChatListener;
 import me.bryang.chatlab.listener.PlayerRegistryListener;
-import me.bryang.chatlab.listener.ServerLoadListener;
 import org.bukkit.event.Listener;
 import team.unnamed.inject.AbstractModule;
 
@@ -13,8 +12,6 @@ public class ListenerModule extends AbstractModule {
 		multibind(Listener.class)
 			.asSet()
 			.to(PlayerRegistryListener.class)
-			.to(PlayerChatListener.class)
-			.to(ServerLoadListener.class)
-			.singleton();
+			.to(PlayerChatListener.class);
 	}
 }
