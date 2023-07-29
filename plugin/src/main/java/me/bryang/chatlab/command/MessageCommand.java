@@ -4,7 +4,6 @@ import me.bryang.chatlab.configuration.ConfigurationContainer;
 import me.bryang.chatlab.configuration.section.MessageSection;
 import me.bryang.chatlab.configuration.section.RootSection;
 import me.bryang.chatlab.message.MessageManager;
-import me.bryang.chatlab.message.authorizer.MessageAuthorizer;
 import me.bryang.chatlab.user.User;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
@@ -16,7 +15,8 @@ import team.unnamed.inject.InjectAll;
 
 import java.util.Map;
 
-//Todo 16-05-2023: To separate the logic of private messages in a separate class for better distribution
+
+
 @InjectAll
 public class MessageCommand implements CommandClass {
 
@@ -24,17 +24,15 @@ public class MessageCommand implements CommandClass {
 	private ConfigurationContainer<MessageSection> messageContainer;
 	private Map<String, User> userData;
 	private MessageManager messageManager;
-	private MessageAuthorizer messageAuthorizer;
-
-	@Command(names = {"msg", "pm", "m", "message", "tell", "w"},
+	@Command(
+		names = {"msg", "pm", "m", "message", "tell", "w"},
 		desc = "Command to send a private message.")
-	public void messageCommand(@Sender Player sender, Player target,
-							   @Text String senderMessage) {
+	public void execute(@Sender Player sender, Player target, @Text String senderMessage) {
 
 		RootSection configFile = configurationContainer.get();
 		MessageSection messageSection = messageContainer.get();
 
-		if (sender == target.getPlayer()) {
+		if (sender.getUniqueId() == target.getUniqueId()) {
 			messageManager.sendMessage(sender, messageSection.error.yourselfTalk);
 			return;
 		}
@@ -48,7 +46,7 @@ public class MessageCommand implements CommandClass {
 		}
 
 		messageManager.sendMessage(sender, configFile.privateMessage.fromSender,
-			Placeholder.unparsed("target", target.getName()),
+			Placeholder.parsed("receptor", target.getName()),
 			Placeholder.unparsed("message", senderMessage));
 
 		if (targetUser.containsIgnoredPlayers(sender.getUniqueId())
@@ -57,13 +55,12 @@ public class MessageCommand implements CommandClass {
 		}
 
 		messageManager.sendMessage(target, configFile.privateMessage.toReceptor,
-			Placeholder.unparsed("sender", sender.getName()),
+			Placeholder.parsed("sender", sender.getName()),
 			Placeholder.unparsed("message", senderMessage));
 
-		User senderUser = userData.get(sender.getUniqueId().toString());
-		User senderTarget = userData.get(target.getUniqueId().toString());
+		User senderUser = userData.get(target.getUniqueId().toString());
 
 		senderUser.recentMessenger(target.getUniqueId());
-		senderTarget.recentMessenger(sender.getUniqueId());
+		targetUser.recentMessenger(sender.getUniqueId());
 	}
 }
