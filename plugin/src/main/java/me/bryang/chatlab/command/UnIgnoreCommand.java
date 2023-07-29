@@ -9,12 +9,13 @@ import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
 import me.fixeddev.commandflow.bukkit.annotation.Sender;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.util.Map;
 
-@Command(names = "unignore")
+@Command(
+	names = "unignore",
+	desc = "Command to un-ignore a player.")
 
 public class UnIgnoreCommand implements CommandClass {
 
@@ -23,7 +24,7 @@ public class UnIgnoreCommand implements CommandClass {
 	private ConfigurationContainer<MessageSection> messageContainer;
 	private Map<String, User> userData;
 
-	public void unIgnoreCommand(@Sender Player sender, OfflinePlayer target) {
+	public void execute(@Sender Player sender, Player target) {
 
 		RootSection rootSection = configurationContainer.get();
 		MessageSection messageSection = messageContainer.get();
