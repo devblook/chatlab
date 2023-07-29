@@ -47,7 +47,6 @@ public class MainModule extends AbstractModule {
 		install(new ListenerModule());
 		install(new CommandModule());
 		install(new ServiceModule());
-		install(new AuthorizerModule());
 		install(new ConfigurationModule());
 	}
 }

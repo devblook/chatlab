@@ -39,11 +39,20 @@ public class MessageCommand implements CommandClass {
 			return;
 		}
 
+		User targetUser = userData.get(target.getUniqueId().toString());
+
+		if (!targetUser.privateMessages() && !sender.hasPermission("clab.msg-toggle-bypass")){
+			messageManager.sendMessage(sender, messageSection.error.msgDisabled,
+				Placeholder.unparsed("player", target.getName()));
+			return;
+		}
+
 		messageManager.sendMessage(sender, configFile.privateMessage.fromSender,
 			Placeholder.unparsed("target", target.getName()),
 			Placeholder.unparsed("message", senderMessage));
 
-		if (!messageAuthorizer.isAuthorized(sender.getUniqueId().toString(), target.getUniqueId().toString()) && !target.hasPermission("clab.ignore-bypass")) {
+		if (targetUser.containsIgnoredPlayers(sender.getUniqueId())
+			&& !sender.hasPermission("clab.ignore-bypass")){
 			return;
 		}
 
