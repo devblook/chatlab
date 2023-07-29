@@ -13,10 +13,12 @@ public class MessageSection extends ConfigurationSection {
 	public static class Error {
 
 		@Comment("Message that action cannot be used at the console.")
-		public String console = "You can't do this in console";
+		public String console = "Error: You can't do this in console";
 
 		@Comment("Specific argument is missing")
-		public String noArgument = "<red>[Error] <dark_gray>| <white>Unknown argument. \n<gray>-<white>Usage: <green><usage><white>.";
+		public String noArgument = """
+				<red>[Error] <dark_gray>| <white>Unknown argument.
+				<red>>> <white>Usage: <green><usage><white>.""";
 
 		@Comment("Message to notify the player hes trying to message isn't online.")
 		public String playerOffline = "<red>[Error] <dark_gray>| <white>The specified player is offline!";
@@ -29,6 +31,9 @@ public class MessageSection extends ConfigurationSection {
 
 		@Comment("Message to player that's try to messaging to itself.")
 		public String yourselfTalk = "<red>[Error] <dark_gray>| <white>You cannot send private message to yourself.";
+
+		@Comment("Message when you send a private message to a player, but the player has private messages disabled.")
+		public String msgDisabled = "<red>Error] <dark_gray>| <white>The player <player> has private messages disabled.";
 
 		@Comment("Message to player that's try to ignoring to itself.")
 		public String yourselfIgnore = "<red>[Error] <dark_gray>| <white>You cannot ignore to yourself.";
