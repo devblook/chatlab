@@ -13,14 +13,14 @@ import javax.inject.Singleton;
 @Singleton
 public class MessageManager {
 
-	private static final MiniMessage MINI_MESSAGE = MiniMessage.miniMessage();
+	private final MiniMessage miniMessage = MiniMessage.miniMessage();
 
 	public void sendMessage(Player sender, String message) {
-		sender.sendMessage(MINI_MESSAGE.deserialize(message));
+		sender.sendMessage(miniMessage.deserialize(message));
 	}
 
 	public void sendMessage(Player sender, String message, TagResolver... tagResolver) {
-		sender.sendMessage(MINI_MESSAGE.deserialize(message, tagResolver));
+		sender.sendMessage(miniMessage.deserialize(message, tagResolver));
 	}
 
 	public Component formatChat(Player target, String formatMessage, TagResolver messageResolver) {
@@ -38,7 +38,7 @@ public class MessageManager {
 					MiniPlaceholders.getAudiencePlaceholders(target));
 		}
 
-		return MINI_MESSAGE.deserialize(formatMessage, tagBuilder.build());
+		return miniMessage.deserialize(formatMessage, tagBuilder.build());
 
 	}
 
