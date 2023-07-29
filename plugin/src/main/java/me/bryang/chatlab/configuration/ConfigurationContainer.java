@@ -25,7 +25,9 @@ public class ConfigurationContainer<T extends ConfigurationSection> {
 			.builder()
 			.path(path.resolve(fileName + ".conf"))
 			.defaultOptions(
-				config -> config.header("\n " + fileName + ".conf"))
+				config -> config.header(String.format("""
+				
+					%s""", fileName + ".conf")))
 			.build();
 
 		try {
@@ -35,7 +37,6 @@ public class ConfigurationContainer<T extends ConfigurationSection> {
 
 			node.set(clazz, internClass.get());
 			loader.save(node);
-
 
 		} catch (IOException exception) {
 			exception.fillInStackTrace();
