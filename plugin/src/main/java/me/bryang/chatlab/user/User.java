@@ -1,6 +1,7 @@
 package me.bryang.chatlab.user;
 
-import me.bryang.chatlab.manager.gson.GsonIgnore;
+import me.bryang.chatlab.user.gson.GsonIgnore;
+
 import javax.annotation.Nullable;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,6 +26,13 @@ public class User {
 		return this.recentMessenger != null;
 	}
 
+	public boolean privateMessages() {
+		return privateMessages;
+	}
+
+	public void privateMessages(boolean value) {
+		this.privateMessages = value;
+	}
 
 	public Set<String> ignoredPlayers() {
 		return ignoredPlayers;
@@ -33,11 +41,6 @@ public class User {
 	public void ignore(UUID target) {
 		ignoredPlayers.add(target.toString());
 	}
-
-	public void ignore(String target) {
-		ignoredPlayers.add(target);
-	}
-
 	public void unIgnore(UUID target) {
 		ignoredPlayers.remove(target.toString());
 	}

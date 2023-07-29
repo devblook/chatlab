@@ -1,12 +1,11 @@
-package me.bryang.chatlab.manager;
+package me.bryang.chatlab.user;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import me.bryang.chatlab.manager.gson.LocalExclusionStrategy;
-import me.bryang.chatlab.user.User;
+import me.bryang.chatlab.user.gson.LocalExclusionStrategy;
 import org.slf4j.Logger;
 
 import javax.inject.Inject;
@@ -21,7 +20,7 @@ import java.nio.file.Path;
 import java.util.Map;
 
 @Singleton
-public class UserDataManager {
+public class UserDataHandler {
 
 	@Inject
 	@Named("plugin-folder")
@@ -30,6 +29,7 @@ public class UserDataManager {
 	private Map<String, User> users;
 	@Inject
 	private Logger logger;
+
 	private File jsonFile;
 
 	public void init() {
@@ -38,8 +38,7 @@ public class UserDataManager {
 
 		try {
 
-			if (!jsonFile.exists()) {
-				jsonFile.createNewFile();
+			if (jsonFile.createNewFile()) {
 				logger.info("Data created");
 				return;
 			}
@@ -50,10 +49,10 @@ public class UserDataManager {
 			}
 
 			JsonElement jsonParsed = JsonParser.parseReader(new FileReader(jsonFile));
-			Type type = new TypeToken<Map<String, User>>() {}.getType();
+			Type type = new TypeToken<Map<String, User>>(){}.getType();
 			Map<String, User> newUserData = new Gson().fromJson(jsonParsed, type);
-			users.putAll(newUserData);
 
+			users.putAll(newUserData);
 			logger.info("Data loaded");
 		} catch (IOException exception) {
 			exception.fillInStackTrace();
@@ -69,18 +68,15 @@ public class UserDataManager {
 
 		String jsonPath = gson.toJson(users);
 
-		try {
+		try (FileWriter fileWriter = new FileWriter(jsonFile)) {
 
-			FileWriter fileWriter = new FileWriter(jsonFile);
 			fileWriter.write(jsonPath);
-			fileWriter.close();
-
 			logger.info("Data saved");
-
 		} catch (IOException exception) {
 			exception.fillInStackTrace();
 
 		}
+
 
 	}
 }
