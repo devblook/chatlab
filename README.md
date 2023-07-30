@@ -17,7 +17,7 @@ This plugin is a recode from my old plugin.
 
 You need:
 - Paper or fork of this.
-- 1.19.4 Software version+.
+- 1.20.1 Software version
 
 ### How to install:
 
