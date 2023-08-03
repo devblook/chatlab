@@ -17,4 +17,5 @@ public enum CommandUsage {
 	public String usage() {
 		return usage;
 	}
+
 }

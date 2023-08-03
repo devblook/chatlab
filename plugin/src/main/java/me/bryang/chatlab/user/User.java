@@ -1,7 +1,5 @@
 package me.bryang.chatlab.user;
 
-import me.bryang.chatlab.user.gson.GsonIgnore;
-
 import javax.annotation.Nullable;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,10 +7,8 @@ import java.util.UUID;
 
 public class User {
 
-	@GsonIgnore
 	private UUID recentMessenger;
 	private boolean privateMessages = true;
-
 	private final Set<String> ignoredPlayers = new HashSet<>();
 
 	@Nullable

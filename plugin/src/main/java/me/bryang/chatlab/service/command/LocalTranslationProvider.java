@@ -31,7 +31,6 @@ public class LocalTranslationProvider implements TranslationProvider {
 
 
 		return LegacyComponentSerializer.legacySection().serialize(MiniMessage.miniMessage().deserialize(text));
-
-
 	}
+
 }

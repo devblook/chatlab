@@ -5,22 +5,22 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonWriter;
 import me.bryang.chatlab.user.gson.LocalExclusionStrategy;
 import org.slf4j.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 @Singleton
-public class UserDataHandler {
+public class UserDataHandler  {
 
 	@Inject
 	@Named("plugin-folder")
@@ -30,53 +30,60 @@ public class UserDataHandler {
 	@Inject
 	private Logger logger;
 
-	private File jsonFile;
+	private Path playersPath;
+	private Gson gson;
 
-	public void init() {
+	public void start() {
 
-		jsonFile = new File(path.resolve("players.json").toUri());
+		gson = new GsonBuilder()
+			.addSerializationExclusionStrategy(new LocalExclusionStrategy())
+			.create();
+		playersPath = path.resolve("players.json");
 
 		try {
-
-			if (jsonFile.createNewFile()) {
-				logger.info("Data created");
-				return;
-			}
-
-			if (jsonFile.length() == 0L) {
+			if (Files.size(playersPath) == 0) {
 				logger.info("Data loaded");
 				return;
 			}
 
-			JsonElement jsonParsed = JsonParser.parseReader(new FileReader(jsonFile));
+
+			JsonElement jsonParsed = JsonParser.parseReader(Files.newBufferedReader(playersPath));
 			Type type = new TypeToken<Map<String, User>>(){}.getType();
 			Map<String, User> newUserData = new Gson().fromJson(jsonParsed, type);
 
 			users.putAll(newUserData);
 			logger.info("Data loaded");
-		} catch (IOException exception) {
+		} catch (Exception exception) {
 			exception.fillInStackTrace();
 		}
 
+	}
+
+	public void update(User user){
+
+		CompletableFuture.runAsync(() -> {
+
+			try (JsonWriter jsonWriter = new JsonWriter(Files.newBufferedWriter(path, StandardCharsets.UTF_8))) {
+				jsonWriter.jsonValue(gson.toJson(user));
+
+			} catch (Exception exception) {
+				exception.fillInStackTrace();
+			}
+		});
 	}
 
 	public void stop() {
 
-		Gson gson = new GsonBuilder()
-			.addSerializationExclusionStrategy(new LocalExclusionStrategy())
-			.create();
-
 		String jsonPath = gson.toJson(users);
 
-		try (FileWriter fileWriter = new FileWriter(jsonFile)) {
-
-			fileWriter.write(jsonPath);
+		try {
+			Files.writeString(playersPath, jsonPath, StandardCharsets.UTF_8);
 			logger.info("Data saved");
-		} catch (IOException exception) {
+		} catch (Exception exception) {
 			exception.fillInStackTrace();
 
 		}
-
-
 	}
+
 }
+

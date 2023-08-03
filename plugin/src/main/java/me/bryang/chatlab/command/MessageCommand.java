@@ -24,6 +24,7 @@ public class MessageCommand implements CommandClass {
 	private ConfigurationContainer<MessageSection> messageContainer;
 	private Map<String, User> userData;
 	private MessageManager messageManager;
+
 	@Command(
 		names = {"msg", "pm", "m", "message", "tell", "w"},
 		desc = "Command to send a private message.")
@@ -63,4 +64,5 @@ public class MessageCommand implements CommandClass {
 		senderUser.recentMessenger(target.getUniqueId());
 		targetUser.recentMessenger(sender.getUniqueId());
 	}
+
 }

@@ -45,6 +45,6 @@ public class UnIgnoreCommand implements CommandClass {
 		user.unIgnore(target.getUniqueId());
 		messageManager.sendMessage(sender, rootSection.ignore.unignoredPlayer,
 			Placeholder.unparsed("player", target.getName()));
-
 	}
+
 }

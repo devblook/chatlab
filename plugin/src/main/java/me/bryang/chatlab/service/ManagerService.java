@@ -12,8 +12,7 @@ public class ManagerService implements Service {
 	@Override
 	public void start() {
 
-		userDataHandler.init();
-
+		userDataHandler.start();
 	}
 
 	@Override

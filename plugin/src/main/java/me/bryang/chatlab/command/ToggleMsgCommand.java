@@ -38,4 +38,5 @@ public class ToggleMsgCommand implements CommandClass {
 
 		user.privateMessages(!user.privateMessages());
 	}
+
 }

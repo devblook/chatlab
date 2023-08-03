@@ -63,7 +63,5 @@ public class LocalPluginLoader implements PluginLoader {
 	private record RepoInput(String id, String url) {
 
 	}
-
-
 }
 

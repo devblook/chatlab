@@ -76,7 +76,6 @@ public class IgnoreCommand implements CommandClass {
 
 		User user = userData.get(sender.getUniqueId().toString());
 
-
 		if (user.containsIgnoredPlayers(target.getUniqueId())) {
 			messageManager.sendMessage(sender, messageSection.error.playerAlreadyIgnored,
 				Placeholder.unparsed("player", target.getName()));
@@ -86,9 +85,6 @@ public class IgnoreCommand implements CommandClass {
 		user.ignore(target.getUniqueId());
 		messageManager.sendMessage(sender, rootSection.ignore.ignoredPlayer,
 			Placeholder.unparsed("player", target.getName()));
-
 	}
-
-
 
 }

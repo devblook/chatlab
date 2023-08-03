@@ -23,4 +23,5 @@ public class ListenerService implements Service {
 		listeners
 			.forEach(listener -> pluginManager.registerEvents(listener, plugin));
 	}
+
 }

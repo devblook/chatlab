@@ -5,6 +5,7 @@ import me.bryang.chatlab.configuration.ConfigurationContainer;
 import me.bryang.chatlab.configuration.section.RootSection;
 import me.bryang.chatlab.message.MessageManager;
 import me.bryang.chatlab.user.User;
+import me.bryang.chatlab.user.UserDataHandler;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -23,6 +24,7 @@ public class PlayerRegistryListener implements Listener {
 	private ConfigurationContainer<RootSection> configurationContainer;
 	private MessageManager messageManager;
 	private UpdateCheckHandler updateChecker;
+	private UserDataHandler userDataHandler;
 
 	@EventHandler
 	public void onRegistry(PlayerJoinEvent event) {
@@ -41,9 +43,6 @@ public class PlayerRegistryListener implements Listener {
 		}
 
 		users.putIfAbsent(sender.getUniqueId().toString(), new User());
-
-
-
 	}
 
 	@EventHandler
@@ -64,5 +63,7 @@ public class PlayerRegistryListener implements Listener {
 		user.recentMessenger(null);
 		target.recentMessenger(null);
 
+		userDataHandler.update(user);
 	}
+
 }

@@ -53,7 +53,6 @@ public class ReplyCommand implements CommandClass {
 		messageManager.sendMessage(target, configFile.privateMessage.toReceptor,
 			Placeholder.unparsed("sender", sender.getName()),
 			Placeholder.unparsed("message", senderMessage));
-
 	}
 
 }

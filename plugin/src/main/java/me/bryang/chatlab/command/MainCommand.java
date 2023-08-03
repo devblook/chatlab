@@ -29,13 +29,13 @@ public class MainCommand implements CommandClass {
 
 	@Command(names = {""})
 	public void executeMainSubCommand(@Sender Player sender) {
+
 		messageManager.sendMessage(sender, """
 					<blue>ChatLab: <white>Main plugin command.
 					<dark_grey>- <white>/clab reload <dark_grey>: <green>Reload the plugin.
 					<dark_grey>- <white>/clab check-update <dark_grey>: <green>Check update.
 					<dark_grey>- <white>/clab re-check <dark_grey>: <green>Send a request if has a new update.
 					<dark_grey>- <white>/clab about <dark_grey>: <green>See about the plugin.""");
-
 	}
 	@Command(names = "about")
 	public void executeAboutSubCommand(@Sender Player sender) {
@@ -45,7 +45,6 @@ public class MainCommand implements CommandClass {
             <blue><version>
             <green>>> <white>Source code: <green><u><click:open_url:'https://github.com/devblook/chatlab>[GitHub]</click></u>""",
 			Placeholder.unparsed("version", pluginVersion));
-
 	}
 
 	@Command(names = "reload", permission = "clab.reload")
@@ -54,7 +53,6 @@ public class MainCommand implements CommandClass {
 		configurationContainer.reload();
 		messageContainer.reload();
 		messageManager.sendMessage(sender, "<blue>[ChatLab] <dark_grey>| <white>Plugin has been reloaded.");
-
 	}
 
 	@Command(names = "check-update", permission = "clab.check-update")
@@ -69,7 +67,6 @@ public class MainCommand implements CommandClass {
 
 		}
 		checkUpdate(sender);
-
 	}
 
 	@Command(names = "re-check", permission = "clab.check-update")
@@ -82,6 +79,7 @@ public class MainCommand implements CommandClass {
 	}
 
 	private void checkUpdate(Player sender){
+
 		if (!updateChecker.updated()){
 			messageManager.sendMessage(sender, """
 						<green>Checked! <white>The plugin has a new update.
@@ -90,7 +88,6 @@ public class MainCommand implements CommandClass {
 		}else{
 			messageManager.sendMessage(sender, "<green>Checked! <white>You have the latest update!");
 		}
-
 	}
 
 }

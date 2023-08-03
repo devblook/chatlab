@@ -37,9 +37,9 @@ public class UpdateCheckHandler {
 	public void init() {
 
 		URI uri;
+
 		try {
 			uri = new URI("https://api.github.com/repos/DevBlook/ChatLab/releases/latest");
-
 		} catch (URISyntaxException exception) {
 			exception.fillInStackTrace();
 			return;
@@ -69,7 +69,6 @@ public class UpdateCheckHandler {
 			});
 	}
 
-
 	public boolean updated() {
 		return updated;
 	}
@@ -77,6 +76,7 @@ public class UpdateCheckHandler {
 	public boolean requestSuccess() {
 		return requestSuccess;
 	}
+
 	public String lastVersion() {
 		return lastVersion;
 	}

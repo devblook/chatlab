@@ -37,9 +37,9 @@ public class ChatLab extends JavaPlugin {
 		logger.info("Thanks for using my plugin!");
 	}
 
-
 	@Override
 	public void onDisable() {
 		services.forEach(Service::stop);
 	}
+
 }

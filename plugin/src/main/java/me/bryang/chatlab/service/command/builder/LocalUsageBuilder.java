@@ -31,6 +31,6 @@ public class LocalUsageBuilder implements UsageBuilder {
 
 		return MiniMessage.miniMessage().deserialize(messageSection.error.noArgument,
 			Placeholder.unparsed("usage", commandUsage.usage()));
-
 	}
+
 }

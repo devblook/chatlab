@@ -62,7 +62,6 @@ public class ConfigurationContainer<T extends ConfigurationSection> {
 		} catch (IOException exception) {
 			exception.fillInStackTrace();
 		}
-
 	}
 
 }

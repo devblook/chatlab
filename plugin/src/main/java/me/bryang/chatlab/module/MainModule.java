@@ -32,7 +32,6 @@ public class MainModule extends AbstractModule {
 	}
 
 	@Override
-
 	public void configure() {
 		bind(ChatLab.class)
 			.toInstance(plugin);
@@ -43,6 +42,7 @@ public class MainModule extends AbstractModule {
 		bind(String.class)
 			.named("plugin-version")
 			.toInstance(plugin.getPluginMeta().getVersion());
+
 		bind(new TypeReference<Map<String, User>>() {
 		})
 			.toInstance(new HashMap<>());

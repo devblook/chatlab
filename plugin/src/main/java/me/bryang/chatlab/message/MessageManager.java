@@ -39,7 +39,6 @@ public class MessageManager {
 		}
 
 		return miniMessage.deserialize(formatMessage, tagBuilder.build());
-
 	}
 
 }

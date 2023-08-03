@@ -17,4 +17,5 @@ public class CommandModule extends AbstractModule {
 			.to(IgnoreCommand.class)
 			.to(UnIgnoreCommand.class);
 	}
+
 }
