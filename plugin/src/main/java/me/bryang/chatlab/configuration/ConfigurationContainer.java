@@ -24,8 +24,9 @@ public class ConfigurationContainer<T extends ConfigurationSection> {
 		loader = HoconConfigurationLoader
 			.builder()
 			.path(path.resolve(fileName + ".conf"))
-			.defaultOptions(
-				config -> config.header(String.format("""
+			.defaultOptions(config ->
+				config
+					.header(String.format("""
 				
 					%s""", fileName + ".conf")))
 			.build();
@@ -63,5 +64,4 @@ public class ConfigurationContainer<T extends ConfigurationSection> {
 			exception.fillInStackTrace();
 		}
 	}
-
 }

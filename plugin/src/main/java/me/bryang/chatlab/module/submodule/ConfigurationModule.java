@@ -23,5 +23,4 @@ public class ConfigurationModule extends AbstractModule {
 	private ConfigurationContainer<MessageSection> provideMessageConfiguration(@Named("plugin-folder") Path pluginPath) {
 		return new ConfigurationContainer<>("messages", pluginPath, MessageSection.class);
 	}
-
 }
