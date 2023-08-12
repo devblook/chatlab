@@ -21,7 +21,8 @@ import java.util.concurrent.TimeUnit;
 @Singleton
 public class UpdateCheckHandler {
 
-	@Inject @Named("plugin-version")
+	@Inject
+	@Named("plugin-version")
 	private String pluginVersion;
 	@Inject
 	private ConfigurationContainer<RootSection> configContainer;
@@ -51,7 +52,6 @@ public class UpdateCheckHandler {
 			.header("accept", "application/vnd.github+json")
 			.GET()
 			.build();
-
 	}
 
 	public CompletableFuture<Void> request() {
@@ -80,6 +80,5 @@ public class UpdateCheckHandler {
 	public String lastVersion() {
 		return lastVersion;
 	}
-
 }
 
