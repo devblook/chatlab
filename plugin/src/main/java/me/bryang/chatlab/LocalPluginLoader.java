@@ -45,15 +45,14 @@ public class LocalPluginLoader implements PluginLoader {
 		classpathBuilder.addLibrary(resolver);
 	}
 
-	private List<Dependency> mapDependencies(String... dependencyCoords){
+	private List<Dependency> mapDependencies(String... dependencyCoords) {
 		return Arrays
 			.stream(dependencyCoords)
 			.map(coords -> new Dependency(new DefaultArtifact(coords), null))
 			.toList();
 	}
 
-
-	private List<RemoteRepository> mapRepositories(RepoInput... repositoryCoords){
+	private List<RemoteRepository> mapRepositories(RepoInput... repositoryCoords) {
 		return Arrays.stream(repositoryCoords)
 			.map(value -> new RemoteRepository.Builder
 				(value.id, "default", value.url).build())

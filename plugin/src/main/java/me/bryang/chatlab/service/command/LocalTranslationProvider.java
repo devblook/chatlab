@@ -29,8 +29,6 @@ public class LocalTranslationProvider implements TranslationProvider {
 			default -> "If u see this message, please contact in the discord support. Key: " + path;
 		};
 
-
 		return LegacyComponentSerializer.legacySection().serialize(MiniMessage.miniMessage().deserialize(text));
 	}
-
 }

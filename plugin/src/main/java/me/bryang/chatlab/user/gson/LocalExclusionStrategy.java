@@ -14,5 +14,4 @@ public class LocalExclusionStrategy implements ExclusionStrategy {
 	public boolean shouldSkipClass(Class<?> clazz) {
 		return false;
 	}
-
 }

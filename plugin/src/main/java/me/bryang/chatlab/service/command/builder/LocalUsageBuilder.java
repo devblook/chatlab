@@ -16,10 +16,11 @@ public class LocalUsageBuilder implements UsageBuilder {
 
 	@Inject
 	private ConfigurationContainer<MessageSection> messageContainer;
+
 	@Override
 	public Component getUsage(CommandContext commandContext) {
 
-		if (commandContext.getArguments().isEmpty()){
+		if (commandContext.getArguments().isEmpty()) {
 			return MiniMessage.miniMessage().deserialize(messageContainer.get().error.noArgument,
 				Placeholder.unparsed("usage", "/clab help"));
 		}
@@ -32,5 +33,4 @@ public class LocalUsageBuilder implements UsageBuilder {
 		return MiniMessage.miniMessage().deserialize(messageSection.error.noArgument,
 			Placeholder.unparsed("usage", commandUsage.usage()));
 	}
-
 }
