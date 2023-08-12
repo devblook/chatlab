@@ -15,5 +15,4 @@ public class ServiceModule extends AbstractModule {
 			.to(ListenerService.class)
 			.to(ManagerService.class);
 	}
-
 }

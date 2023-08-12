@@ -7,5 +7,4 @@ public interface Service {
 	default void stop() {
 		// do nothing
 	}
-
 }
