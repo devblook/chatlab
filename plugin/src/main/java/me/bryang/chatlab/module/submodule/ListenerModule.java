@@ -14,5 +14,4 @@ public class ListenerModule extends AbstractModule {
 			.to(PlayerRegistryListener.class)
 			.to(PlayerChatListener.class);
 	}
-
 }

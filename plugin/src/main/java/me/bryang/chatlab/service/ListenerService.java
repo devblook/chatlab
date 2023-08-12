@@ -13,8 +13,11 @@ import java.util.Set;
 public class ListenerService implements Service {
 
 	private ChatLab plugin;
-	private Set<Listener> listeners;
+
 	private ConfigurationContainer<RootSection> configContainer;
+
+	private Set<Listener> listeners;
+
 	@Override
 	public void start() {
 
@@ -23,5 +26,4 @@ public class ListenerService implements Service {
 		listeners
 			.forEach(listener -> pluginManager.registerEvents(listener, plugin));
 	}
-
 }
