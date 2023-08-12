@@ -1,6 +1,7 @@
 package me.bryang.chatlab.listener;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
+import me.bryang.chatlab.chat.ChatFormatter;
 import me.bryang.chatlab.configuration.ConfigurationContainer;
 import me.bryang.chatlab.configuration.section.RootSection;
 import me.bryang.chatlab.message.MessageManager;
@@ -19,7 +20,6 @@ import javax.inject.Singleton;
 import java.util.Map;
 import java.util.Set;
 
-
 @Singleton
 @InjectAll
 public class PlayerChatListener implements Listener {
@@ -29,6 +29,7 @@ public class PlayerChatListener implements Listener {
 	private Map<String, User> userData;
 
 	private MessageManager messageManager;
+	private ChatFormatter chatFormatter;
 
 	private Logger logger;
 
@@ -38,10 +39,10 @@ public class PlayerChatListener implements Listener {
 		Player sender = event.getPlayer();
 		event.viewers().removeIf(audience -> {
 
-			if (audience instanceof Player player){
+			if (audience instanceof Player player) {
 				Set<String> ignoredPlayers = userData.get(player.getUniqueId().toString()).ignoredPlayers();
 
-				if (sender.hasPermission("clab.ignore-bypass")){
+				if (sender.hasPermission("clab.ignore-bypass")) {
 					return false;
 				}
 
@@ -66,10 +67,9 @@ public class PlayerChatListener implements Listener {
 				? Placeholder.parsed("message", formattedMessage)
 				: Placeholder.unparsed("message", formattedMessage);
 
-			return messageManager.formatChat(
-				source,
-				configurationContainer.get().chatFormat.format,
-				messagePlaceholder);
+			String format = chatFormatter.format(sender);
+
+			return messageManager.formatChat(source, format, messagePlaceholder);
 
 		});
 	}
