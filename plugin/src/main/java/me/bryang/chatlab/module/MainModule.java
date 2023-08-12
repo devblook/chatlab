@@ -1,20 +1,13 @@
 package me.bryang.chatlab.module;
 
 import me.bryang.chatlab.ChatLab;
-import me.bryang.chatlab.module.submodule.CommandModule;
-import me.bryang.chatlab.module.submodule.ConfigurationModule;
-import me.bryang.chatlab.module.submodule.ListenerModule;
-import me.bryang.chatlab.module.submodule.ServiceModule;
-import me.bryang.chatlab.user.User;
+import me.bryang.chatlab.module.submodule.*;
 import org.slf4j.Logger;
 import team.unnamed.inject.AbstractModule;
 import team.unnamed.inject.Provides;
-import team.unnamed.inject.key.TypeReference;
 
 import javax.inject.Singleton;
 import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainModule extends AbstractModule {
 
@@ -43,14 +36,10 @@ public class MainModule extends AbstractModule {
 			.named("plugin-version")
 			.toInstance(plugin.getPluginMeta().getVersion());
 
-		bind(new TypeReference<Map<String, User>>() {
-		})
-			.toInstance(new HashMap<>());
-
+		install(new DataModule());
 		install(new ListenerModule());
 		install(new CommandModule());
 		install(new ServiceModule());
 		install(new ConfigurationModule());
 	}
-
 }
