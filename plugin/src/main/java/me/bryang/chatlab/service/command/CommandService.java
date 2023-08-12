@@ -38,5 +38,4 @@ public class CommandService implements Service {
 		commands
 			.forEach(commandClass -> commandManager.registerCommands(builder.fromClass(commandClass)));
 	}
-
 }

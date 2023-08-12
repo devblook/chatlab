@@ -2,13 +2,14 @@ package me.bryang.chatlab.service.command.builder;
 
 public enum CommandUsage {
 	MSG("/msg <player> <message>"),
-	TOGGLE_MSG("/toggle_msg <on/off/toggle>"),
+	TOGGLE_MSG("/toggle_msg"),
 	REPLY("/reply <message>"),
 	IGNORE("/ignore <player>"),
 	UNIGNORE("/unignore <player>"),
-	CLAB("/clab help");
+	CLAB("/clab help"),
+	SOCIALSPY("/socialspy");
 
-	private String usage;
+	private final String usage;
 
 	CommandUsage(String usage) {
 		this.usage = usage;
@@ -17,5 +18,4 @@ public enum CommandUsage {
 	public String usage() {
 		return usage;
 	}
-
 }

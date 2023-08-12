@@ -21,6 +21,9 @@ public class RootSection extends ConfigurationSection {
 	@Comment("Ignore messages section")
 	public Ignore ignore = new Ignore();
 
+	@Comment("Private message spy section")
+	public MsgSpy msgSpy = new MsgSpy();
+
 	@ConfigSerializable
 	public static class MainSettings{
 		@Comment("""

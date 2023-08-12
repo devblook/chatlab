@@ -15,7 +15,7 @@ public class CommandModule extends AbstractModule {
 			.to(ToggleMsgCommand.class)
 			.to(ReplyCommand.class)
 			.to(IgnoreCommand.class)
-			.to(UnIgnoreCommand.class);
+			.to(UnIgnoreCommand.class)
+			.to(SocialSpyCommand.class);
 	}
-
 }
