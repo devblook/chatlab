@@ -14,12 +14,11 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import team.unnamed.inject.InjectAll;
 
+import javax.inject.Named;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
-
-
 
 @Command(
 	names = "ignore",
@@ -27,10 +26,13 @@ import java.util.UUID;
 @InjectAll
 public class IgnoreCommand implements CommandClass {
 
-	private MessageManager messageManager;
+	@Named("users")
+	private Map<String, User> users;
+
 	private ConfigurationContainer<RootSection> configurationContainer;
 	private ConfigurationContainer<MessageSection> messageContainer;
-	private Map<String, User> userData;
+
+	private MessageManager messageManager;
 
 	@Command(names = "")
 	public void execute(@Sender Player sender, OfflinePlayer targetFormatted) {
@@ -41,7 +43,7 @@ public class IgnoreCommand implements CommandClass {
 		if (targetFormatted.getName().equalsIgnoreCase("-list")) {
 
 			RootSection.Ignore.SeeIgnoredPlayers ignoredPlayersSector = rootSection.ignore.seeIgnoredPlayers;
-			Set<String> ignoredPlayers = userData.get(sender.getUniqueId().toString()).ignoredPlayers();
+			Set<String> ignoredPlayers = users.get(sender.getUniqueId().toString()).ignoredPlayers();
 
 			String ignoredPlayersData;
 			if (!ignoredPlayers.isEmpty()) {
@@ -63,7 +65,7 @@ public class IgnoreCommand implements CommandClass {
 			return;
 		}
 
-		if (!targetFormatted.isOnline()){
+		if (!targetFormatted.isOnline()) {
 			messageManager.sendMessage(sender, messageSection.error.playerOffline);
 			return;
 		}
@@ -74,7 +76,7 @@ public class IgnoreCommand implements CommandClass {
 			return;
 		}
 
-		User user = userData.get(sender.getUniqueId().toString());
+		User user = users.get(sender.getUniqueId().toString());
 
 		if (user.containsIgnoredPlayers(target.getUniqueId())) {
 			messageManager.sendMessage(sender, messageSection.error.playerAlreadyIgnored,
@@ -86,5 +88,4 @@ public class IgnoreCommand implements CommandClass {
 		messageManager.sendMessage(sender, rootSection.ignore.ignoredPlayer,
 			Placeholder.unparsed("player", target.getName()));
 	}
-
 }

@@ -11,6 +11,7 @@ import me.fixeddev.commandflow.bukkit.annotation.Sender;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.entity.Player;
 
+import javax.inject.Named;
 import java.util.Map;
 
 @Command(
@@ -19,10 +20,13 @@ import java.util.Map;
 
 public class UnIgnoreCommand implements CommandClass {
 
-	private MessageManager messageManager;
+	@Named("users")
+	private Map<String, User> users;
+
 	private ConfigurationContainer<RootSection> configurationContainer;
 	private ConfigurationContainer<MessageSection> messageContainer;
-	private Map<String, User> userData;
+
+	private MessageManager messageManager;
 
 	public void execute(@Sender Player sender, Player target) {
 
@@ -34,7 +38,7 @@ public class UnIgnoreCommand implements CommandClass {
 			return;
 		}
 
-		User user = userData.get(target.getUniqueId().toString());
+		User user = users.get(target.getUniqueId().toString());
 
 		if (user.containsIgnoredPlayers(target.getUniqueId())) {
 			messageManager.sendMessage(sender, messageSection.error.playerAlreadyUnIgnored,
@@ -46,5 +50,4 @@ public class UnIgnoreCommand implements CommandClass {
 		messageManager.sendMessage(sender, rootSection.ignore.unignoredPlayer,
 			Placeholder.unparsed("player", target.getName()));
 	}
-
 }

@@ -20,30 +20,33 @@ import javax.inject.Named;
 @InjectAll
 public class MainCommand implements CommandClass {
 
-	private ConfigurationContainer<RootSection> configurationContainer;
-	private ConfigurationContainer<MessageSection> messageContainer;
-	private UpdateCheckHandler updateChecker;
-	private MessageManager messageManager;
 	@Named("plugin-version")
 	private String pluginVersion;
+
+	private ConfigurationContainer<RootSection> configurationContainer;
+	private ConfigurationContainer<MessageSection> messageContainer;
+
+	private UpdateCheckHandler updateChecker;
+	private MessageManager messageManager;
 
 	@Command(names = {""})
 	public void executeMainSubCommand(@Sender Player sender) {
 
 		messageManager.sendMessage(sender, """
-					<blue>ChatLab: <white>Main plugin command.
-					<dark_grey>- <white>/clab reload <dark_grey>: <green>Reload the plugin.
-					<dark_grey>- <white>/clab check-update <dark_grey>: <green>Check update.
-					<dark_grey>- <white>/clab re-check <dark_grey>: <green>Send a request if has a new update.
-					<dark_grey>- <white>/clab about <dark_grey>: <green>See about the plugin.""");
+			<blue>ChatLab: <white>Main plugin command.
+			<dark_grey>- <white>/clab reload <dark_grey>: <green>Reload the plugin.
+			<dark_grey>- <white>/clab check-update <dark_grey>: <green>Check update.
+			<dark_grey>- <white>/clab re-check <dark_grey>: <green>Send a request if has a new update.
+			<dark_grey>- <white>/clab about <dark_grey>: <green>See about the plugin.""");
 	}
+
 	@Command(names = "about")
 	public void executeAboutSubCommand(@Sender Player sender) {
 
 		messageManager.sendMessage(sender, """
-            <green>ChatLab <dark_gray>- <white>Chat plugin.<white>
-            <blue><version>
-            <green>>> <white>Source code: <green><u><click:open_url:'https://github.com/devblook/chatlab>[GitHub]</click></u>""",
+				<green>ChatLab <dark_gray>- <white>Chat plugin.<white>
+				<blue><version>
+				<green>>> <white>Source code: <green><u><click:open_url:'https://github.com/devblook/chatlab>[GitHub]</click></u>""",
 			Placeholder.unparsed("version", pluginVersion));
 	}
 
@@ -56,9 +59,9 @@ public class MainCommand implements CommandClass {
 	}
 
 	@Command(names = "check-update", permission = "clab.check-update")
-	public void executeCheckUpdateSubCommand(@Sender Player sender){
+	public void executeCheckUpdateSubCommand(@Sender Player sender) {
 
-		if (!updateChecker.requestSuccess()){
+		if (!updateChecker.requestSuccess()) {
 			messageManager.sendMessage(sender, "<green>Checking update!");
 			updateChecker
 				.request()
@@ -70,7 +73,7 @@ public class MainCommand implements CommandClass {
 	}
 
 	@Command(names = "re-check", permission = "clab.check-update")
-	public void executeReCheckUpdateSubCommand(@Sender Player sender){
+	public void executeReCheckUpdateSubCommand(@Sender Player sender) {
 
 		messageManager.sendMessage(sender, "<green>Checking update!");
 		updateChecker
@@ -78,16 +81,15 @@ public class MainCommand implements CommandClass {
 			.thenAccept(action -> checkUpdate(sender));
 	}
 
-	private void checkUpdate(Player sender){
+	private void checkUpdate(Player sender) {
 
-		if (!updateChecker.updated()){
+		if (!updateChecker.updated()) {
 			messageManager.sendMessage(sender, """
-						<green>Checked! <white>The plugin has a new update.
-						<dark_green>>> <green><u><click:open_url:'https://github.com/devblook/chatlab/releases/tag/%s'>Click here</click></u> <white>to download the plugin."""
+				<green>Checked! <white>The plugin has a new update.
+				<dark_green>>> <green><u><click:open_url:'https://github.com/devblook/chatlab/releases/tag/%s'>Click here</click></u> <white>to download the plugin."""
 				.formatted(updateChecker.lastVersion()));
-		}else{
+		} else {
 			messageManager.sendMessage(sender, "<green>Checked! <white>You have the latest update!");
 		}
 	}
-
 }
