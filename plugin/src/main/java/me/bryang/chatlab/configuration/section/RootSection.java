@@ -1,23 +1,30 @@
 package me.bryang.chatlab.configuration.section;
 
+import me.bryang.chatlab.chat.condition.ConditionType;
+import me.bryang.chatlab.chat.serializer.FormatConfig;
 import me.bryang.chatlab.configuration.ConfigurationSection;
 import org.spongepowered.configurate.objectmapping.ConfigSerializable;
 import org.spongepowered.configurate.objectmapping.meta.Comment;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @ConfigSerializable
 public class RootSection extends ConfigurationSection {
 
 	@Comment("Plugin settings")
 	public MainSettings mainSettings = new MainSettings();
+
 	@Comment("Private messages section")
 	public PrivateMessage privateMessage = new PrivateMessage();
+
 	@Comment("Reply messages section")
 	public Reply reply = new Reply();
+
 	@Comment("Chat format section")
 	public ChatFormat chatFormat = new ChatFormat();
+
 	@Comment("Ignore messages section")
 	public Ignore ignore = new Ignore();
 
@@ -25,7 +32,8 @@ public class RootSection extends ConfigurationSection {
 	public MsgSpy msgSpy = new MsgSpy();
 
 	@ConfigSerializable
-	public static class MainSettings{
+	public static class MainSettings {
+
 		@Comment("""
 			Enable message if the plugin isn't updated when you enter to the server with a permission.
 			Permission: clab.check-update
@@ -33,17 +41,6 @@ public class RootSection extends ConfigurationSection {
 		public boolean updateCheckChat = true;
 	}
 
-	@ConfigSerializable
-	public static class ChatFormat {
-
-		@Comment("Enable option")
-		public boolean enabled;
-
-		@Comment("""
-			Format when you input a chat message.
-			Permission to use tags (MiniMessage tags): clab.tags""")
-		public String format = "<green>>> <white><player> <grey>: <white><message>";
-	}
 
 	@ConfigSerializable
 	public static class PrivateMessage {
@@ -54,7 +51,7 @@ public class RootSection extends ConfigurationSection {
 		public Toggle toggle = new Toggle();
 
 		@ConfigSerializable
-		public static class Toggle{
+		public static class Toggle {
 
 			public String enable = "<red>[MSG] <dark_gray>| <white>Enabled private messages.";
 			public String disable = "<red>[MSG] <dark_gray>| <white>Disabled private messages.";
@@ -95,5 +92,38 @@ public class RootSection extends ConfigurationSection {
 			public String error = "You aren't ignoring anyone.";
 		}
 	}
+
+	@ConfigSerializable
+	public static class MsgSpy{
+
+		@Comment("Format when a player send a private message.")
+		public String privateMessageFormat = "<orange>[Spy] <dark_gray>| <green><sender> <dark_green>> <green><receptor> <dark_gray>: <white><message>";
+
+		@Comment("")
+		public String enabled = "<orange>[Spy] <dark_gray>| <white>Enabled spy-private message mode.";
+
+		@Comment("")
+		public String disabled = "<orange>[Spy] <dark_gray>| <white>Disabled spy-private message mode.";
+	}
+
+	@ConfigSerializable
+	public static class ChatFormat{
+
+		public boolean enabled = true;
+		
+		public ConditionType conditionType = ConditionType.GROUP;
+
+		public Default defaultFormat = new Default();
+
+		public Map<String, FormatConfig> groupFormats = Map.of(
+			"vip", new FormatConfig("vip" , "[VIP] >> <white><player> <dark_gray>: <white><message>"));
+	}
+
+	@ConfigSerializable
+	public static class Default{
+
+		public String format = ">> <white><player> <dark_gray>: <white><message>";
+	}
+
 
 }
