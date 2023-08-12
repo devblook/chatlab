@@ -39,6 +39,7 @@ public class User {
 	public void ignore(UUID target) {
 		ignoredPlayers.add(target.toString());
 	}
+
 	public void unIgnore(UUID target) {
 		ignoredPlayers.remove(target.toString());
 	}
