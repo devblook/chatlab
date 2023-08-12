@@ -1,18 +1,13 @@
 package me.bryang.chatlab.user;
 
-import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonWriter;
 import me.bryang.chatlab.user.gson.LocalExclusionStrategy;
 import org.slf4j.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
-import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,7 +15,7 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 @Singleton
-public class UserDataHandler  {
+public class UserDataHandler {
 
 	@Inject
 	@Named("plugin-folder")
@@ -38,34 +33,37 @@ public class UserDataHandler  {
 		gson = new GsonBuilder()
 			.addSerializationExclusionStrategy(new LocalExclusionStrategy())
 			.create();
-		playersPath = path.resolve("players.json");
-
-		try {
-			if (Files.size(playersPath) == 0) {
-				logger.info("Data loaded");
-				return;
-			}
-
-
-			JsonElement jsonParsed = JsonParser.parseReader(Files.newBufferedReader(playersPath));
-			Type type = new TypeToken<Map<String, User>>(){}.getType();
-			Map<String, User> newUserData = new Gson().fromJson(jsonParsed, type);
-
-			users.putAll(newUserData);
-			logger.info("Data loaded");
-		} catch (Exception exception) {
-			exception.fillInStackTrace();
-		}
+		playersPath = path.resolve("users");
 
 	}
 
-	public void update(User user){
+	public boolean exists(String uniqueId){
+		return Files.exists(playersPath.resolve(uniqueId + ".json"));
+	}
+
+	public void deserializeAndPut(String uniqueId){
 
 		CompletableFuture.runAsync(() -> {
+			String playerData = "";
 
-			try (JsonWriter jsonWriter = new JsonWriter(Files.newBufferedWriter(path, StandardCharsets.UTF_8))) {
-				jsonWriter.jsonValue(gson.toJson(user));
+			try {
+				playerData = Files.readString(playersPath.resolve(uniqueId + ".json"));
+			} catch (Exception exception) {
+				exception.fillInStackTrace();
+			}
 
+			User user = gson.fromJson(playerData, User.class);
+			users.put(uniqueId, user);
+		});
+	}
+
+	public void serializeAndSave(String uniqueId, User user){
+
+		CompletableFuture.runAsync(() -> {
+			String jsonPath = gson.toJson(user);
+
+			try {
+				Files.writeString(playersPath.resolve(uniqueId + ".json"), jsonPath, StandardCharsets.UTF_8);
 			} catch (Exception exception) {
 				exception.fillInStackTrace();
 			}
@@ -74,16 +72,17 @@ public class UserDataHandler  {
 
 	public void stop() {
 
-		String jsonPath = gson.toJson(users);
+		users.forEach((key, user) -> {
+			String jsonPath = gson.toJson(user);
 
-		try {
-			Files.writeString(playersPath, jsonPath, StandardCharsets.UTF_8);
-			logger.info("Data saved");
-		} catch (Exception exception) {
-			exception.fillInStackTrace();
+			try {
+				Files.writeString(playersPath.resolve(key + ".json"), jsonPath, StandardCharsets.UTF_8);
+			}catch (Exception exception){
+				exception.fillInStackTrace();
+			}
+		});
 
-		}
+		logger.info("Data saved");
 	}
-
 }
 
