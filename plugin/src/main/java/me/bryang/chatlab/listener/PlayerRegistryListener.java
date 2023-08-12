@@ -22,6 +22,7 @@ public class PlayerRegistryListener implements Listener {
 
 	private Map<String, User> users;
 	private ConfigurationContainer<RootSection> configurationContainer;
+
 	private MessageManager messageManager;
 	private UpdateCheckHandler updateChecker;
 	private UserDataHandler userDataHandler;
@@ -34,7 +35,7 @@ public class PlayerRegistryListener implements Listener {
 		if (updateChecker.requestSuccess() &&
 			sender.hasPermission("clab.check-update") &&
 			configurationContainer.get().mainSettings.updateCheckChat &&
-			!updateChecker.updated()){
+			!updateChecker.updated()) {
 
 			messageManager.sendMessage(sender, """
 				<blue>[ChatLab] <white>| <green>Hello! There is a update.
@@ -42,28 +43,37 @@ public class PlayerRegistryListener implements Listener {
 				.formatted(updateChecker.lastVersion()));
 		}
 
-		users.putIfAbsent(sender.getUniqueId().toString(), new User());
+		String senderUniqueId = sender.getUniqueId().toString();
+
+		if (users.containsKey(senderUniqueId)) {
+			return;
+		}
+
+		if (!userDataHandler.exists(senderUniqueId)){
+			userDataHandler.deserializeAndPut(senderUniqueId);
+		}else{
+			users.put(senderUniqueId, new User());
+		}
 	}
 
 	@EventHandler
 	public void onUnRegistry(PlayerQuitEvent event) {
 
-		User user = users.get(event.getPlayer().getUniqueId().toString());
+		String senderUniqueId = event.getPlayer().getUniqueId().toString();
+		User user = users.get(senderUniqueId);
 
-		if (!user.hasRecentMessenger()) {
-			return;
+		if (user.hasRecentMessenger()) {
+
+			Player sender = Bukkit.getPlayer(user.recentMessenger());
+			User target = users.get(user.recentMessenger().toString());
+
+			messageManager.sendMessage(sender, configurationContainer.get().reply.left,
+				Placeholder.unparsed("target", event.getPlayer().getName()));
+
+			user.recentMessenger(null);
+			target.recentMessenger(null);
 		}
 
-		Player sender = Bukkit.getPlayer(user.recentMessenger());
-		User target = users.get(user.recentMessenger().toString());
-
-		messageManager.sendMessage(sender, configurationContainer.get().reply.left,
-			Placeholder.unparsed("target", event.getPlayer().getName()));
-
-		user.recentMessenger(null);
-		target.recentMessenger(null);
-
-		userDataHandler.update(user);
+		userDataHandler.serializeAndSave(senderUniqueId, user);
 	}
-
 }
