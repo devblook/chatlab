@@ -23,6 +23,10 @@ public class MessageManager {
 		sender.sendMessage(miniMessage.deserialize(message, tagResolver));
 	}
 
+	public Component parse(String message, TagResolver... tagResolver){
+		return miniMessage.deserialize(message, tagResolver);
+	}
+
 	public Component formatChat(Player target, String formatMessage, TagResolver messageResolver) {
 
 		TagResolver.Builder tagBuilder = TagResolver.builder();
@@ -40,5 +44,4 @@ public class MessageManager {
 
 		return miniMessage.deserialize(formatMessage, tagBuilder.build());
 	}
-
 }
