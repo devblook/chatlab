@@ -17,8 +17,8 @@ public class MessageSection extends ConfigurationSection {
 
 		@Comment("Specific argument is missing")
 		public String noArgument = """
-				<red>[Error] <dark_gray>| <white>Unknown argument.
-				<red>>> <white>Usage: <green><usage><white>.""";
+			<red>[Error] <dark_gray>| <white>Unknown argument.
+			<red>>> <white>Usage: <green><usage><white>.""";
 
 		@Comment("Message to notify the player hes trying to message isn't online.")
 		public String playerOffline = "<red>[Error] <dark_gray>| <white>The specified player is offline!";
