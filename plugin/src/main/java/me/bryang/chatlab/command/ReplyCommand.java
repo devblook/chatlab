@@ -14,15 +14,20 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import team.unnamed.inject.InjectAll;
 
+import javax.inject.Named;
 import java.util.Map;
 
 @InjectAll
 public class ReplyCommand implements CommandClass {
 
+	@Named("users")
+	private Map<String, User> users;
+
 	private ConfigurationContainer<RootSection> configurationContainer;
 	private ConfigurationContainer<MessageSection> messageContainer;
-	private Map<String, User> users;
+
 	private MessageManager messageManager;
+
 
 	@Command(
 		names = {"reply", "r"},
@@ -54,5 +59,4 @@ public class ReplyCommand implements CommandClass {
 			Placeholder.unparsed("sender", sender.getName()),
 			Placeholder.unparsed("message", senderMessage));
 	}
-
 }
