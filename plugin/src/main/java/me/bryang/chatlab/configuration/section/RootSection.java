@@ -97,32 +97,51 @@ public class RootSection extends ConfigurationSection {
 	public static class MsgSpy{
 
 		@Comment("Format when a player send a private message.")
-		public String privateMessageFormat = "<orange>[Spy] <dark_gray>| <green><sender> <dark_green>> <green><receptor> <dark_gray>: <white><message>";
+		public String privateMessageFormat = "<gold>[Spy] <dark_gray>| <green><sender> <dark_green>> <green><receptor> <dark_gray>: <white><message>";
 
-		@Comment("")
-		public String enabled = "<orange>[Spy] <dark_gray>| <white>Enabled spy-private message mode.";
+		@Comment("Message when a player enable the social-spy mode")
+		public String enabled = "<gold>[Spy] <dark_gray>| <white>Enabled spy-private message mode.";
 
-		@Comment("")
-		public String disabled = "<orange>[Spy] <dark_gray>| <white>Disabled spy-private message mode.";
+		@Comment("Message when a player disable the social-spy mode")
+		public String disabled = "<gold>[Spy] <dark_gray>| <white>Disabled spy-private message mode.";
+
+		@Comment("Social-spy list format")
+		public List<String> socialSpyListFormat = List.of("<gold>[Spy] <dark_gray>| <white>List of players using social-spy <green>[<player-in-spy-size>] <dark_gray>: <gold><player-in-spy-data>");
 	}
 
 	@ConfigSerializable
 	public static class ChatFormat{
 
+		@Comment("Enable the chat-format option.")
 		public boolean enabled = true;
-		
-		public ConditionType conditionType = ConditionType.GROUP;
+
+		@Comment("""
+   			Note: If you doesn't have Vault and a plugin permission you only can use the default option.
+			Type of conditions:
+			- GROUP: Divide formats in groups.
+			- PERMISSIONS: Divide formats in permissions.
+			- DEFAULT: Use only default group.
+			""")
+		public ConditionType conditionType = ConditionType.DEFAULT;
 
 		public Default defaultFormat = new Default();
 
+		@Comment("Enable op format [When a player has OP or '*' permission")
+		public OPFormat opFormat = new OPFormat();
 		public Map<String, FormatConfig> groupFormats = Map.of(
-			"vip", new FormatConfig("vip" , "[VIP] >> <white><player> <dark_gray>: <white><message>"));
+			"vip", new FormatConfig("vip" , "<green>[VIP] >> <white><player> <dark_gray>: <white><message>"),
+			"admin", new FormatConfig("admin" , "<red>[ADMIN] >> <white><player> <dark_gray>: <white><message>"));
 	}
+	@ConfigSerializable
+	public static class OPFormat{
 
+		public boolean enabled = false;
+		public String format = "<red>[OP] <white><player> <dark_gray>: <white><message>";
+	}
 	@ConfigSerializable
 	public static class Default{
 
-		public String format = ">> <white><player> <dark_gray>: <white><message>";
+		public String format = "<green>>> <white><player> <dark_gray>: <white><message>";
 	}
 
 
