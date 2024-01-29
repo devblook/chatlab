@@ -1,7 +1,12 @@
 package me.bryang.chatlab.module;
 
 import me.bryang.chatlab.ChatLab;
-import me.bryang.chatlab.module.submodule.*;
+import me.bryang.chatlab.module.submodule.plugin.ConditionModule;
+import me.bryang.chatlab.module.submodule.plugin.ConfigurationModule;
+import me.bryang.chatlab.module.submodule.plugin.ServiceModule;
+import me.bryang.chatlab.module.submodule.plugin.StorageModule;
+import me.bryang.chatlab.module.submodule.server.CommandModule;
+import me.bryang.chatlab.module.submodule.server.ListenerModule;
 import org.slf4j.Logger;
 import team.unnamed.inject.AbstractModule;
 import team.unnamed.inject.Provides;
@@ -36,10 +41,13 @@ public class MainModule extends AbstractModule {
 			.named("plugin-version")
 			.toInstance(plugin.getPluginMeta().getVersion());
 
-		install(new DataModule());
-		install(new ListenerModule());
-		install(new CommandModule());
-		install(new ServiceModule());
-		install(new ConfigurationModule());
+		install(
+			new ConfigurationModule(),
+			new ConditionModule(),
+			new StorageModule(),
+			new ListenerModule(),
+			new CommandModule(),
+			new ServiceModule());
+
 	}
 }
