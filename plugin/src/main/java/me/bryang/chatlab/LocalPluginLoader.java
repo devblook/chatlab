@@ -20,15 +20,15 @@ public class LocalPluginLoader implements PluginLoader {
 		MavenLibraryResolver resolver = new MavenLibraryResolver();
 
 		List<RemoteRepository> repositories = mapRepositories(
-			new RepoInput(
+			new RepositoryCoordinates(
 				"central",
 				"https://repo1.maven.org/maven2/"),
 
-			new RepoInput(
+			new RepositoryCoordinates(
 				"unnamed-public",
 				"https://repo.unnamed.team/repository/unnamed-public/"),
 
-			new RepoInput(
+			new RepositoryCoordinates(
 				"sonatype-snapshot",
 				"https://oss.sonatype.org/content/repositories/snapshots/")
 
@@ -52,15 +52,16 @@ public class LocalPluginLoader implements PluginLoader {
 			.toList();
 	}
 
-	private List<RemoteRepository> mapRepositories(RepoInput... repositoryCoords) {
+	private List<RemoteRepository> mapRepositories(RepositoryCoordinates... repositoryCoords) {
 		return Arrays.stream(repositoryCoords)
 			.map(value -> new RemoteRepository.Builder
 				(value.id, "default", value.url).build())
 			.toList();
 	}
 
-	private record RepoInput(String id, String url) {
+	private record RepositoryCoordinates(String id, String url) {
 
 	}
+
 }
 
