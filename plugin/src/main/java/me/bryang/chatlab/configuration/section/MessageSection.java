@@ -33,7 +33,7 @@ public class MessageSection extends ConfigurationSection {
 		public String yourselfTalk = "<red>[Error] <dark_gray>| <white>You cannot send private message to yourself.";
 
 		@Comment("Message when you send a private message to a player, but the player has private messages disabled.")
-		public String msgDisabled = "<red>Error] <dark_gray>| <white>The player <player> has private messages disabled.";
+		public String msgDisabled = "<red>[Error] <dark_gray>| <white>The player <player> has private messages disabled.";
 
 		@Comment("Message to player that's try to ignoring to itself.")
 		public String yourselfIgnore = "<red>[Error] <dark_gray>| <white>You cannot ignore to yourself.";
@@ -43,6 +43,12 @@ public class MessageSection extends ConfigurationSection {
 
 		@Comment("Message when you input a player to unignore that already is unignored")
 		public String playerAlreadyUnIgnored = "<red>[Error] <dark_gray>| <white>The player <green><player> <white>is already unignored.";
+
+		@Comment("Message when you already enabled the socialspy mode")
+		public String socialSpyAlreadyEnabled = "<red>[Error] <dark_gray>| <white>You have the social-spy enabled.";
+
+		@Comment("Message when you already enabled the socialspy mode")
+		public String socialSpyAlreadyDisabled = "<red>[Error] <dark_gray>| <white>You have the social-spy enabled.";
 
 	}
 }
