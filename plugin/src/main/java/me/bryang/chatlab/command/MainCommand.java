@@ -1,6 +1,7 @@
 package me.bryang.chatlab.command;
 
 import me.bryang.chatlab.UpdateCheckHandler;
+import me.bryang.chatlab.chat.GroupFormatHandler;
 import me.bryang.chatlab.configuration.ConfigurationContainer;
 import me.bryang.chatlab.configuration.section.MessageSection;
 import me.bryang.chatlab.configuration.section.RootSection;
@@ -26,6 +27,7 @@ public class MainCommand implements CommandClass {
 	private ConfigurationContainer<RootSection> configurationContainer;
 	private ConfigurationContainer<MessageSection> messageContainer;
 
+	private GroupFormatHandler groupFormatHandler;
 	private UpdateCheckHandler updateChecker;
 	private MessageManager messageManager;
 
@@ -55,7 +57,9 @@ public class MainCommand implements CommandClass {
 
 		configurationContainer.reload();
 		messageContainer.reload();
-		messageManager.sendMessage(sender, "<blue>[ChatLab] <dark_grey>| <white>Plugin has been reloaded.");
+		groupFormatHandler.load();
+
+		messageManager.sendMessage(sender, "<blue>[ChatLab] <dark_grey>| <white>The plugin has been reloaded.");
 	}
 
 	@Command(names = "check-update", permission = "clab.check-update")
