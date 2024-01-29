@@ -1,4 +1,4 @@
-package me.bryang.chatlab.service.command.builder;
+package me.bryang.chatlab.command.component.builder;
 
 public enum CommandUsage {
 	MSG("/msg <player> <message>"),
@@ -7,7 +7,7 @@ public enum CommandUsage {
 	IGNORE("/ignore <player>"),
 	UNIGNORE("/unignore <player>"),
 	CLAB("/clab help"),
-	SOCIALSPY("/socialspy");
+	SOCIALSPY("/socialspy [<on/enable>, <off/disable>, list]");
 
 	private final String usage;
 

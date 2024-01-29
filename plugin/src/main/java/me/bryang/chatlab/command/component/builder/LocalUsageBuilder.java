@@ -1,4 +1,4 @@
-package me.bryang.chatlab.service.command.builder;
+package me.bryang.chatlab.command.component.builder;
 
 import me.bryang.chatlab.configuration.ConfigurationContainer;
 import me.bryang.chatlab.configuration.section.MessageSection;
