@@ -2,7 +2,7 @@
 
 <p align="center">
  <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://i.ibb.co/Tvw7v4g/plugin-background-black.png"> 
+  <source media="(prefers-color-scheme: dark)" srcset="https://i.ibb.co/ZHNQswB/background.png"> 
   <img src="https://i.ibb.co/fdhwS1J/plugin-background.png" width="550" height="320" />
  </picture>
 </p>
@@ -27,21 +27,20 @@ You can check the last version of the plugin in the [releases](https://github.co
 
 With the plugin you can:
 
-
 - Use [MiniMessage](https://docs.advntr.dev/minimessage/index.html) in message paths.
-- Send private messages and reply.
-- Ignore or unignore a player and see the list.
-- Use the chat format.
+- Send private messages and reply the message.
+- Ignore or un-ignore a player, and see the list of ignored players.
+- Use the chat format (compability with MiniPlaceholders).
+- Divide chat format per group/permission (with optional op-format).
+- Watch private messages.
+- Toggle private messages.
 
 ## To do:
 
 - [X] Release
-- [ ] Chat format 
-- [ ] Ignore and unignore command 
-- [ ] Multilanguage support 
-
-Note: Coming soon more features.
+- [x] Chat format 
+- [x] Ignore and unignore command
 
 ## Support:
-[Click here](https://discord.devblook.team/) to go to the discord support.
+[Click here](https://discord.gg/8pnK5g2eeH) to go to the discord support.
 
