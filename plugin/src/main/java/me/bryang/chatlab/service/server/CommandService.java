@@ -1,7 +1,8 @@
-package me.bryang.chatlab.service.command;
+package me.bryang.chatlab.service.server;
 
+import me.bryang.chatlab.command.component.LocalTranslationProvider;
+import me.bryang.chatlab.command.component.builder.LocalUsageBuilder;
 import me.bryang.chatlab.service.Service;
-import me.bryang.chatlab.service.command.builder.LocalUsageBuilder;
 import me.fixeddev.commandflow.CommandManager;
 import me.fixeddev.commandflow.annotated.AnnotatedCommandTreeBuilder;
 import me.fixeddev.commandflow.annotated.AnnotatedCommandTreeBuilderImpl;

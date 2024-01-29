@@ -1,8 +1,9 @@
-package me.bryang.chatlab.service;
+package me.bryang.chatlab.service.server;
 
 import me.bryang.chatlab.ChatLab;
 import me.bryang.chatlab.configuration.ConfigurationContainer;
 import me.bryang.chatlab.configuration.section.RootSection;
+import me.bryang.chatlab.service.Service;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import team.unnamed.inject.InjectAll;
