@@ -56,7 +56,6 @@ public class GsonReader {
 			.getAsJsonArray()
 			.forEach(value -> stringList.add(value.getAsString()));
 
-		System.out.println(stringList);
 		return stringList;
 
 	}
