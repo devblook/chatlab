@@ -4,7 +4,8 @@ import me.bryang.chatlab.configuration.ConfigurationContainer;
 import me.bryang.chatlab.configuration.section.MessageSection;
 import me.bryang.chatlab.configuration.section.RootSection;
 import me.bryang.chatlab.message.MessageManager;
-import me.bryang.chatlab.user.User;
+import me.bryang.chatlab.storage.repository.Repository;
+import me.bryang.chatlab.storage.user.User;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
 import me.fixeddev.commandflow.bukkit.annotation.Sender;
@@ -12,22 +13,22 @@ import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.entity.Player;
 
 import javax.inject.Named;
-import java.util.Map;
 
-@Command(
-	names = "unignore",
-	desc = "Command to un-ignore a player.")
+
 
 public class UnIgnoreCommand implements CommandClass {
 
 	@Named("users")
-	private Map<String, User> users;
+	private Repository<User> userRepository;
 
 	private ConfigurationContainer<RootSection> configurationContainer;
 	private ConfigurationContainer<MessageSection> messageContainer;
 
 	private MessageManager messageManager;
 
+	@Command(
+		names = "unignore",
+		desc = "Command to un-ignore a player.")
 	public void execute(@Sender Player sender, Player target) {
 
 		RootSection rootSection = configurationContainer.get();
@@ -38,7 +39,7 @@ public class UnIgnoreCommand implements CommandClass {
 			return;
 		}
 
-		User user = users.get(target.getUniqueId().toString());
+		User user = userRepository.findById(target.getUniqueId().toString());
 
 		if (user.containsIgnoredPlayers(target.getUniqueId())) {
 			messageManager.sendMessage(sender, messageSection.error.playerAlreadyUnIgnored,
