@@ -1,6 +1,6 @@
 package me.bryang.chatlab.service.server;
 
-import me.bryang.chatlab.command.component.LocalTranslationProvider;
+import me.bryang.chatlab.command.component.LocalTranslator;
 import me.bryang.chatlab.command.component.builder.LocalUsageBuilder;
 import me.bryang.chatlab.service.Service;
 import me.fixeddev.commandflow.CommandManager;
@@ -19,7 +19,7 @@ import java.util.Set;
 public class CommandService implements Service {
 
 	private Set<CommandClass> commands;
-	private LocalTranslationProvider commandTranslatorHandler;
+	private LocalTranslator localTranslator;
 	private LocalUsageBuilder localUsageBuilder;
 
 	@Override
@@ -28,7 +28,7 @@ public class CommandService implements Service {
 		CommandManager commandManager = new BukkitCommandManager("ChatLab");
 
 		commandManager.setUsageBuilder(localUsageBuilder);
-		commandManager.getTranslator().setProvider(commandTranslatorHandler);
+		commandManager.setTranslator(localTranslator);
 
 		PartInjector partInjector = PartInjector.create();
 
