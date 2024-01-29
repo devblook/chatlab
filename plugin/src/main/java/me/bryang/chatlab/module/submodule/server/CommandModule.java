@@ -1,4 +1,4 @@
-package me.bryang.chatlab.module.submodule;
+package me.bryang.chatlab.module.submodule.server;
 
 import me.bryang.chatlab.command.*;
 import me.fixeddev.commandflow.annotated.CommandClass;

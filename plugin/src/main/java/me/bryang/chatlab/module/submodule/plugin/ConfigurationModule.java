@@ -1,4 +1,4 @@
-package me.bryang.chatlab.module.submodule;
+package me.bryang.chatlab.module.submodule.plugin;
 
 import me.bryang.chatlab.configuration.ConfigurationContainer;
 import me.bryang.chatlab.configuration.section.MessageSection;
