@@ -1,5 +1,7 @@
 package me.bryang.chatlab.configuration;
 
+import me.bryang.chatlab.chat.serializer.FormatConfig;
+import me.bryang.chatlab.chat.serializer.FormatSerializer;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
 
@@ -21,14 +23,17 @@ public class ConfigurationContainer<T extends ConfigurationSection> {
 
 	public void start(String fileName, Path path) {
 
+
 		loader = HoconConfigurationLoader
 			.builder()
 			.path(path.resolve(fileName + ".conf"))
 			.defaultOptions(config ->
 				config
 					.header(String.format("""
-				
-					%s""", fileName + ".conf")))
+		
+					%s""", fileName + ".conf"))
+
+					.serializers(serializer -> serializer.register(FormatConfig.class, new FormatSerializer())))
 			.build();
 
 		try {
@@ -38,6 +43,7 @@ public class ConfigurationContainer<T extends ConfigurationSection> {
 
 			node.set(clazz, internClass.get());
 			loader.save(node);
+
 
 		} catch (IOException exception) {
 			exception.fillInStackTrace();
@@ -63,5 +69,6 @@ public class ConfigurationContainer<T extends ConfigurationSection> {
 		} catch (IOException exception) {
 			exception.fillInStackTrace();
 		}
-	}
+
+    }
 }

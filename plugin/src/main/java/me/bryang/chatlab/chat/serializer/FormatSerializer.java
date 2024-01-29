@@ -24,4 +24,5 @@ public class FormatSerializer implements TypeSerializer<FormatConfig> {
 		node.node("condition").set(clazz.condition());
 		node.node("format").set(clazz.format());
 	}
+
 }
