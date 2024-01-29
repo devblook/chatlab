@@ -11,11 +11,12 @@ import me.fixeddev.commandflow.annotated.annotation.Command;
 import me.fixeddev.commandflow.bukkit.annotation.Sender;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.entity.Player;
+import team.unnamed.inject.InjectAll;
 
 import javax.inject.Named;
 
 
-
+@InjectAll
 public class UnIgnoreCommand implements CommandClass {
 
 	@Named("users")
@@ -39,9 +40,9 @@ public class UnIgnoreCommand implements CommandClass {
 			return;
 		}
 
-		User user = userRepository.findById(target.getUniqueId().toString());
+		User user = userRepository.findById(sender.getUniqueId().toString());
 
-		if (user.containsIgnoredPlayers(target.getUniqueId())) {
+		if (!user.containsIgnoredPlayers(target.getUniqueId())) {
 			messageManager.sendMessage(sender, messageSection.error.playerAlreadyUnIgnored,
 				Placeholder.unparsed("player", target.getName()));
 			return;
