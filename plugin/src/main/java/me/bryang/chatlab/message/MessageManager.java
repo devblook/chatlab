@@ -9,6 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import javax.inject.Singleton;
+import java.util.List;
 
 @Singleton
 public class MessageManager {
@@ -21,6 +22,11 @@ public class MessageManager {
 
 	public void sendMessage(Player sender, String message, TagResolver... tagResolver) {
 		sender.sendMessage(miniMessage.deserialize(message, tagResolver));
+	}
+
+	public void sendMessage(Player sender, List<String> message, TagResolver... tagResolver) {
+		message.forEach(messageLine ->  sender.sendMessage(miniMessage.deserialize(messageLine, tagResolver)));
+
 	}
 
 	public Component parse(String message, TagResolver... tagResolver){
