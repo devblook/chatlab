@@ -9,7 +9,7 @@ import team.unnamed.inject.Injector;
 import javax.inject.Inject;
 import java.util.Set;
 
-public class ChatLab extends JavaPlugin {
+public class ChatLab extends JavaPlugin{
 
 	@Inject
 	private Set<Service> services;
@@ -33,7 +33,7 @@ public class ChatLab extends JavaPlugin {
 
 		services.forEach(Service::start);
 
-		logger.info("Loaded services");
+		logger.info("Loaded services.");
 		logger.info("Thanks for using my plugin!");
 	}
 
