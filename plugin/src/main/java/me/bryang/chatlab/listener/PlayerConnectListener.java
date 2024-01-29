@@ -20,6 +20,7 @@ import team.unnamed.inject.InjectAll;
 
 import javax.inject.Named;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
 
 @InjectAll
 public class PlayerConnectListener implements Listener {
@@ -32,6 +33,9 @@ public class PlayerConnectListener implements Listener {
 	private MessageManager messageManager;
 	private UpdateCheckHandler updateChecker;
 	private GsonStorageManager gsonStorageManager;
+
+	@Named("async-thread")
+	private ExecutorService executorService;
 
 	@EventHandler
 	public void loginEvent(AsyncPlayerPreLoginEvent event){
@@ -85,12 +89,15 @@ public class PlayerConnectListener implements Listener {
 		}
 
 		CompletableFuture
-			.runAsync(() -> gsonStorageManager.save(user))
+			.runAsync(() -> {
+				gsonStorageManager.save(user);
+				userRepository.deleteById(user.id());
+			}, executorService)
 			.exceptionally(throwable -> {
 
 					logger.info("There was a error to save " + event.getPlayer().getName() + " data.");
 					logger.info("Message: " + throwable.getMessage());
 					return null;
-				});
+			});
 	}
 }

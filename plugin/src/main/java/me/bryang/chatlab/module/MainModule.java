@@ -11,8 +11,11 @@ import org.slf4j.Logger;
 import team.unnamed.inject.AbstractModule;
 import team.unnamed.inject.Provides;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 import java.nio.file.Path;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MainModule extends AbstractModule {
 
@@ -23,12 +26,14 @@ public class MainModule extends AbstractModule {
 
 	}
 
-	@Provides
-	@Singleton
+	@Provides @Singleton
 	private Logger provideLogger(ChatLab plugin) {
 		return plugin.getSLF4JLogger();
 	}
-
+	@Provides @Singleton @Named("async-thread")
+	public ExecutorService asyncThreadExecutor(){
+		return Executors.newSingleThreadExecutor();
+	}
 	@Override
 	public void configure() {
 		bind(ChatLab.class)
