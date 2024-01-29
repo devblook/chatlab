@@ -4,31 +4,52 @@ import me.bryang.chatlab.UpdateCheckHandler;
 import me.bryang.chatlab.configuration.ConfigurationContainer;
 import me.bryang.chatlab.configuration.section.RootSection;
 import me.bryang.chatlab.message.MessageManager;
-import me.bryang.chatlab.user.User;
-import me.bryang.chatlab.user.UserDataHandler;
+import me.bryang.chatlab.storage.repository.Repository;
+import me.bryang.chatlab.storage.user.User;
+import me.bryang.chatlab.storage.user.gson.GsonStorageManager;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.slf4j.Logger;
 import team.unnamed.inject.InjectAll;
 
-import java.util.Map;
+import javax.inject.Named;
+import java.util.concurrent.CompletableFuture;
 
 @InjectAll
-public class PlayerRegistryListener implements Listener {
+public class PlayerConnectListener implements Listener {
 
-	private Map<String, User> users;
+	@Named("users")
+	private Repository<User> userRepository;
 	private ConfigurationContainer<RootSection> configurationContainer;
 
+	private Logger logger;
 	private MessageManager messageManager;
 	private UpdateCheckHandler updateChecker;
-	private UserDataHandler userDataHandler;
+	private GsonStorageManager gsonStorageManager;
 
 	@EventHandler
-	public void onRegistry(PlayerJoinEvent event) {
+	public void loginEvent(AsyncPlayerPreLoginEvent event){
+		String senderUniqueId = event.getUniqueId().toString();
+
+		if (userRepository.exists(senderUniqueId)) {
+			return;
+		}
+
+		User user = gsonStorageManager.exists(senderUniqueId)
+			? gsonStorageManager.deserialize(senderUniqueId)
+			: new User(senderUniqueId);
+
+		userRepository.create(user);
+
+	}
+	@EventHandler
+	public void joinEvent(PlayerJoinEvent event) {
 
 		Player sender = event.getPlayer();
 
@@ -43,29 +64,18 @@ public class PlayerRegistryListener implements Listener {
 				.formatted(updateChecker.lastVersion()));
 		}
 
-		String senderUniqueId = sender.getUniqueId().toString();
-
-		if (users.containsKey(senderUniqueId)) {
-			return;
-		}
-
-		if (!userDataHandler.exists(senderUniqueId)){
-			userDataHandler.deserializeAndPut(senderUniqueId);
-		}else{
-			users.put(senderUniqueId, new User());
-		}
 	}
 
 	@EventHandler
-	public void onUnRegistry(PlayerQuitEvent event) {
+	public void quitEvent(PlayerQuitEvent event) {
 
 		String senderUniqueId = event.getPlayer().getUniqueId().toString();
-		User user = users.get(senderUniqueId);
+		User user = userRepository.findById(senderUniqueId);
 
 		if (user.hasRecentMessenger()) {
 
 			Player sender = Bukkit.getPlayer(user.recentMessenger());
-			User target = users.get(user.recentMessenger().toString());
+			User target = userRepository.findById(user.recentMessenger().toString());
 
 			messageManager.sendMessage(sender, configurationContainer.get().reply.left,
 				Placeholder.unparsed("target", event.getPlayer().getName()));
@@ -74,6 +84,13 @@ public class PlayerRegistryListener implements Listener {
 			target.recentMessenger(null);
 		}
 
-		userDataHandler.serializeAndSave(senderUniqueId, user);
+		CompletableFuture
+			.runAsync(() -> gsonStorageManager.save(user))
+			.exceptionally(throwable -> {
+
+					logger.info("There was a error to save " + event.getPlayer().getName() + " data.");
+					logger.info("Message: " + throwable.getMessage());
+					return null;
+				});
 	}
 }
