@@ -1,4 +1,4 @@
-package me.bryang.chatlab.user.gson;
+package me.bryang.chatlab.storage.user.gson;
 
 
 import java.lang.annotation.ElementType;
