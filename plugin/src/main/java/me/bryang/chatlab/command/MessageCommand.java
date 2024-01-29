@@ -3,9 +3,10 @@ package me.bryang.chatlab.command;
 import me.bryang.chatlab.configuration.ConfigurationContainer;
 import me.bryang.chatlab.configuration.section.MessageSection;
 import me.bryang.chatlab.configuration.section.RootSection;
+import me.bryang.chatlab.event.LocalSpyEvent;
 import me.bryang.chatlab.message.MessageManager;
-import me.bryang.chatlab.socialspy.LocalSpyEvent;
-import me.bryang.chatlab.user.User;
+import me.bryang.chatlab.storage.repository.Repository;
+import me.bryang.chatlab.storage.user.User;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
 import me.fixeddev.commandflow.annotated.annotation.Text;
@@ -15,13 +16,12 @@ import org.bukkit.entity.Player;
 import team.unnamed.inject.InjectAll;
 
 import javax.inject.Named;
-import java.util.Map;
 
 @InjectAll
 public class MessageCommand implements CommandClass {
 
 	@Named("users")
-	private Map<String, User> users;
+	private Repository<User> userRepository;
 
 	private ConfigurationContainer<RootSection> configurationContainer;
 	private ConfigurationContainer<MessageSection> messageContainer;
@@ -32,7 +32,7 @@ public class MessageCommand implements CommandClass {
 	@Command(
 		names = {"msg", "pm", "m", "message", "tell", "w"},
 		desc = "Command to send a private message.")
-	public void execute(@Sender Player sender, Player target, @Text String senderMessage) {
+	public void execute(@Sender Player sender, Player target, @Text String senderMessage){
 
 		RootSection configFile = configurationContainer.get();
 		MessageSection messageSection = messageContainer.get();
@@ -42,7 +42,7 @@ public class MessageCommand implements CommandClass {
 			return;
 		}
 
-		User targetUser = users.get(target.getUniqueId().toString());
+		User targetUser = userRepository.findById(target.getUniqueId().toString());
 
 		if (!targetUser.privateMessages() && !sender.hasPermission("clab.msg-toggle-bypass")) {
 			messageManager.sendMessage(sender, messageSection.error.msgDisabled,
@@ -63,7 +63,7 @@ public class MessageCommand implements CommandClass {
 			Placeholder.parsed("sender", sender.getName()),
 			Placeholder.unparsed("message", senderMessage));
 
-		User senderUser = users.get(target.getUniqueId().toString());
+		User senderUser = userRepository.findById(target.getUniqueId().toString());
 
 		senderUser.recentMessenger(target.getUniqueId());
 		targetUser.recentMessenger(sender.getUniqueId());
