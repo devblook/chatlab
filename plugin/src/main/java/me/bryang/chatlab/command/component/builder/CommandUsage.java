@@ -4,7 +4,7 @@ public enum CommandUsage {
 	MSG("/msg <player> <message>"),
 	TOGGLE_MSG("/toggle_msg"),
 	REPLY("/reply <message>"),
-	IGNORE("/ignore <player>"),
+	IGNORE("/ignore <player/-list>"),
 	UNIGNORE("/unignore <player>"),
 	CLAB("/clab help"),
 	SOCIALSPY("/socialspy [<on/enable>, <off/disable>, list]");
