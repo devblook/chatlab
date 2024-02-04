@@ -90,7 +90,7 @@ public class MainCommand implements CommandClass {
 	public void executeCommandsSubCommand(@Sender Player sender){
 		messageManager.sendMessage(sender, """
 			<blue>ChatLab: <white>List of commands.
-			<dark_grey>- <white>/clab [help,reload,check-update...]<dark_grey>: <green>Plugin command.
+			<dark_grey>- <white>/clab [help, reload, check-update...]<dark_grey>: <green>Plugin command.
 			<dark_grey>- <white>/msg <player> <message> <dark_grey>: <green>Send a private message.
 			<dark_grey>- <white>/reply <message> <dark_grey>: <green>Reply a message.
 			<dark_grey>- <white>/ignore <player/-list> <dark_grey>: <green>Ignore a player.
