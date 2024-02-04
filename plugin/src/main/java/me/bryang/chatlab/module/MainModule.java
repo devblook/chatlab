@@ -1,6 +1,6 @@
 package me.bryang.chatlab.module;
 
-import me.bryang.chatlab.ChatLab;
+import me.bryang.chatlab.ChatLabPlugin;
 import me.bryang.chatlab.module.submodule.plugin.ConditionModule;
 import me.bryang.chatlab.module.submodule.plugin.ConfigurationModule;
 import me.bryang.chatlab.module.submodule.plugin.ServiceModule;
@@ -19,15 +19,15 @@ import java.util.concurrent.Executors;
 
 public class MainModule extends AbstractModule {
 
-	private final ChatLab plugin;
+	private final ChatLabPlugin plugin;
 
-	public MainModule(ChatLab plugin) {
+	public MainModule(ChatLabPlugin plugin) {
 		this.plugin = plugin;
 
 	}
 
 	@Provides @Singleton
-	private Logger provideLogger(ChatLab plugin) {
+	private Logger provideLogger(ChatLabPlugin plugin) {
 		return plugin.getSLF4JLogger();
 	}
 	@Provides @Singleton @Named("async-thread")
@@ -36,7 +36,7 @@ public class MainModule extends AbstractModule {
 	}
 	@Override
 	public void configure() {
-		bind(ChatLab.class)
+		bind(ChatLabPlugin.class)
 			.toInstance(plugin);
 
 		bind(Path.class)

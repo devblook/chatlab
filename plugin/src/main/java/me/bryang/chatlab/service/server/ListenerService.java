@@ -1,6 +1,6 @@
 package me.bryang.chatlab.service.server;
 
-import me.bryang.chatlab.ChatLab;
+import me.bryang.chatlab.ChatLabPlugin;
 import me.bryang.chatlab.configuration.ConfigurationContainer;
 import me.bryang.chatlab.configuration.section.RootSection;
 import me.bryang.chatlab.service.Service;
@@ -13,7 +13,7 @@ import java.util.Set;
 @InjectAll
 public class ListenerService implements Service {
 
-	private ChatLab plugin;
+	private ChatLabPlugin plugin;
 
 	private ConfigurationContainer<RootSection> configContainer;
 

@@ -9,7 +9,7 @@ import team.unnamed.inject.Injector;
 import javax.inject.Inject;
 import java.util.Set;
 
-public class ChatLab extends JavaPlugin{
+public class ChatLabPlugin extends JavaPlugin{
 
 	@Inject
 	private Set<Service> services;
