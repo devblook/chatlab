@@ -30,7 +30,7 @@ public class MessageCommand implements CommandClass {
 	private LocalSpyEvent localSpyEvent;
 
 	@Command(
-		names = {"msg", "pm", "m", "message", "tell", "w"},
+		names = {"msg", "pm", "m", "message", "tell", "w", "whisper"},
 		desc = "Command to send a private message.")
 	public void execute(@Sender Player sender, Player target, @Text String senderMessage){
 
