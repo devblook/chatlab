@@ -3,7 +3,7 @@
 <p align="center">
  <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://i.ibb.co/ZHNQswB/background.png"> 
-  <img src="https://i.ibb.co/fdhwS1J/plugin-background.png" width="550" height="320" />
+  <img src="https://i.ibb.co/MRjQ8Tg/background-1.png" width="550" height="320" />
  </picture>
 </p>
 
