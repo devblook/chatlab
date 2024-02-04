@@ -72,7 +72,7 @@ public class PlayerChatListener implements Listener {
 			;
 			String format = groupFormatHandler.format(sender);
 
-			return messageManager.formatChat(source, format, messagePlaceholder);
+			return messageManager.parseChatFormat(source, format, messagePlaceholder);
 
 		});
 	}

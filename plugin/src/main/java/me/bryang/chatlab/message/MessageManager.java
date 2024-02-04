@@ -33,7 +33,7 @@ public class MessageManager {
 		return miniMessage.deserialize(message, tagResolver);
 	}
 
-	public Component formatChat(Player target, String formatMessage, TagResolver messageResolver) {
+	public Component parseChatFormat(Player target, String formatMessage, TagResolver messageResolver) {
 
 		TagResolver.Builder tagBuilder = TagResolver.builder();
 		tagBuilder
