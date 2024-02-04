@@ -24,7 +24,7 @@ public class ToggleMsgCommand implements CommandClass {
 	private MessageManager messageManager;
 
 	@Command(
-		names = "toggle-msg",
+		names = {"toggle-msg", "toggle-pm"},
 		desc = "Toggle private messages"
 	)
 	public void execute(@Sender Player sender) {
