@@ -39,7 +39,8 @@ public class MainCommand implements CommandClass {
 			<dark_grey>- <white>/clab reload <dark_grey>: <green>Reload the plugin.
 			<dark_grey>- <white>/clab check-update <dark_grey>: <green>Check update.
 			<dark_grey>- <white>/clab re-check <dark_grey>: <green>Send a request if has a new update.
-			<dark_grey>- <white>/clab about <dark_grey>: <green>See about the plugin.""");
+			<dark_grey>- <white>/clab about <dark_grey>: <green>See about the plugin.
+			<dark_grey>- <white>/clab commands <dark_grey>: <green>See all commands of the plugin.""");
 	}
 
 	@Command(names = "about")
@@ -47,7 +48,7 @@ public class MainCommand implements CommandClass {
 
 		messageManager.sendMessage(sender, """
 				<green>ChatLab <dark_gray>- <white>Chat plugin.<white>
-				<blue><version>
+				<blue>Version: <white><version>
 				<green>>> <white>Source code: <green><u><click:open_url:'https://github.com/devblook/chatlab>[GitHub]</click></u>""",
 			Placeholder.unparsed("version", pluginVersion));
 	}
@@ -85,6 +86,18 @@ public class MainCommand implements CommandClass {
 			.thenAccept(action -> checkUpdate(sender));
 	}
 
+	@Command(names = "commands")
+	public void executeCommandsSubCommand(@Sender Player sender){
+		messageManager.sendMessage(sender, """
+			<blue>ChatLab: <white>List of commands.
+			<dark_grey>- <white>/clab [help,reload,check-update...]<dark_grey>: <green>Plugin command.
+			<dark_grey>- <white>/msg <player> <message> <dark_grey>: <green>Send a private message.
+			<dark_grey>- <white>/reply <message> <dark_grey>: <green>Reply a message.
+			<dark_grey>- <white>/ignore <player/-list> <dark_grey>: <green>Ignore a player.
+			<dark_grey>- <white>/unignore <player> <dark_grey>: <green>Un-ignore a player.
+			<dark_grey>- <white>/toggle-msg <dark_grey>: <green>Toggle private messages.
+			<dark_grey>- <white>/socialspy [<on/enable>, <off/disable>, list]<dark_grey>: <green>See private messages of other players.""");
+	}
 	private void checkUpdate(Player sender) {
 
 		if (!updateChecker.updated()) {
