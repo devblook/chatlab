@@ -1,6 +1,6 @@
 name: ChatLab
-version: "1.2.1"
-main: me.bryang.chatlab.ChatLab
+version: "1.2.2"
+main: me.bryang.chatlab.ChatLabPlugin
 loader: me.bryang.chatlab.LocalPluginLoader
 api-version: "1.20"
 author: BryanG
