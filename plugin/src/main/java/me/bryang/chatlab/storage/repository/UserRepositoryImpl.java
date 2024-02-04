@@ -39,4 +39,5 @@ public class UserRepositoryImpl implements Repository<User>{
 	public Collection<User> findAll(){
 		return users.values();
 	}
+
 }
