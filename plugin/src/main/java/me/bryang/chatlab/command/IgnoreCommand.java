@@ -8,7 +8,6 @@ import me.bryang.chatlab.storage.repository.Repository;
 import me.bryang.chatlab.storage.user.User;
 import me.fixeddev.commandflow.annotated.CommandClass;
 import me.fixeddev.commandflow.annotated.annotation.Command;
-import me.fixeddev.commandflow.annotated.annotation.Switch;
 import me.fixeddev.commandflow.bukkit.annotation.Sender;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
@@ -35,7 +34,7 @@ public class IgnoreCommand implements CommandClass {
 	private MessageManager messageManager;
 
 	@Command(names = "")
-	public void execute(@Sender Player sender, 	@Switch(value = "test") OfflinePlayer targetFormatted) {
+	public void execute(@Sender Player sender, OfflinePlayer targetFormatted) {
 
 		RootSection rootSection = configurationContainer.get();
 		MessageSection messageSection = messageContainer.get();
