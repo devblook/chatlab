@@ -39,6 +39,11 @@ public class PlayerConnectListener implements Listener {
 
 	@EventHandler
 	public void loginEvent(AsyncPlayerPreLoginEvent event){
+
+		if (event.getLoginResult() != AsyncPlayerPreLoginEvent.Result.ALLOWED){
+			return;
+		}
+
 		String senderUniqueId = event.getUniqueId().toString();
 
 		if (userRepository.exists(senderUniqueId)) {
